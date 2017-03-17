@@ -1,0 +1,72 @@
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title">
+					<span class="icon"><i class="icon-info-sign"></i></span>
+					<h5>Alterar Permissões</h5>
+				</div>
+				<div class="widget-content nopadding">
+					<form class="form-horizontal" method="post" action="/permissao/cadastrar" name="" id="insere-altera" novalidate="novalidate">
+						<div class="control-group">
+							<label class="control-label">Grupo Usuário <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<input tabindex="1" type="text" name=fGrupoUsuario value="<?=$this->fGrupoUsuario;?>" class="required">
+								<input type="hidden" name="fIdGrupoUsuario" value="<?=$this->fIdGrupoUsuario;?>" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Permissões <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<select id="fOperacao" name="fOperacao[]" multiple="multiple">
+<?php
+foreach ($this->vNovoArray as $programa) {
+?>
+										<optgroup label="<?=$programa["nome"];?>">
+<?php
+	foreach ($programa["operacao"] as $operacao) {
+		if (array_search($operacao["id"], $this->vPermissao)) {
+?>
+											<option value="<?=$operacao["id"];?>" selected="selected"><?=$operacao["nm_display"]?></option>
+<?php
+		}
+		else {
+?>
+											<option value="<?=$operacao["id"];?>"><?=$operacao["nm_display"]?></option>
+<?php
+		}
+	}
+?>
+										</optgroup>
+<?php
+}
+?>
+								</select>
+								
+							</div>
+						</div>
+						<div class="form-actions">
+							<input type="hidden" name="sOP" value="cadastrar" />
+							<input type="submit" value="Salvar" class="btn btn-success">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title"><span class="icon"><i class="icon-comment"></i></span><h5>Legenda</h5></div>
+				<div class="widget-content nopadding">
+					<ul class="activity-list">
+						<li><a href="#">
+							<i class="icon-asterisk"></i>
+							<span>Campo obrigatório</span>
+						</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

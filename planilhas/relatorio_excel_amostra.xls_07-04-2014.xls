@@ -1,0 +1,470 @@
+
+
+<div class="widget-content nopadding">
+    
+   
+    <table border="1" style="border: 1px solid #cccccc;margin-bottom:1px; margin-top: 20px; margin-left: 20px; margin-right: 20px;">
+        <th>&ensp;</th>
+        <th>id_amostra_coletor</th>
+        <th>projeto_programa</th>
+        <th>protocolo</th>
+        <th>metodo</th>
+        <th>sitio</th>
+        <th>latitude</th>
+        <th>longitude</th>
+        
+       
+        <tr> 
+            <td><div style="text-align: center;">1</div></td>
+            <td><div style="text-align: center">15846.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6329.6</div></td>
+            <td><div style="text-align: center">-185126.5</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">2</div></td>
+            <td><div style="text-align: center">15845.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6329.6</div></td>
+            <td><div style="text-align: center">-185126.5</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">3</div></td>
+            <td><div style="text-align: center">15852.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6331.3</div></td>
+            <td><div style="text-align: center">-185128</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">4</div></td>
+            <td><div style="text-align: center">15857.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6350.1</div></td>
+            <td><div style="text-align: center">-185154.4</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">5</div></td>
+            <td><div style="text-align: center">15858.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">6</div></td>
+            <td><div style="text-align: center">15854.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">7</div></td>
+            <td><div style="text-align: center">15856.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">8</div></td>
+            <td><div style="text-align: center">15830.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">9</div></td>
+            <td><div style="text-align: center">15827.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">10</div></td>
+            <td><div style="text-align: center">15826.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">11</div></td>
+            <td><div style="text-align: center">15825.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">12</div></td>
+            <td><div style="text-align: center">15835.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">13</div></td>
+            <td><div style="text-align: center">15831.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">14</div></td>
+            <td><div style="text-align: center">15855.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">15</div></td>
+            <td><div style="text-align: center">15829.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">16</div></td>
+            <td><div style="text-align: center">15833.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">17</div></td>
+            <td><div style="text-align: center">15841.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">18</div></td>
+            <td><div style="text-align: center">15840.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">19</div></td>
+            <td><div style="text-align: center">15839.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">20</div></td>
+            <td><div style="text-align: center">15824.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">21</div></td>
+            <td><div style="text-align: center">15834.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">22</div></td>
+            <td><div style="text-align: center">15837.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">23</div></td>
+            <td><div style="text-align: center">15836.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">24</div></td>
+            <td><div style="text-align: center">15828.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">25</div></td>
+            <td><div style="text-align: center">15832.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">26</div></td>
+            <td><div style="text-align: center">15843.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">27</div></td>
+            <td><div style="text-align: center">15842.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-6239.5</div></td>
+            <td><div style="text-align: center">-185220.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">28</div></td>
+            <td><div style="text-align: center">15851.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-7040.2</div></td>
+            <td><div style="text-align: center">-185667.3</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">29</div></td>
+            <td><div style="text-align: center">15860.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-7058.3</div></td>
+            <td><div style="text-align: center">-185700.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">30</div></td>
+            <td><div style="text-align: center">15844.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-7040.2</div></td>
+            <td><div style="text-align: center">-185700.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">31</div></td>
+            <td><div style="text-align: center">15838.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-7058.3</div></td>
+            <td><div style="text-align: center">-185700.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">32</div></td>
+            <td><div style="text-align: center">15853.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-7058.3</div></td>
+            <td><div style="text-align: center">-185700.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">33</div></td>
+            <td><div style="text-align: center">15850.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-7058.3</div></td>
+            <td><div style="text-align: center">-185700.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">34</div></td>
+            <td><div style="text-align: center">15849.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-7058.3</div></td>
+            <td><div style="text-align: center">-185700.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">35</div></td>
+            <td><div style="text-align: center">15848.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-7058.3</div></td>
+            <td><div style="text-align: center">-185700.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">36</div></td>
+            <td><div style="text-align: center">15847.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-7058.3</div></td>
+            <td><div style="text-align: center">-185700.8</div></td>
+            
+         </tr>
+             
+                         <tr> 
+            <td><div style="text-align: center;">37</div></td>
+            <td><div style="text-align: center">15859.0</div></td>
+            <td><div style="text-align: center">Programa de Pesquisa em Biodiversidade da Amazônia Oriental</div></td>
+            <td><div style="text-align: center">Peixes</div></td>
+            <td><div style="text-align: center">Rede de Espera (Malhadeira)</div></td>
+            <td><div style="text-align: center">Flona de Caxiuanã</div></td>
+            <td><div style="text-align: center">-7056.1</div></td>
+            <td><div style="text-align: center">-185771.2</div></td>
+            
+         </tr>
+             
+                                     
+</table>
+    
+   
+                                            
+                                          
+				
+				
+						
+                            </div>

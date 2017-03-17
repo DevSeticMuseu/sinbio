@@ -1,0 +1,88 @@
+<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title">
+					<span class="icon"><i class="icon-info-sign"></i></span>
+					<h5>Resultado do Qauntidade de Amostra por Metodo</h5>
+				</div>
+                            
+<div class="widget-content nopadding">
+    
+    <?
+    	if(count($this->dadosRel) > 0){
+    ?>
+    <div style=" margin-top: 20px;">
+<?php 
+$anterior = "";
+$contprotocolo = 0;
+$contexpedicao = 0;
+foreach($this->dadosRel as $value){ ?>
+       <div> 
+      
+        <?php 
+          
+       if ($value['sigla'] != $anterior){
+           
+           
+       
+           ?>
+            
+       
+      <div style=" margin-bottom: 20px; margin-top: 20px; text-align: center; background: #efefef; text-align: center;border-top:  1px solid #CCCCCC; border-bottom:  1px solid #CCCCCC;"><?= $value['sigla'] ?></div>
+           
+        <?php 
+         $anterior = $value['sigla'];
+         $contprotocolo ++;
+         
+         
+         
+       if($contexpedicao != 0 && $contexpedicao != -1){
+       
+        ?>
+        &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;
+        &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;
+        &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; 
+        Quantidade de Amostras : <?php echo $contexpedicao  ?>
+        
+        
+        <?php
+        $contexpedicao = 0;
+         }
+        } ?>
+              
+         
+             
+                 <?php $contexpedicao++; }?>
+                    
+        </div>
+    
+    <?php } else { ?>
+    <div style="padding: 20px 0 0 50px; font-size: 15px; font-weight: bold; color: #666666;">
+        Nenhum Resultado Encontrado
+    </div>
+    <?php }?>                           
+        <div style="text-align: center;">  Quantidade de Amostras : <?php echo $contexpedicao; ?></div>
+				
+        <div class="form-actions" style="">
+                                                    <div style="float: left; margin-right: 30px;">
+                                                    <form class="form-horizontal" method="post" action="/relatorios/index" name="" id="insere-altera" novalidate="novalidate">
+                                                        <input style=" margin-left: 410px;" type="submit" value="voltar" class="btn btn-success">
+                                                        </form>
+                                                    </div>
+                                                    <div style="float: left;">
+                                                    <form class="form-horizontal" method="post" action="/relatorios/relatorio-excel-amostra-protocolo" name="" id="insere-altera" novalidate="novalidate">
+                                                        <input style=" margin-left: 350px; margin-bottom: 10px;" type="submit" value="Exportar Dados em Excel" class="btn btn-success">
+                                                        </form>
+                                                    </div>
+						</div>
+
+                            </div>
+			</div>
+		</div>
+</div>
+        
+        
+        	
+</div>
+
+

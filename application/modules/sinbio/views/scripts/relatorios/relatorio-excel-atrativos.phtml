@@ -1,0 +1,94 @@
+
+<?php
+/*
+* Jhonny Scerni Gondim Costa
+* Criando e exportando planilhas do Excel
+
+*/
+
+// Definimos o nome do arquivo que será exportado
+
+$arquivo = 'relatorio_excel_atrativos'.date("d/m/Y").".xls";
+
+
+
+// Configurações header para forçar o download
+
+header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+
+header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+
+header ("Cache-Control: no-cache, must-revalidate");
+
+header ("Pragma: no-cache");
+
+header ("Content-type: application/x-msexcel");
+
+header ("Content-Disposition: attachment; filename=\"{$arquivo}\"" );
+
+header ("Content-Description: PHP Generated Data" );
+
+// Envia o conteúdo do arquivo
+
+?>
+<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title">
+					<span class="icon"><i class="icon-info-sign"></i></span>
+                                        <h3>Resultado do Relat&oacute;rio Atrativos</h3>
+				</div>
+                            
+<div class="widget-content nopadding">
+    
+    <?
+    	if(count($this->dadosRel) > 0){
+    ?>
+    <table border="1" style="border: 1px solid #cccccc;margin-bottom:1px; margin-top: 20px; margin-left: 20px; margin-right: 20px;">
+        <th>Quantidade</th>
+        <th>nm_atrativos</th>
+        
+       
+<?php 
+$cont = 1;
+$conttotal = 0;
+foreach($this->dadosRel as $value){ ?>
+        <tr> 
+            <td style="width: 200px"><div style="text-align: center"><?= $cont ?></div></td>
+            <td style="width: 600px"><div style="text-align: center"><?= utf8_decode($value['nm_atrativos']); ?></div></td>
+            
+         </tr>
+             
+                 <?php $cont++; $conttotal++;}?>
+                    
+</table>
+    
+  <table border="1" style="border: 1px solid #cccccc;margin-bottom:1px; margin-top: 20px; margin-left: 20px; margin-right: 20px;">
+        <th colspan="2" style="width: 800px" >Quantidade Total de Atrativos</th>
+        <tr> 
+            <td colspan="2" style="width: 800px"><div style="text-align: center"><?= $conttotal ?></div></td>
+            
+         </tr>
+    </table>
+    
+    
+    <?php } else { ?>
+    <div style="padding: 20px 0 0 50px; font-size: 15px; font-weight: bold; color: #666666;">
+        Nenhum Resultado Encontrado
+    </div>
+    <?php }?>
+                                            
+                                          
+				
+				
+
+                            </div>
+			</div>
+		</div>
+</div>
+        
+        
+        	
+</div>
+
+

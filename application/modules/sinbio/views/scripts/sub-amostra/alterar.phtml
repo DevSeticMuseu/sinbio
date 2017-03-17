@@ -1,0 +1,124 @@
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title">
+					<span class="icon"><i class="icon-info-sign"></i></span>
+					<h5>Alterar Identifica&ccedil;&atilde;o</h5>
+				</div>
+				<div class="widget-content nopadding">
+					<form class="form-horizontal" method="post" action="<?php echo $this->baseUrl();?>/sub-amostra/alterar/nId/<?=$this->nId?>" name="" id="insere-altera" novalidate="novalidate">
+					
+                                            
+                                                <div class="control-group">
+							<label class="control-label">Taxon <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<select name="fIdTaxon" class="required" style="width: 400px;">
+									<?php
+									foreach ($this->vTaxon as $taxon) {
+                                                                            
+                                                                              if ($taxon["id"] == $this->nIdTaxon)
+											$sSel = 'selected="selected"';
+										else
+											$sSel = "";
+									?>
+									<option value="<?=$taxon["id"]?>" <?=$sSel?>><?=$taxon["taxon"]?></option>
+									<?php 
+									}
+									?>
+								</select>
+							</div>
+						</div>
+                                            
+                                       
+                                                 <div class="control-group">
+							<label class="control-label">Amostra <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<select name="fIdAmostra" class="required" style="width: 400px;">
+									<?php
+									foreach ($this->vAmostra as $amostra) {
+                                                                             if ($amostra["id"] == $this->nIdAmostra)
+											$sSel = 'selected="selected"';
+										else
+											$sSel = "";
+									?>
+									<option value="<?=$amostra["id"]?>" <?=$sSel?>><?=$amostra["id"]?></option>
+									<?php 
+									}
+									?>
+								</select>
+							</div>
+						</div>
+                                            
+                                                <div class="control-group">
+							<label class="control-label">Quantidade: </label>
+							<div class="controls">
+                                                            <input tabindex="1" type="text" name="fQuantidade" id="fQuantidade" value="<?php echo $this->sQuantidade ?>" style="width: 400px">
+							</div>
+						</div>
+                                            
+                                                   <div class="control-group">
+							<label class="control-label">Status <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<select name="fStatus_2" class="required" style="width: 400px;">
+								
+                                                                    
+                                                                        
+                                                                        <?php if ($this->sStatus == 1) { ?>
+                                                                        <option value="<?php echo $this->sStatus ?>"><?php echo ($this->sStatus == 1)? "Ativo" : "Inativo"; ?></option>
+									<option value="0">Inativo</option>                                                                         
+                                                                       <?php } ?>
+                                                                        
+                                                                            <?php if ($this->sStatus == 0) { ?>
+                                                                        <option value="<?php echo $this->sStatus ?>"><?php echo ($this->sStatus == 1)? "Ativo" : "Inativo"; ?></option>
+									<option value="0">Ativo</option>                                                                         
+                                                                       <?php } ?>
+                                                                        
+                                           			</select>
+							</div>
+						</div>
+                                            
+                                            
+                                            
+                                                <div class="control-group">
+							<label class="control-label">Quantidade de Machos: </label>
+							<div class="controls">
+                                                            <input tabindex="1" type="text" name="fQtMachos" style="width: 400px" value="<?php echo $this->sQtMachos ?>">
+							</div>
+						</div>
+                                            
+                                            <div class="control-group">
+							<label class="control-label">Quantidade de Femeas: </label>
+							<div class="controls">
+                                                            <input tabindex="1" type="text" name="fQtFemeas" style="width: 400px" value="<?php echo $this->sQtFemeas ?>">
+							</div>
+						</div>
+                                            
+                                        
+                                            
+						 <div class="form-actions">
+							<input type="hidden" name="sOP" value="alterar" />
+							<input type="hidden" name="nId" value="<?=$this->nId?>" />
+							<input type="submit" value="Salvar" class="btn btn-success">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title"><span class="icon"><i class="icon-comment"></i></span><h5>Legenda</h5></div>
+				<div class="widget-content nopadding">
+					<ul class="activity-list">
+						<li><a href="#">
+							<i class="icon-asterisk"></i>
+							<span>Campo obrigatório</span>
+						</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,179 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-info-sign"></i></span>
+                    <h5>Alterar Expedicao</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <form class="form-horizontal" method="post" action="/expedicao/alterar/nId/<?=$this->nId?>" name="" id="insere-altera" novalidate="novalidate">
+
+                        <div class="control-group">
+                            <label class="control-label">Estado <i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <select name="fLocUfId" class="required" style="width: 200px;">
+                                    <?php
+                                    foreach ($this->vUF as $UF) {
+                                        if ($UF["id"] == $this->nIdUF)
+                                            $sSel = 'selected="selected"';
+                                        else
+                                            $sSel = "";
+                                        ?>
+                                        <option value="<?=$UF["id"]?>" <?=$sSel?>><?=$UF["sigla"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Município <i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <select name="fIdMunicipio" class="required" style="width: 200px;">
+                                    <?php
+                                    foreach ($this->vMunicipio as $municipio) {
+                                        if ($municipio["id"] == $this->nIdMunicipio)
+                                            $sSel = 'selected="selected"';
+                                        else
+                                            $sSel = "";
+                                        ?>
+                                        <option value="<?=$municipio["id"]?>" <?=$sSel?>><?=$municipio["nm_municipio"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Localidade <i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <select name="fIdSitio" class="required" style="width: 200px;">
+                                    <?php
+                                    foreach ($this->vSitio as $sitio) {
+                                        if ($sitio["id"] == $this->nIdSitio)
+                                            $sSel = 'selected="selected"';
+                                        else
+                                            $sSel = "";
+                                        ?>
+                                        <option value="<?=$sitio["id"]?>" <?=$sSel?>><?=$sitio["nm_sitio"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Coordenada da Localidade: </label>
+                            <div class="controls">
+                                <input tabindex="1" type="text" name="fColetaAmostra" value="<?=$this->sLocalidade?>" style="width: 400px">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Protocolo <i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <select name="fIdProtocolo" class="required" style="width: 400px;">
+                                    <?php
+                                    foreach ($this->vProtocolo as $protocolo) {
+                                        if ($protocolo["id"] == $this->nIdProtocolo)
+                                            $sSel = 'selected="selected"';
+                                        else
+                                            $sSel = "";
+                                        ?>
+                                        <option value="<?=$protocolo["id"]?>" <?=$sSel?>><?=$protocolo["sigla"]?> - <?=$protocolo["nm_protocolo"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Projeto/Programa <i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <select name="fIdProjetoPrograma" class="required" style="width: 200px;">
+                                    <?php
+                                    foreach ($this->vProjetoPrograma as $projetoprograma) {
+                                        if ($projetoprograma["id"] == $this->nIdProjetoPrograma)
+                                            $sSel = 'selected="selected"';
+                                        else
+                                            $sSel = "";
+                                        ?>
+                                        <option value="<?=$projetoprograma["id"]?>" <?=$sSel?>><?=$projetoprograma["nm_projeto_programa"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Projeção <i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <select name="fIdProjecao" class="required" style="width: 400px;">
+                                    <?php
+                                    foreach ($this->vProjecao as $projecao) {
+                                        if ($projecao["id"] == $this->nIdProjecao)
+                                            $sSel = 'selected="selected"';
+                                        else
+                                            $sSel = "";
+                                        ?>
+                                        <option value="<?=$projecao["id"]?>" <?=$sSel?>><?=$projecao["sistema_projecao"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Data Inicio: </label>
+                            <div class="controls">
+                                <input type="text" name="fDataInicio" data-date-format="dd/mm/yyyy" value="<?php echo UtilsDate::formataDataToShow($this->sDtInicio) ?>" class="datepicker" />
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Data Fim: </label>
+                            <div class="controls">
+                                <input type="text" name="fDataFim" data-date-format="dd/mm/yyyy" value="<?php echo UtilsDate::formataDataToShow($this->sDtFim) ?>" class="datepicker" />
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Observação: </label>
+                            <div class="controls">
+                                <input tabindex="1" type="text" name="fObservacao" value="<?=$this->sObservacao?>" style="width: 400px">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <input type="hidden" name="sOP" value="alterar" />
+                            <input type="hidden" name="nId" value="<?=$this->nId?>" />
+                            <input type="submit" value="Salvar" class="btn btn-success">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title"><span class="icon"><i class="icon-comment"></i></span><h5>Legenda</h5></div>
+                <div class="widget-content nopadding">
+                    <ul class="activity-list">
+                        <li><a href="#">
+                                <i class="icon-asterisk"></i>
+                                <span>Campo obrigatório</span>
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,163 @@
+<h2>Importação</h2>    
+<?php
+if ($this->vMenu == "") {
+    
+} else {
+    foreach ($this->vMenu as $vModulo) {
+      
+        ?>
+                            <ul class="nav nav-tabs">
+                        <?php
+                                if ($vModulo["modulo"] == "Importação") {
+                             
+                                    
+                             
+                        foreach ($vModulo["programas"] as $vPrograma) {
+
+        
+        if ($vPrograma['controller'] == "importacao") {
+                                            ?>
+                                  <li class="active">  
+                                      <?php
+                    } else {?>
+                                  <li> 
+                                   <?php
+                                        }
+                                        ?>
+                                    <a href="/<?= $vPrograma["controller"] . "/cadastrar" ?>"><?= $vPrograma["programa"] ?></a></li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+                                <?php
+                            }
+                        }
+                           }
+                        ?>
+                           
+<!--                        <form class="search">
+                            <input type="text" name="pesquisar" id="pesquisar" />
+                            <input type="submit" class="btn" name="enviar" value="pesquisar">
+                        </form>-->
+<div class="container-fluid">
+	<div class="row-fluid">
+            <div class="span6" style="width: 700px; height: 500px; overflow: scroll;">
+			<form action="importar" method="post">
+			<?php
+				echo "<table class='tabela-content table-striped table-bordered table-hover'>";
+				//echo "<tbody>";
+                                echo "<tr>";
+                                    echo "<td> # </td>";
+                                    echo "<td>Identificador de Amostra</td>";
+                                    echo "<td>Coletor(es)</td>";
+                                    echo "<td>Data Coleta</td>";
+                                    echo "<td>Hora Coleta</td>";
+                                    echo "<td>Local</td>";
+                                    echo "<td>Latitude</td>";
+                                    echo "<td>Direção Latitude</td>";
+                                    echo "<td>Longitude</td>";
+                                    echo "<td>Direção Logintude</td>";
+                                    echo "<td>Sistema de Projeção</td>";
+                                    echo "<td>Trilha</td>";
+                                    echo "<td>Distancia da Trilha</td>";
+                                    echo "<td>Parcela</td>";
+                                    echo "<td>Distância da Parcela</td>";
+                                    echo "<td>Método de Coleta</td>";
+                                    echo "<td>Altura da Armadilha/Subs.</td>";
+                                    echo "<td>Atrativo</td>";
+                                    echo "<td>Densidade de Sub-bosque</td>";
+                                    echo "<td>Abertura de Dossel</td>";
+                                    echo "<td>Temperatura do Ar</td>";
+                                    echo "<td>Umidade do Ar</td>";
+                                    echo "<td>Tipo de Substrato</td>";
+                                    echo "<td>Determinador da Amostra</td>";
+                                    echo "<td>Data Determinação</td>";
+                                    echo "<td>Ref. Bibliog. Determinação</td>";
+                                    echo "<td>Observação Determinação</td>";
+                                    echo "<td>Ordem</td>";
+                                    echo "<td>Família</td>";
+                                    echo "<td>Sub-família</td>";
+                                    echo "<td>Gênero</td>";
+                                    echo "<td>Sub-gênero</td>";
+                                    echo "<td>Grupo de Espécie</td>";
+                                    echo "<td>Táxon(Espécie)</td>";
+                                    echo "<td>Autor, Ano</td>";
+                                    echo "<td>Morfoespecies</td>";
+                                    echo "<td>Qtd. Individuos</td>";
+                                    echo "<td>Abundancia Femeas</td>";
+                                    echo "<td>Abundancia Machos</td>";
+                                    echo "<td>Total</td>";
+                                    echo "<td>Conservação</td>";
+                                    echo "<td>Destinação</td>";
+                                echo "</tr>";
+                                $count = 1;
+				foreach($this->worksheet as $key => $value){
+					echo "<tr>";
+                                                echo "<td>".$count."</td>";
+						echo "<td><input type='text' name='id_amostra[]' value='".$value['id_amostra']."'/></td>";
+						echo "<td>";
+                                                        $vColetores = array();
+                                                        foreach($this->vColetores as $coletor)
+                                                        {
+                                                            $vColetores[] = $coletor["citacao"];
+                                                            echo "<input type='hidden' name='coletores[]' value='".$coletor['id']."'/>";
+                                                        }
+                                                        echo implode(", ", $vColetores);
+                                                echo "</td>";
+                                                echo "<td><input type=\"text\" name=\"data_coleta[]\" data-date-format=\"dd-mm-yyyy\" value=\"".$value['data_coleta']."\" class=\"datepicker\" /></td>";
+						echo "<td><input type='text' name='hora_coleta[]' value='".$value['hora_coleta']."'/></td>";
+						echo "<td><input type='text' name='local[]' value='".$value['local']."'/></td>";
+						echo "<td><input type='text' name='latitude[]' value='".$value['latitude']."'/></td>";
+						echo "<td><input type='text' name='direcao_latitude[]' value='".$value['direcao_latitude']."'/></td>";
+						echo "<td><input type='text' name='longitude[]' value='".$value['longitude']."'/></td>";
+						echo "<td><input type='text' name='direcao_longitude[]' value='".$value['direcao_longitude']."'/></td>";
+						echo "<td>".$this->nmProjecao."<input type='hidden' name='projecao[]' value='".$this->nmProjecao."'/></td>";
+						echo "<td><input type='text' name='trilha[]' value='".$value['trilha']."'/></td>";
+						echo "<td><input type='text' name='distancia_trilha[]' value='".$value['distancia_trilha']."'/></td>";
+						echo "<td><input type='text' name='parcela[]' value='".$value['parcela']."'/></td>";
+						echo "<td><input type='text' name='distancia_parcela[]' value='".$value['distancia_parcela']."'/></td>";
+						echo "<td>".$this->nmMetodo."<input type='hidden' name='metodo_coleta[]' value='".$this->nmMetodo."'/></td>";
+						echo "<td><input type='text' name='altura_armadilha[]' value='".$value['altura_armadilha']."'/></td>";
+                                                echo "<td>".$this->nmAtrativo."<input type='hidden' name='atrativo[]' value='".$this->nmAtrativo."'/></td>";
+						echo "<td><input type='text' name='densidade[]' value='".$value['densidade']."'/></td>";
+						echo "<td><input type='text' name='abertura_dossel[]' value='".$value['abertura_dossel']."'/></td>";
+						echo "<td><input type='text' name='temperatura_ar[]' value='".$value['temperatura_ar']."'/></td>";
+						echo "<td><input type='text' name='umidade_ar[]' value='".$value['umidade_ar']."'/></td>";
+						echo "<td><input type='text' name='substrato[]' value='".$value['tipo_substrato']."'/></td>";
+                                                echo "<td>";
+                                                        $vDeterminadores = array();
+                                                        foreach($this->vDeterminadores as $determinador)
+                                                        {
+                                                            $vDeterminadores[] = $determinador["citacao"];
+                                                            echo "<input type='hidden' name='determinadores[]' value='".$determinador['id']."'/>";
+                                                        }
+                                                        echo implode(", ", $vDeterminadores);
+                                                echo "</td>";
+                                                echo "<td>".$this->fDataDeterminacao."<input type='hidden' name='dtDeterminacao[]' value='".$this->fDataDeterminacao."'/></td>";
+                                                echo "<td>".$this->fReferencia."<input type='hidden' name='referencia[]' value='".$this->fReferencia."'/></td>";
+                                                echo "<td>".$this->fObservacao."<input type='hidden' name='observacao[]' value='".$this->fObservacao."'/></td>";
+						echo "<td><input type='text' name='ordem[]' value='".$value['ordem']."'/></td>";
+						echo "<td><input type='text' name='familia[]' value='".$value['familia']."'/></td>";
+						echo "<td><input type='text' name='subfamilia[]' value='".$value['subfamilia']."'/></td>";
+						echo "<td><input type='text' name='genero[]' value='".$value['genero']."'/></td>";
+						echo "<td><input type='text' name='subgenero[]' value='".$value['subgenero']."'/></td>";
+						echo "<td><input type='text' name='grupo_especie[]' value='".$value['grupo_especie']."'/></td>";
+						echo "<td><input type='text' name='especie[]' value='".$value['especie']."'/></td>";
+						echo "<td><input type='text' name='autor[]' value='".$value['autor']."'/></td>";
+						echo "<td><input type='text' name='morfoespecie[]' value='".$value['morfoespecie']."'/></td>";
+						echo "<td><input type='text' name='individuos[]' value='".$value['individuos']."'/></td>";
+						echo "<td><input type='text' name='femeas[]' value='".$value['femeas']."'/></td>";
+						echo "<td><input type='text' name='machos[]' value='".$value['machos']."'/></td>";
+						echo "<td><input type='text' name='total[]' value='".$value['total']."'/></td>";
+                                                echo "<td>".$this->nmConservacao."<input type='hidden' name='conservacao[]' value='".$this->nmConservacao."'/></td>";
+                                                echo "<td>".$this->nmDestinacao."<input type='hidden' name='destinacao[]' value='".$this->nmDestinacao."'/></td>";
+					echo "</tr>";
+                                        $count++;
+				}
+				//echo "</tbody>";
+				echo "</table>";
+			?>
+			</form>
+		</div>
+	</div>
+</div>

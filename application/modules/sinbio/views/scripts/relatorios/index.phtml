@@ -1,0 +1,231 @@
+<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title">
+					<span class="icon"><i class="icon-info-sign"></i></span>
+					<h5>Relatórios</h5>
+				</div>
+                            
+<div class="widget-content nopadding">
+    
+    
+    
+    	<div class="accordion" id="collapse-group">
+                            <div class="accordion-group widget-box">
+                                <div class="accordion-heading">
+                                    <div class="widget-title">
+                                        <a data-parent="#collapse-group" href="#collapseGOne" data-toggle="collapse">
+                                            <span class="icon"><i class="icon-eye-open"></i></span><h5>Relat&oacute;rio de Amostras Cadastradas</h5>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="collapse in accordion-body" id="collapseGOne">
+                                    <div class="widget-content">
+                                       <form class="form-horizontal" method="post" action="/relatorios/relatorio" name="" id="insere-altera" novalidate="novalidate">
+    
+                      
+    
+    
+                <div class="control-group">
+							<label class="control-label">Protocolo <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<select name="fIdProtocolo" class="required" style="width: 400px;">
+                                                                    <option value="0">-- Todos os Protocolos --</option>
+									<?php
+									foreach ($this->vProtocolo as $protocolo) {
+									?>
+									<option value="<?=$protocolo["id"]?>"><?=$protocolo["sigla"]?> - <?=$protocolo["nm_protocolo"]?></option>
+									<?php 
+									}
+									?>
+								</select>
+							</div>
+						</div>
+    
+      <div class="control-group">
+							<label class="control-label">Metodos <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<select name="fIdMetodos" class="required" style="width: 400px;">
+                                                                    <option value="0">-- Todos os Métodos --</option>
+									<?php
+									foreach ($this->vMetodo as $Metodo) {
+									?>
+									<option value="<?=$Metodo["id"]?>"><?=$Metodo["id"]?> - <?=$Metodo["nm_metodo"]?></option>
+									<?php 
+									}
+									?>
+								</select>
+							</div>
+						</div>
+    
+    
+        <div class="control-group">
+							<label class="control-label">Expedicao <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<select name="fIdExpedicao" class="required" style="width: 400px;">
+                                                                    <option value="0">-- Todas as Expedições --</option>
+									<?php
+									foreach ($this->vExpedicao as $Expedicao) {
+                                                                            $date = explode("-",$Expedicao["data_inicio"]);
+                                                                            $date = $date[2]."/".$date[1]."/".$date[0];
+									?>
+                                                                            <option value="<?=$Expedicao["id"]?>"><?php echo $date." - ".$Expedicao["id"]." - ".$Expedicao["nm_sitio"];?></option>
+									<?php 
+									}
+									?>
+								</select>
+							</div>
+						</div>
+                                            
+                                          
+				
+				
+						<div class="form-actions">
+							<input type="hidden" name="sOP" value="Pesquisar" />
+							<input style="width: 330px" type="submit" value="Pesquisar do Relatório da Amostra" class="btn btn-success">
+						 </div>
+					</form>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="accordion-group widget-box">
+                                <div class="accordion-heading">
+                                    <div class="widget-title">
+                                        <a data-parent="#collapse-group" href="#collapseGTwo" data-toggle="collapse">
+                                            <span class="icon"><i class="icon-eye-open"></i></span><h5>Relat&oacute;rio da Quantidade de Expedi&ccedil;&otilde;es por Protocolo </h5>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="collapse accordion-body" id="collapseGTwo">
+                                    <div class="widget-content">
+                                        <form class="form-horizontal" method="post" action="/relatorios/relatorio-protocolo-expedicao" name="" id="insere-altera" novalidate="novalidate">
+    <div class="control-group">
+							<label class="control-label">Protocolo <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<select name="fIdProtocolo" class="required" style="width: 400px;">
+                                                                    <option value="0">-- Todos os Protocolos --</option>
+									<?php
+									foreach ($this->vProtocolo as $protocolo) {
+									?>
+									<option value="<?=$protocolo["id"]?>"><?=$protocolo["sigla"]?> - <?=$protocolo["nm_protocolo"]?></option>
+									<?php 
+									}
+									?>
+								</select>
+							</div>
+						</div>
+                                            <div class="form-actions">
+                                        		<input type="hidden" name="sOP" value="Relatorio Qtd Protocolo e Expedição" />
+                                                        <input style="width: 330px" type="submit" value="Resultado de Expedi&ccedil;&otilde;es por Protocolo" class="btn btn-success">
+                                                </div>
+					</form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group widget-box">
+                                <div class="accordion-heading">
+                                    <div class="widget-title">
+                                        <a data-parent="#collapse-group" href="#collapseGThree" data-toggle="collapse">
+                                            <span class="icon"><i class="icon-eye-open"></i></span><h5>Relatorio Qtd Amostra Protocolo</h5>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="collapse accordion-body" id="collapseGThree">
+                                    <div class="widget-content">
+                                        
+					
+                                        <form class="form-horizontal" method="post" action="/relatorios/relatorio-amostra-protocolo" name="" id="insere-altera" novalidate="novalidate">
+ 
+                                             <div class="control-group">
+							<label class="control-label">Protocolo <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<select name="fIdProtocolo" class="required" style="width: 400px;">
+                                                                    <option value="0">-- Todos os Protocolos --</option>
+									<?php
+									foreach ($this->vProtocolo as $protocolo) {
+									?>
+									<option value="<?=$protocolo["id"]?>"><?=$protocolo["sigla"]?> - <?=$protocolo["nm_protocolo"]?></option>
+									<?php 
+									}
+									?>
+								</select>
+							</div>
+						</div>
+                                            <div class="form-actions">
+                                        		<input type="hidden" name="sOP" value="Relatorio Qtd Amostra Protocolo" />
+							<input style="width: 330px" type="submit" value="Relatorio Qtd Amostra Protocolo" class="btn btn-success">
+ </div>
+					</form>
+                                    </div>
+                                </div>
+                            </div> 
+            
+            
+                 <div class="accordion-group widget-box">
+                                <div class="accordion-heading">
+                                    <div class="widget-title">
+                                        <a data-parent="#collapse-group" href="#collapseGFour" data-toggle="collapse">
+                                            <span class="icon"><i class="icon-eye-open"></i></span><h5>Relatorio Sisbio</h5>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="collapse accordion-body" id="collapseGFour">
+                                    <div class="widget-content">
+                                      <form class="form-horizontal" method="post" action="/relatorios/relatorio-sisbio" name="" id="insere-altera" novalidate="novalidate">
+ 
+                                        		<input type="hidden" name="sOP" value="PesquisarSisbio" />
+							<input style="width: 330px" type="submit" value="Pesquisa do Relatório no Formato Sisbio" class="btn btn-success">
+		
+					</form>
+                                    </div>
+                                </div>
+                            </div> 
+            
+            
+           
+            
+                        </div>
+                        
+    
+    
+          </div>
+    
+    
+
+<!--                                        <form class="form-horizontal" method="post" action="/relatorios/relatorio-sisbio" name="" id="insere-altera" novalidate="novalidate">
+ 
+                                        		<input type="hidden" name="sOP" value="PesquisarSisbio" />
+							<input style="width: 330px" type="submit" value="Pesquisa do Relatório no Formato Sisbio" class="btn btn-success">
+		
+					</form>
+    
+     -->
+                                        
+                                   
+    
+
+                            </div>
+			</div>
+		</div>
+</div>
+        
+        
+        	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title"><span class="icon"><i class="icon-comment"></i></span><h5>Legenda</h5></div>
+				<div class="widget-content nopadding">
+					<ul class="activity-list">
+						<li><a href="#">
+							<i class="icon-asterisk"></i>
+							<span>Campo obrigatório</span>
+						</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+                    
+	</div>
+</div>
+
+

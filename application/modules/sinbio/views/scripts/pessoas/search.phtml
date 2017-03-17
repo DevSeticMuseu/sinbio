@@ -1,0 +1,197 @@
+<style>
+    .table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 1px;
+    border-color: grey;
+    border: 1px solid #DDDDDD;
+}
+    thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+    .table th{
+        font-weight: normal;
+    cursor: default;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: "Conv_AGaramondPro-Regular";
+    font-size: 15px;
+    font-weight: bold;
+    color: #333333;
+    text-align: left;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #fff;
+    overflow: hidden;
+    vertical-align: top !important;
+    padding-left: 5px;
+    padding-right: 5px;
+
+
+    }
+
+</style>
+<h2>Pessoas Cadastradas</h2>
+<form method="post" action="<?php echo $this->url(array('controller' => 'pessoas', 'action'=> 'search')); ?>">
+
+
+       <div class="control-group">
+
+
+
+       <label class="control-label">Nome <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+                                                            <input name="fUsuario" type="text" style="width: 400px"></input>
+							</div>
+    </div>
+
+
+
+    <div class="control-group" style="float:left; width: 270px">
+
+
+
+        <label class="control-label" style="float:left; width: ">Titula&ccedil;&atilde;o <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<select name="fIdTitulacao" class="required" style="width: 270px;">
+                                                                    <option value="0">-- Todas as Titula&ccedil;&otilde;es --</option>
+									<?php
+									foreach ($this->vTitulacao as $titulacao) {
+									?>
+									<option value="<?=$titulacao["id"]?>"><?=$titulacao["nm_titulacao"]?></option>
+									<?php
+									}
+									?>
+								</select>
+							</div>
+    </div>
+    <div class="control-group" style="float:left; width: 270px;margin-left: 20px">
+        <label class="control-label">Atribui&ccedil;&atilde;o <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<select name="fIdGrupo" class="required" style="width: 270px;">
+                                                                    <option value="0">-- Todas as Atribui&ccedil;&otilde;es --</option>
+									<?php
+									foreach ($this->vGrupo as $grupo) {
+									?>
+									<option value="<?=$grupo["id"]?>"><?=$grupo["nm_grupo_usuario"]?></option>
+									<?php
+									}
+									?>
+								</select>
+							</div>
+						</div>
+
+     <div class="control-group" style="float:left; width: 270px;margin-left: 20px">
+        <label class="control-label">Protocolo <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<select name="fIdProtocolo" class="required" style="width: 270px;">
+                                                                    <option value="0">-- Todos os Protocolos --</option>
+									<?php
+									foreach ($this->vProtocolo as $protocolo) {
+									?>
+									<option value="<?=$protocolo["id"]?>"><?=$protocolo["nm_protocolo"]?></option>
+									<?php
+									}
+									?>
+								</select>
+							</div>
+						</div>
+
+
+            <div class="control-group" style="float:left; width: 270px;margin-left: 20px">
+               <label class="control-label">Nucleo <i class="icon-asterisk"></i>:</label>
+       							<div class="controls">
+       								<select name="fIdProtocolo" class="required" style="width: 270px;">
+                      <option value="0">-- Todos os Nucleos --</option>
+       									<?php
+       									foreach ($this->vNucleo as $nucleo) {
+       									?>
+       									<option value="<?=$nucleo["id"]?>"><?=$nucleo["nm_nucleo"]?></option>
+       									<?php
+       									}
+       									?>
+       								</select>
+       							</div>
+       						</div>
+
+      <div class="control-group" style="float:left; width: 270px;">
+        <label class="control-label">Institui&ccedil;&otilde;es <i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<select name="fIdInstituicao" class="required" style="width: 270px;">
+                                                                    <option value="0">-- Todas as Institui&ccedil;&otilde;es --</option>
+									<?php
+									foreach ($this->vInstituicao as $instituicao) {
+									?>
+									<option value="<?=$instituicao["id"]?>"><?=$instituicao["razao_social"]?></option>
+									<?php
+									}
+									?>
+								</select>
+							</div>
+						</div>
+    <div class="control-group" style="float:left; width: 270px; margin-left: 20px">
+
+      <label class="control-label">Projetos e Programas<i class="icon-asterisk"></i>:</label>
+							<div class="controls">
+								<select name="fIdProjetos" class="required" style="width: 270px;">
+                                                                    <option value="0">-- Todos os Projetos e Programas --</option>
+									<?php
+									foreach ($this->vProjetos as $projetos) {
+									?>
+									<option value="<?=$projetos["id"]?>"><?=$projetos["nm_projeto_programa"]?></option>
+									<?php
+									}
+									?>
+								</select>
+							</div>
+
+    </div>
+
+
+
+
+    <div class="control-group" style="float: right; width: 100%">
+        <input type="submit" value="Pesquisar" style="float: right"></input>
+      </div>
+</form>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+		<div class="bs-example">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Titula&ccedil;&atilde;o</th>
+                <th>Institui&ccedil;&atilde;o</th>
+                 <th>Protocolo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if(sizeof($this->paginator2)): $num = 1;?>
+
+            <?php foreach ($this->paginator2 as $value) {
+                if($num % 2 == 1) { $cor="#e3e3e3"; } else { $cor = "#FFFFFF"; } ?>
+            <tr style="background: <?php echo $cor ?>">
+
+             <td><?php echo $value["nm_usuario"]; ?></td>
+                <td><?php echo $value["nm_titulacao"]; ?></td>
+                <td><?php echo $value["razao_social"]; ?></td>
+                <td><?php echo $value["nm_protocolo"]; ?></td>
+                 <td>
+                     <a href="/usuario/alterar/nId/<?php echo $value["id_usuario"]; ?>">Editar</a>
+                 </tr>
+            <?php $num = $num + 1 ;} ?>
+           <?php else: ?>
+                 <div id="msg" class="container-fluid"><div class="row-fluid"><div class="span12"><div class="alert alert-info alert-block"><a class="close" data-dismiss="alert" href="#">×</a>Nenhum usu&aacute;rio encontrado.</div></div></div></div>
+
+            <?php endif; ?>
+            <?php echo $this->paginationControl($this->paginator2 , 'Sliding' , 'paginator.phtml') ?>
+        </tbody>
+    </table>
+                    <?php echo $this->paginationControl($this->paginator2 , 'Sliding' , 'paginator.phtml') ?>
+</div>
+		</div>
+	</div>
+</div>

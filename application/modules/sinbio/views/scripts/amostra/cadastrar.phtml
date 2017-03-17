@@ -1,0 +1,230 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-info-sign"></i></span>
+                    <h5>Cadastrar Amostra</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <form class="form-horizontal" method="post" action="/amostra/cadastrar" name="" id="insere-altera" novalidate="novalidate">
+
+
+                        <div class="control-group">
+                            <label class="control-label">Id Amostra Projeto: </label>
+                            <div class="controls">
+                                <input tabindex="1" type="text" name="fidAmostraProjeto" style="width: 400px">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">C&oacute;digo Amostra/N&#186; Coletor <i class="icon-asterisk"></i>: </label>
+                            <div class="controls">
+                                <input tabindex="1" type="text" name="fIdAmostraColeta" class="required" style="width: 400px">
+                            </div>
+                        </div>
+
+
+
+                        <div class="control-group">
+                            <label class="control-label">Data Coleta: </label>
+                            <div class="controls">
+                                <input type="text" name="fDataColeta" data-date-format="dd/mm/yyyy" value="<?php echo date("d/m/Y") ?>" 
+                                       class="datepicker" readonly="true" />
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Hora Coleta:</label>
+                            <div class="controls">
+                                <select name="fHoraColeta"  style="width: 400px;">
+
+                                    <option value="00:00:00">00:00</option>
+                                    <option value="01:00:00">01:00</option>
+                                    <option value="02:00:00">02:00</option>
+                                    <option value="03:00:00">03:00</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Latitude: <i class="icon-asterisk"></i></label>
+                            <div class="controls">
+                                <input tabindex="1" type="text" name="fLatitude" class="required" style="width: 400px">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Longitude: <i class="icon-asterisk"></i></label>
+                            <div class="controls">
+                                <input tabindex="1" type="text" name="fLongitude" class="required" style="width: 400px">
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label class="control-label">Protocolo <i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <select name="fIdProtocolo" class="required" style="width: 400px;">
+                                    <?php
+                                    foreach ($this->vProtocolo as $protocolo) {
+                                        ?>
+                                        <option value="<?=$protocolo["id"]?>"><?=$protocolo["sigla"]?> - <?=$protocolo["nm_protocolo"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label class="control-label">M&eacute;todos <i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <select name="fIdMetodos" class="required" style="width: 400px;">
+                                    <?php
+                                    foreach ($this->vMetodo as $Metodo) {
+                                        ?>
+                                        <option value="<?=$Metodo["id"]?>"><?=$Metodo["nm_metodo"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Atrativos :</label>
+                            <div class="controls">
+                                <select name="fIdAtrativos"  style="width: 400px;">
+                                    <!--<option value="Nenhum">Nenhum</option>-->
+                                    <?php
+                                    foreach ($this->vAtrativos as $Atrativos) {
+                                        ?>
+                                        <option value="<?=$Atrativos["id"]?>"><?=$Atrativos["nm_atrativos"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Expedi&ccedil;&atilde;o <i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <select name="fIdExpedicao" class="required" style="width: 400px;">
+                                    <?php
+                                    foreach ($this->vExpedicao as $Expedicao) {
+                                        ?>
+                                        <option value="<?=$Expedicao["id"]?>"><?= $Expedicao["nm_sitio"] ?> - <?= $Expedicao["data_inicio"] ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Direção Longitude: </label>
+                            <div class="controls">
+                                <input tabindex="1" type="text" name="fDirecaoLongitude"  style="width: 400px">
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label class="control-label">Direção Latitude: </label>
+                            <div class="controls">
+                                <input tabindex="1" type="text" name="fDirecaoLatitude" style="width: 400px">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Coordenada da Localidade: </label>
+                            <div class="controls">
+                                <input tabindex="1" type="text" name="fCoordenadaLocalidade" style="width: 400px">
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label class="control-label">Coordenada de Município: </label>
+                            <div class="controls">
+                                <input tabindex="1" type="text" name="fDirecaoLongitude"  style="width: 400px">
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label class="control-label">Proje&ccedil;&atilde;o :<i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <select name="fIdProjecao" class="required" style="width: 400px;">
+                                    <?php
+                                    foreach ($this->vProjecao as $Projecao) {
+                                        ?>
+                                        <option value="<?=$Projecao["id"]?>"><?=$Projecao["sistema_projecao"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label class="control-label">Conserva&ccedil;&atilde;o :</label>
+                            <div class="controls">
+                                <select name="fIdConservacao"  style="width: 400px;">
+                                    <!--<option value="Nenhum">Nenhum</option>-->
+                                    <?php
+                                    foreach ($this->vConservacao as $Conservacao) {
+                                        ?>
+                                        <option value="<?=$Conservacao["id"]?>"><?=$Conservacao["conservacao_material"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Destina&ccedil;&atilde;o :</label>
+                            <div class="controls">
+                                <select id="fIdDestinacao" name="fIdDestinacao[]" multiple="multiple" style="width: 400px;">
+                                    <?php
+                                    foreach ($this->vDestinacao as $Destinacao) {
+                                        ?>
+                                        <option value="<?=$Destinacao["id"]; ?>"><?=$Destinacao["nm_destinacao"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <input type="hidden" name="sOP" value="cadastrar" />
+                            <input type="submit" value="Salvar" class="btn btn-success">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title"><span class="icon"><i class="icon-comment"></i></span><h5>Legenda</h5></div>
+                <div class="widget-content nopadding">
+                    <ul class="activity-list">
+                        <li><a href="#">
+                                <i class="icon-asterisk"></i>
+                                <span>Campo obrigatório</span>
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

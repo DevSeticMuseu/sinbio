@@ -1,0 +1,48 @@
+
+<h2>Niveis Taxonomicos Cadastrados</h2>    
+<?php
+if ($this->vMenu == "") {
+    
+} else {
+    foreach ($this->vMenu as $vModulo) {
+      
+        ?>
+                            <ul class="nav nav-tabs">
+                        <?php
+                                if ($vModulo["modulo"] == "Amostra") {
+                                    
+                             
+                        foreach ($vModulo["programas"] as $vPrograma) {
+
+        
+        if ($vPrograma['controller'] == "nivel-taxonomico") {
+                                            ?>
+                                  <li class="active">  
+                                      <?php
+                    } else {?>
+                                  <li> 
+                                   <?php
+                                        }
+                                        ?>
+                                    <a href="/<?= $vPrograma["controller"] . "/index" ?>"><?= $vPrograma["programa"] ?></a></li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+                                <?php
+                            }
+                        }
+                           }
+                        ?>
+                           
+<!--                        <form class="search">
+                            <input type="text" name="pesquisar" id="pesquisar" />
+                            <input type="submit" class="btn" name="enviar" value="pesquisar">
+                        </form>-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<table class="grid" style="display: none"></table>
+		</div>
+	</div>
+</div>

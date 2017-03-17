@@ -1,0 +1,211 @@
+<?= $this->doctype() ?>
+<html lang="en">
+
+  <head>
+	<title>Painel de Controle</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="/css/sinbio/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/sinbio/bootstrap-responsive.min.css" />
+	<link rel="stylesheet" href="/css/sinbio/style.css" />
+	<link rel="stylesheet" href="/css/sinbio/media.css" class="skin-color" />
+	<link rel="stylesheet" href="/css/sinbio/colorpicker.css" />
+	<link rel="stylesheet" href="/css/sinbio/datepicker.css" />
+	<link rel="stylesheet" href="/css/sinbio/uniform.css" />
+	<link rel="stylesheet" href="/css/sinbio/select2.css" />
+	<link rel="stylesheet" href="/plugin/jquery.alerts/jquery.alerts.css" />
+	<?=$this->layout()->includeCss?>
+
+
+
+
+</head>
+
+    <body>
+
+        <!--Header-part-->
+        <div id="header" class="header">
+            <div class="selos">
+                <a class="brasil" href="">brasil</a>
+                <a class="acesso" href="">acesso à informação</a>
+            </div>
+        </div>
+        <!--close-Header-part-->
+
+
+        <!--top-Header-menu-->
+        <?php
+//á
+        $nHora = (int) date("H");
+
+        switch (true) {
+            case $nHora >= 6 && $nHora < 12:
+                $sSaudacao = "Bom dia ";
+                break;
+            case $nHora >= 12 && $nHora < 18:
+                $sSaudacao = "Boa tarde ";
+                break;
+            case ($nHora >= 18 && $nHora <= 23) || ($nHora >= 0 && $nHora < 6):
+                $sSaudacao = "Boa noite ";
+                break;
+        }
+
+
+
+
+        $auth = Zend_Auth::getInstance();
+        $vUsuarioLogado = $auth->getIdentity();
+        ?>
+
+      <div class="bartop">
+
+          <div class="sinbio">
+<a href="">sinbio</a>
+</div>
+
+            <div class="bt-user">
+                <div class="btn-group">
+                <button class="btn btn-success">Admin Usuario</button>
+                <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>           <a title="" href="/sinbio/alterar-senha/alterar/nId/<?php echo $vUsuarioLogado['id']; ?>">
+
+                        <img src="/img/icons/ico-key.png"/>
+                        <span class="text">alterar senha</span>
+                    </a>
+                    </li>
+                    <li>  <a title="" href="/sinbio/login/logoff">
+                        <i class="icon-off"></i>
+                        <span class="text">Logout</span>
+                    </a></li>
+                </ul>
+                </div>
+            </div>
+ <div class="conta">
+<p class="usuario"><?= $sSaudacao ?> !</p>
+<p class="perfil"><?= $vUsuarioLogado['login']; ?></p>
+</div>
+
+
+
+
+<!--            <ul class="nav">
+
+                <li class="">
+                    <a title="" href="/sinbio/alterar-senha/alterar/nId/<?php// echo $vUsuarioLogado['id']; ?>">
+
+                        <img src="/img/icons/ico-key.png"/>
+                        <span class="text">alterar senha</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a title="" href="/sinbio/login/logoff">
+                        <i class="icon-off"></i>
+                        <span class="text">Logout</span>
+                    </a>
+                </li>
+            </ul>-->
+        </div>
+        <!--close-top-Header-menu-->
+
+
+
+        <!-- MENU -->
+        <div id="sidebar">
+            <ul>
+                <li><a href="/sinbio/internas/pagina-inicial"><i class="icon icon-home"></i><span>Página Inicial</span></a></li>
+<?php
+if ($this->vMenu == "") {
+
+} else {
+    foreach ($this->vMenu as $vModulo) {
+        ?>
+                        <li>
+                            <a href="#"><i class="icon <?= $vModulo["ico"] ?>"></i><span><?= $vModulo["modulo"] ?></span></a>
+                            <ul>
+                        <?php
+                        foreach ($vModulo["programas"] as $vPrograma) {
+                            ?>
+                                    <li><a href="/sinbio/<?= $vPrograma["controller"] . "/index" ?>"><?= $vPrograma["programa"] ?></a></li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+                        </li>
+                                <?php
+                            }
+                        }
+                        ?>
+            </ul>
+
+
+        </div>
+
+
+                <?php
+                //	$auth = Zend_Auth::getInstance();
+                //	$vUsuarioLogado = $auth->getIdentity();
+                //$oVerifica = new VerificaPermissao("usuario", "alterar-senha" , $vUsuarioLogado["id"]);
+                ?>
+        <!--<div id="sidebar">
+                        <ul>
+                                <li><a href="#"><i class="icon icon-home"></i><span>Página Inicial</span></a></li>
+        <?php // if ($oVerifica->bResultado) { ?>
+                                <li>
+                                        <a href="#"><i class="icon "></i><span>Segurança</span></a>
+                                        <ul>
+
+                                                <li><a href="#"> </a></li>
+
+                                        </ul>
+                                </li>
+<?php
+//}
+?>
+
+
+                        </ul>
+
+
+                </div>-->
+
+
+
+        <div id="content">
+            <div id="content-header">
+                <div id="breadcrumb">
+                    <a href="/sinbio/internas/pagina-inicial" title="Página Inicial" class="tip-bottom"><i class="icon-home"></i> Página Inicial</a>
+                    <a href="#" title="<?= $this->layout()->nmModulo; ?>" class="tip-bottom"><?= $this->layout()->nmModulo; ?></a>
+                    <a href="/sinbio/<?= $this->layout()->nmController; ?>/index" class="current tip-bottom" title="<?= $this->layout()->nmPrograma; ?>"><?= $this->layout()->nmPrograma; ?></a>
+                    <a href="#"><?= $this->layout()->nmOperacao; ?></a>
+                </div>
+            </div>
+<?= ($this->layout()->msg) ? $this->layout()->msg : ""; ?>
+<?= $this->layout()->content; ?>
+        </div>
+        <div class="row-fluid">
+            <div id="footer" class="span12">Museu Paraense Emilio Goeldi - Sinbio<a href="#"></a></div>
+        </div>
+    </body>
+    <script src="/js/jquery-1.7.1.min.js"></script>
+    <script src="/js/geral/jquery.min.js"></script>
+    <script src="/js/jquery.maskedinput.min.js"></script>
+    <script src="/js/geral/jquery.ui.custom.js"></script>
+    <script src="/js/geral/bootstrap.min.js"></script>
+    <script src="/js/geral/bootstrap-colorpicker.js"></script>
+    <script src="/js/geral/bootstrap-datepicker.js"></script>
+    <script src="/js/geral/jquery.uniform.js"></script>
+    <script src="/js/geral/select2.min.js"></script>
+    <script src="/js/geral/maruti.js"></script>
+    <script src="/js/geral/maruti.form_common.js"></script>
+    <script src="/plugin/jquery.alerts/jquery.alerts.js"></script>
+<?= $this->layout()->includeJs ?>
+
+<?php
+//  echo '<pre>';
+//  print_r($this->vMenu);
+?>
+</html>

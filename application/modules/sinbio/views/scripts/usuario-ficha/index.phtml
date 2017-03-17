@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-info-sign"></i></span>
+                    <h5>Ficha do Usuário</h5>
+                </div>
+                <div class="widget-content nopadding">
+
+
+                    <?php
+                    foreach ($this->Usuario as $usuario) {
+                        ?>
+                        <div style="margin-top: 50px; margin-bottom: 50px;">
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Nome : </strong><?=$usuario["nm_usuario"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Titulação : </strong><?=$usuario["nm_titulacao"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Protocolo : </strong><?=$usuario["nm_protocolo"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Núcleos : </strong>
+                                <ul>
+                                <?php
+                                    foreach ($this->nucleos as $nucleo) {
+                                        echo '<li>' . $nucleo["nm_nucleo"], '<br>';
+                                    }
+                                ?>
+                                </ul>
+                            </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Instituição : </strong><?=$usuario["sigla"]?> - <?=$usuario["razao_social"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> E-mail : </strong><?=$usuario["email"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Data de Cadastro :</strong> <?=$usuario["dt_cadastro"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Citação : </strong><?=$usuario["citacao"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Cpf : </strong><?=$usuario["cpf"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Rg : </strong><?=$usuario["rg"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Sisbio : </strong><?=$usuario["sisbio"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Lattes : </strong><?=$usuario["lattes"]?> </div>
+
+
+                        </div>
+                        <?php
+                    }
+                    ?>
+
+
+                    <form class="form-horizontal" method="post" action="/usuario/index" name="" id="insere-altera" novalidate="novalidate">
+                        <input style=" margin-left: 350px;" type="submit" value="voltar para todos os usuários" class="btn btn-success">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

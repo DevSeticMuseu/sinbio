@@ -1,0 +1,261 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-info-sign"></i></span>
+                    <h5>Cadastrar Usuário</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <form class="form-horizontal" method="post" action="/usuario/cadastrar" name="insere-altera" id="insere-altera" novalidate="novalidate">
+                        <div class="control-group">
+                            <label class="control-label">Nome <i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <input tabindex="1" type="text" name="fNmUsuario" class="required">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">E-mail :</label>
+                            <div class="controls">
+                                <input type="text" name="fEmail">
+
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Grupo Usuário :</label>
+                            <div class="controls ">
+                                <select name="fIdGrupoUsuario" style="width: 200px;">
+                                    <?php
+                                    foreach ($this->vGrupoUsuario as $grupoUsuario) {
+                                        ?>
+                                        <option value="<?=$grupoUsuario["id"]?>"><?=$grupoUsuario["nm_grupo_usuario"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label class="control-label">Instituição :</label>
+                            <div class="controls ">
+                                <select name="fIdInstituicao" style="width: 200px;">
+                                    <?php
+                                    foreach ($this->vInstituicao as $instituicao) {
+                                        ?>
+                                        <option value="<?=$instituicao["id"]?>"><?=$instituicao["razao_social"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Maior Titulação :</label>
+                            <div class="controls ">
+                                <select name="fIdTitulacao" style="width: 200px;">
+                                    <?php
+                                    foreach ($this->vTitulacao as $titulacao) {
+                                        ?>
+                                        <option value="<?=$titulacao["id"]?>"><?=$titulacao["nm_titulacao"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Protocolo :</label>
+                            <div class="controls ">
+                                <select name="fIdProtocolo" style="width: 200px;">
+                                    <?php
+                                    foreach ($this->vProtocolo as $protocolo) {
+                                        ?>
+                                        <option value="<?=$protocolo["id"]?>"><?=$protocolo["nm_protocolo"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Núcleo :</label>
+                            <div class="controls ">
+                                <select id="fIdNucleo" name="fIdNucleo[]" multiple="multiple" style="width: 200px;">
+                                    <?php
+                                    foreach ($this->vNucleo as $nucleo) {
+                                        ?>
+                                        <option value="<?=$nucleo["id"]; ?>"><?=$nucleo["nm_nucleo"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Login <i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <input type="text" id="fLogin" name="fLogin" class="required">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Senha <i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <input type="password" id="fSenha" name="fSenha" class="required">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Confirmar Senha <i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <input type="password" name="fSenhaConf" id="fSenhaConf" class="required">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Data Entrada: </label>
+                            <div class="controls">
+                                <input type="text" name="fDatadeCadastro" data-date-format="dd-mm-yyyy" value="<?php echo date("d-m-Y") ?>" class="datepicker" />
+                            </div>
+                        </div>
+
+                                                                                                                                                                                <!--<input type="text" name="fDtSaida" data-date-format="dd-mm-yyyy" value="<?php //echo date("d-m-Y")  ?>" class="datepicker" />-->
+
+                        <!--  <div class="control-group">
+                        <label class="control-label">Data Saida: </label>
+                        <div class="controls">
+                                                                                                                                                                                        <input id="fDtSaida" name="fDtSaida"  class="form-control input-md"   value="<?php echo date("d-m-Y") ?>" />
+                                                                                                                                                                        </div>
+                    </div>
+                                                                                                                                                        <script type="text/javascript" src="/js/jquery.maskedinput.min.js"></script>
+                                                                                                                                                        <script>
+
+                                                                                                                                                                        $("#fDtSaida").mask("99-99-9999");
+                                                                                                                                                        </script> */ -->
+
+
+
+                        <div class="control-group">
+                            <label class="control-label">Citação:</label>
+                            <div class="controls">
+                                <input type="text" id="fCitacao" name="fCitacao">
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label class="control-label">RG:</label>
+                            <div class="controls">
+                                <input type="text" id="fRg" name="fRg">
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label class="control-label">Cpf:</label>
+                            <div class="controls">
+                                <input type="text" id="fCpf" name="fCpf">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Sinbio:</label>
+                            <div class="controls">
+                                <input type="text" id="fSisbio" name="fSisbio">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Lattes:</label>
+                            <div class="controls">
+                                <input type="text" id="fLattes" name="fLattes">
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label class="control-label">Banco:</label>
+                            <div class="controls ">
+                                <select name="fIdBanco" style="width: 200px;">
+                                    <?php
+                                    foreach ($this->vBanco as $banco) {
+                                        ?>
+                                        <option value="<?=$banco["id"]?>"><?=$banco["nm_banco"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Banco Agencia:</label>
+                            <div class="controls">
+                                <input type="text" id="fBancoAgencia" name="fBancoAgencia">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Banco Conta:</label>
+                            <div class="controls">
+                                <input type="text" id="fBancoConta" name="fBancoConta">
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label class="control-label">Bolsista:</label>
+                            <div class="controls">
+                                <input type="checkbox" id="fVinculoEmpregaticio" name="fBolsista" value ="1">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Vinculo Empregaticio:</label>
+                            <div class="controls">
+                                <input type="checkbox" id="fVinculoEmpregaticio" name="fVinculoEmpregaticio" value ="1">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Outros:</label>
+                            <div class="controls">
+                                <input type="text" id="fOutro" value="" name="fOutro">
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <input type="hidden" name="fDtUtimaAtualizacao" data-date-format="dd-mm-yyyy" value="<?php echo date("d-m-Y") ?>" class="datepicker" />
+
+
+
+                        <div class="form-actions">
+                            <input type="hidden" name="sOP" value="cadastrar" />
+                            <input type="submit" value="Salvar" class="btn btn-success">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title"><span class="icon"><i class="icon-comment"></i></span><h5>Legenda</h5></div>
+                <div class="widget-content nopadding">
+                    <ul class="activity-list">
+                        <li><a href="#"><i class="icon-asterisk"></i><span>Campo obrigatório</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title">
+					<span class="icon"><i class="icon-info-sign"></i></span>
+					<h5>Resultado do Relatório</h5>
+				</div>
+                            
+<div class="widget-content nopadding">
+    
+    <?
+    	if(count($this->dadosRel) > 0){
+    ?>
+    <table border="1" style="border: 1px solid #cccccc;margin-bottom:1px; margin-top: 20px; margin-left: 20px; margin-right: 20px;">
+        <th>&ensp;</th>
+        <th>id_amostra_coletor</th>
+        <th>projeto_programa</th>
+        <th>protocolo</th>
+        <th>metodo</th>
+        <th>sitio</th>
+        <th>latitude</th>
+        <th>longitude</th>
+        
+       
+<?php 
+$cont = 1;
+foreach($this->dadosRel as $value){ ?>
+        <tr> 
+            <td><div style="text-align: center"><?= $cont ?></div></td>
+            <td><div style="text-align: center"><?= $value['id_amostra_coleta'] ?></div></td>
+            <td><div style="text-align: center"><?= $value['nm_projeto_programa'] ?></div></td>
+            <td><div style="text-align: center"><?= $value['nm_protocolo'] ?></div></td>
+            <td><div style="text-align: center"><?= $value['nm_metodo'] ?></div></td>
+            <td><div style="text-align: center"><?= $value['nm_sitio'] ?></div></td>
+            <td><div style="text-align: center"><?= $value['latitude'] ?></div></td>
+            <td><div style="text-align: center"><?= $value['longitude'] ?></div></td>
+            
+         </tr>
+             
+                 <?php $cont++; }?>
+                    
+</table>
+    
+    <?php } else { ?>
+    <div style="padding: 20px 0 0 50px; font-size: 15px; font-weight: bold; color: #666666;">
+        Nenhum Resultado Encontrado
+    </div>
+    <?php }?>
+                                            
+                                          
+				
+				
+						<div class="form-actions">
+                                                    <div style="float: left; margin-right: 30px;">
+                                                    <form class="form-horizontal" method="post" action="/relatorios/index" name="" id="insere-altera" novalidate="novalidate">
+							<input type="submit" value="voltar" class="btn btn-success">
+                                                        </form>
+                                                    </div>
+                                                    <div style="float: left;">
+                                                    <form class="form-horizontal" method="post" action="/relatorios/relatorio-excel-amostra" name="" id="insere-altera" novalidate="novalidate">
+							<input type="submit" value="Exportar Dados em Excel" class="btn btn-success">
+                                                        </form>
+                                                    </div>
+						</div>
+
+                            </div>
+			</div>
+		</div>
+</div>
+        
+        
+        	
+</div>
+
+

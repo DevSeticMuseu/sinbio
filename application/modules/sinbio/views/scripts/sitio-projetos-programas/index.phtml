@@ -1,0 +1,64 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-info-sign"></i></span>
+                    <h5>Atribuir Projetos/Programas para Sitio</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <form class="form-horizontal" method="post" action="/sitio-projetos-programas/cadastrar" name="" id="insere-altera" novalidate="novalidate">
+                        <div class="control-group">
+                            <label class="control-label">Instituição <i class="icon-asterisk"></i>:</label>
+                            <div class="controls">
+                                <input tabindex="1" type="text" name=fSitio value="<?= $this->fSitio; ?>" class="required"  style="width: 500px">
+                                <input type="hidden" name="fIdSitio" value="<?= $this->fIdSitio; ?>" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Projetos Programas <i class="icon-asterisk"></i>:</label>
+                               <div class="controls">
+                                <select id="fProjetosProgramas" name="fProjetosProgramas[]" multiple="multiple">
+                                  <?php
+                                            foreach ($this->vProjetosProgramas as $projetoprograma) {
+                                                if (array_search($projetoprograma["id"], $this->vSitioProgramas)) {
+                                                    ?>
+                                                    <option value="<?= $projetoprograma["id"]; ?>" selected="selected"><?= $projetoprograma["nm_projeto_programa"] ?></option>
+                                                    <?php
+                                                } else {
+                                                    ?>
+                                                    <option value="<?= $projetoprograma["id"]; ?>"><?= $projetoprograma["nm_projeto_programa"] ?></option>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                   
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input type="hidden" name="sOP" value="cadastrar" />
+                            <input type="submit" value="Salvar" class="btn btn-success">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title"><span class="icon"><i class="icon-comment"></i></span><h5>Legenda</h5></div>
+                <div class="widget-content nopadding">
+                    <ul class="activity-list">
+                        <li><a href="#">
+                                <i class="icon-asterisk"></i>
+                                <span>Campo obrigatório</span>
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

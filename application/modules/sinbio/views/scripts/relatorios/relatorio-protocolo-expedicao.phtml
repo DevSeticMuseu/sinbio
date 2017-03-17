@@ -1,0 +1,72 @@
+<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title">
+					<span class="icon"><i class="icon-info-sign"></i></span>
+                                        <h5>Relat&oacute;rio da Quantidade de Expedi&ccedil;&otilde;es por Protocolo </h5>
+				</div>
+                            
+<div class="widget-content nopadding">
+    
+    <?
+    	if(count($this->dadosRel) > 0){
+    ?>
+    <div style=" margin-top: 20px;">
+<?php 
+$anterior = "";
+$contprotocolo = 0;
+$contexpedicao = 0;
+foreach($this->dadosRel as $value){ ?>
+       <div> 
+      
+        <?php 
+        
+        if ($value['sigla'] != $anterior){ ?></php>
+            
+      <div style=" background: #efefef; text-align: center;border-top:  1px solid #CCCCCC; border-bottom:  1px solid #CCCCCC;"><?= $value['sigla'] ?></div>
+           
+        <?php 
+         $anterior = $value['sigla'];
+         $contprotocolo ++;
+        } ?>
+      <div style="text-align: center"> Expedi&ccedil;&atilde;o - <?= $value['id'] ?></div>
+            
+         
+             
+                 <?php $contexpedicao++; }?>
+                    
+        </div>
+    
+    <?php } else { ?>
+    <div style="padding: 20px 0 0 50px; font-size: 15px; font-weight: bold; color: #666666;">
+        Nenhum Resultado Encontrado
+    </div>
+    <?php }?>
+       <div style=" background: #efefef; text-align: center;border-top:  1px solid #CCCCCC; border-bottom:  1px solid #CCCCCC;">                                     
+        <div style=" margin-top: 20px; font-size: 16px ;"> Total de Protocolos : <?php echo $contprotocolo; ?></div>                            
+        <div style=" margin-top: 10px; margin-bottom: 20px;  font-size: 16px">  Total de Expedi&ccedil;&otilde;es : <?php echo $contexpedicao; ?></div>
+       </div>
+				
+						<div class="form-actions">
+                                                    <div style="float: left; margin-right: 30px;">
+                                                    <form class="form-horizontal" method="post" action="/relatorios/index" name="" id="insere-altera" novalidate="novalidate">
+							<input type="submit" value="voltar" class="btn btn-success">
+                                                        </form>
+                                                    </div>
+                                                    <div style="float: left;">
+                                                    <form class="form-horizontal" method="post" action="/relatorios/relatorio-excel-protocolo-expedicao" name="" id="insere-altera" novalidate="novalidate">
+							<input type="submit" value="Exportar Dados em Excel" class="btn btn-success">
+                                                        </form>
+                                                    </div>
+						</div>
+
+                            </div>
+			</div>
+		</div>
+</div>
+        
+        
+        	
+</div>
+
+

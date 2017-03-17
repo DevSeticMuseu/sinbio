@@ -1,0 +1,72 @@
+<div class="row-fluid">
+		<div class="span12">
+			<div class="widget-box">
+				<div class="widget-title">
+					<span class="icon"><i class="icon-info-sign"></i></span>
+					<h5>Resultado do Relatório Atrativos</h5>
+				</div>
+                            
+<div class="widget-content nopadding">
+    
+    <?
+    	if(count($this->dadosRel) > 0){
+    ?>
+    <table border="1" style="border: 1px solid #cccccc;margin-bottom:1px; margin-top: 20px; margin-left: 20px; margin-right: 20px;">
+        <th>Quantidade</th>
+        <th>nm_atrativos</th>
+        
+       
+<?php 
+$cont = 1;
+$conttotal = 0;
+foreach($this->dadosRel as $value){ ?>
+        <tr> 
+            <td style="width: 200px"><div style="text-align: center"><?= $cont ?></div></td>
+            <td style="width: 600px"><div style="text-align: center"><?= $value['nm_atrativos'] ?></div></td>
+            
+         </tr>
+             
+                 <?php $cont++; $conttotal++;}?>
+                    
+</table>
+    
+    <table border="1" style="border: 1px solid #cccccc;margin-bottom:1px; margin-top: 20px; margin-left: 20px; margin-right: 20px;">
+        <th colspan="2" style="width: 800px" >Quantidade Total de Atrativos</th>
+        <tr> 
+            <td colspan="2" style="width: 800px"><div style="text-align: center"><?= $conttotal ?></div></td>
+            
+         </tr>
+    </table>
+    
+    <?php } else { ?>
+    <div style="padding: 20px 0 0 50px; font-size: 15px; font-weight: bold; color: #666666;">
+        Nenhum Resultado Encontrado
+    </div>
+    <?php }?>
+                                            
+                                          
+				
+				
+						<div class="form-actions">
+                                                    <div style="float: left; margin-right: 30px;">
+                                                    <form class="form-horizontal" method="post" action="/relatorios/index" name="" id="insere-altera" novalidate="novalidate">
+							<input type="submit" value="voltar" class="btn btn-success">
+                                                        </form>
+                                                    </div>
+                                                    <div style="float: left;">
+                                                    <form class="form-horizontal" method="post" action="/relatorios/relatorio-excel-atrativos" name="" id="insere-altera" novalidate="novalidate">
+							<input type="submit" value="Exportar Dados em Excel" class="btn btn-success">
+                                                        </form>
+                                                    </div>
+						</div>
+
+                            </div>
+			</div>
+		</div>
+</div>
+        
+        
+        	
+</div>
+
+

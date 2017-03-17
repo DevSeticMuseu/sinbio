@@ -1,0 +1,100 @@
+<style>
+    ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+ul.pagination li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+
+
+ul.pagination li a {
+    transition: background-color .3s;
+}
+
+ul.pagination li a {
+    border: 1px solid #ddd; /* Gray */
+}
+
+.pagination li:first-child a {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.pagination li:last-child a {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+div.center {
+    text-align: center;
+}
+</style>
+
+<center>
+<?php if ($this->pageCount): ?>
+<div>
+    <ul class="pagination">
+<!-- Previous page link -->
+<?php if (isset($this->previous)): ?>
+<li>
+    <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+        &lt; Previous
+    </a> 
+    </li>
+<?php else: ?>
+    <li>
+     <a href="#" class="active">
+    <span>&lt; Previous</span> 
+     </a>
+    </li>
+<?php endif; ?>
+ 
+<!-- Numbered page links -->
+<?php foreach ($this->pagesInRange as $page): ?>
+    <?php if ($page != $this->current): ?>
+<li>
+        <a href="<?php echo $this->url(array('page' => $page)); ?>">
+            <?php echo $page; ?>
+        </a> 
+    </li>
+    <?php else: ?>
+        <li>
+         <a href="#" class="active">
+        <?php echo $page; ?> 
+         </a>
+            </li>
+    <?php endif; ?>
+<?php endforeach; ?>
+ 
+<!-- Next page link -->
+<?php if (isset($this->next)): ?>
+<li>
+    <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
+        Next &gt;
+    </a>
+    </li>
+<?php else: ?>
+<li>
+ <a href="#" class="active">
+    <span>Next &gt;</span>
+ </a>
+    </li>
+<?php endif; ?>
+    </ul>
+</div>
+<?php endif; ?></center>

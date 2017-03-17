@@ -1,0 +1,246 @@
+@import "mixins.less";
+@import "variables.less";
+@import "bootstrap/less/bootstrap.less";
+//@import "bootstrap/less/responsive.less";
+
+
+//Variables
+
+.border{
+	border:1px solid black;
+}
+
+.center{
+	margin: 0px auto;
+}
+
+.bt-submit{
+	width: 117px;
+	height: 43px;
+	.gradient(#71a93e, #4b8615);
+	border:none;
+	color:#fff;
+	font-size: 24px;
+}
+
+@font-face {  
+    font-family: 'AsapRegular';  
+    src:url('fonts/Asap-Regular-webfont.eot');  
+    src:url('fonts/Asap-Regular-webfont.eot?#iefix') format('embedded-opentype'),  
+    url('fonts/Asap-Regular-webfont.woff') format('woff'),  
+    url('fonts/Asap-Regular-webfont.ttf') format('truetype'),  
+    url('fonts/Asap-Regular-webfont.svg#AsapRegular') format('svg');  
+    font-weight: normal;  
+    font-style: normal;  
+}  
+
+// Content
+
+.wrap{
+	width: 1020px;
+	.center
+}
+
+.header .selos{
+	width: 100%;
+	height: 26px;
+	background:#7f7f7f;
+	border-bottom: 1px solid #006c0a;
+
+		a.acesso{
+			background: url(../images/acesso_informacao.png) no-repeat;
+			width:163px;
+			height:63px;
+			display: inline-block;
+			text-indent: -9999px;
+			overflow: hidden;
+			float: right; 
+		}
+		a.brasil{
+			background: url(../images/brasil.png) no-repeat;
+			width:109px;
+			height:26px;
+			display: inline-block;
+			text-indent: -9999px;
+			overflow: hidden;
+			float: right;
+		}
+}
+
+.header .rotation-banner{
+	width: 100%;
+	height: 540px;
+	border-top:1px solid #ffb400;
+	background: url(../images/cogumelos.jpg) no-repeat;
+
+		.logo {
+			width: 360px;
+			height: 178px;
+			float: left;
+			a{
+				background: url(../images/logobk.png) no-repeat;
+				width: 360px;
+				height: 178px;
+				display: block;
+				text-indent: -9999px;
+				overflow: hidden;
+			}
+		}
+
+		.nav{
+			width: 660px;
+			height: 75px;
+			background: url(../images/bgmenu.png);
+			float: left;
+			margin-top: -35px;
+			padding: 0px;
+
+			ul{
+				margin:0px;
+				width: 620px;
+				height: 50px;
+				padding-top: 25px;
+
+				li{
+					//width: 200px;
+					display:inline-block;
+					list-style: none;
+					margin-left: 50px;
+
+					a{
+
+						text-decoration: none;
+						color:@white;
+						font-size: 24px;
+						
+						&:hover{
+							text-decoration:underline;
+						}
+					}
+				}
+			}
+		}
+
+		form{
+			width: 420px;
+			height: 360px;
+			background: url(../images/bgform.png);
+			float: right;
+			margin:30px 100px;
+				a{
+					margin: 20px 20px 20px 0px;
+					float: right;
+				}
+				input{
+					width:382px;
+					height: 54px;
+					margin:10px 0px 10px 12px;
+					border-radius: 0px;
+				}
+				.submit{
+					.bt-submit;
+				}
+				label{
+					float:right;
+					width: 135px;
+					margin: 25px 15px 0px 0px;
+				}
+				.conectado{
+					width: auto;
+					float:right;
+					margin-right:5px;
+				}
+				.acessoconta{
+					margin: 30px 0px 0px 13px;
+					display:table;
+					float: none;
+					width: auto;
+				}
+		}
+}
+
+.content{
+	width: 1020px;
+	.center;
+	margin-top: 0px;
+
+		.presentation{
+			height: 340px;
+			padding: 40px 40px 0px 40px;
+			background: url(../images/bg-apresentation.jpg) repeat-x;
+				.text{
+					width: 630px;
+					float: left;
+						a{
+							margin-top: 20px;
+							float: right;
+						}
+				}
+				.imagemobile{
+					float: right;
+					width: 280px;
+				}
+		}
+
+		.how{
+			height: 380px;
+			padding: 20px 40px 0px 40px;
+				.step{
+					width: 140px;
+					float: left;
+					margin: 10px 10px 0px 5px;
+					text-align: center;
+					font-size: 12px;
+				}
+		}
+}
+
+.foot{
+	width: 1020px;
+	height: auto;
+	background:#5d9d22;
+	.center;
+
+		.form{
+			margin:10px 0px 30px 100px;
+			width: 380px;
+			float: left;
+				input, textarea{
+					width: 360px;
+				}
+				input
+				{
+					height: 50px;
+				}
+				textarea{
+					height: 104px;
+				}
+				.submit{
+					.bt-submit;
+					float: right;
+				}
+				h2{
+					color: #fff;
+				}
+		}
+		.info{
+			width: 450px;
+			height: 250px;
+			float: left;
+			margin: 40px 0px 0px 40px;
+			color: white;
+			background: url(../images/mpeg.png) no-repeat right bottom;
+			line-height: 14px;
+		}
+		.copyright{
+			width: 1020px;
+			display:table;
+			text-align: center;
+			background:#3d3c37;
+			color:#fff;
+			height: 28px;
+			padding-top: 7px;
+			font-size: 12px;
+			bottom: 0px;
+		}
+}
