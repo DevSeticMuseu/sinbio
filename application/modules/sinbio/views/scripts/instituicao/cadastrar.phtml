@@ -120,6 +120,21 @@
                                 </select>
                             </div>
                         </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Estado <i class="icon-asterisk"></i>:</label>
+                            <div class="controls ">
+                                <select name="fIdUf" style="width: 200px;">
+                                    <?php
+                                    foreach ($this->vUf as $uf) {
+                                        ?>
+                                        <option value="<?=$uf["id"]?>"><?=$uf["nm_uf"]?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="control-group">
                             <label class="control-label">Município <i class="icon-asterisk"></i>:</label>

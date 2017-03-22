@@ -39,7 +39,9 @@ class Sinbio_InstituicaoController extends Zend_Controller_Action {
 
         $this->view->layout()->includeCss = '';
 
-        //RECUPERA MUNICÍPIO PARA SELECT
+        $oUf = new Loc_Uf();
+        $this->view->vUf = $oUf->fetchAll()->toArray();
+        
         $oMunicipio = new Loc_Municipio();
         $this->view->vMunicipio = $oMunicipio->fetchAll()->toArray();
 
@@ -61,6 +63,7 @@ class Sinbio_InstituicaoController extends Zend_Controller_Action {
                 "email" => $request->getParam("fEmail"),
                 "cpf_diretor" => $request->getParam("fCpfDiretor"),
                 "loc_nucleo_id" => $request->getParam("fIdNucleo"),
+                "loc_uf_id" => $request->getParam("fIdUf"),
                 "loc_municipio_id" => $request->getParam("fIdMunicipio"),
                 "logradouro" => $request->getParam("fLogradouro"),
                 "bairro" => $request->getParam("fBairro"),
@@ -130,6 +133,9 @@ class Sinbio_InstituicaoController extends Zend_Controller_Action {
 
         $oInstituicao = new Instituicao_Instituicao();
 
+        $oUf = new Loc_Uf();
+        $this->view->vUf = $oUf->fetchAll()->toArray();
+        
         $oMunicipio = new Loc_Municipio();
         $this->view->vMunicipio = $oMunicipio->fetchAll()->toArray();
 
@@ -148,6 +154,7 @@ class Sinbio_InstituicaoController extends Zend_Controller_Action {
             //VALIDA SE O USUARIO EXISTE
             if (count($vInstituicao)) {
                 $this->view->nId = $vInstituicao["id"];
+                $this->view->nIdUf = $vInstituicao["loc_uf_id"];
                 $this->view->nIdMunicipio = $vInstituicao["loc_municipio_id"];
                 $this->view->nIdNucleo = $vInstituicao["loc_nucleo_id"];
                 $this->view->sRazaoSocial = $vInstituicao["razao_social"];
@@ -187,6 +194,7 @@ class Sinbio_InstituicaoController extends Zend_Controller_Action {
                         "cargo_diretor" => $request->getParam("fCargoDiretor"),
                         "email" => $request->getParam("fEmail"),
                         "cpf_diretor" => $request->getParam("fCpfDiretor"),
+                        "loc_uf_id" => $request->getParam("fIdUf"),
                         "loc_municipio_id" => $request->getParam("fIdMunicipio"),
                         "loc_nucleo_id" => $request->getParam("fIdNucleo"),
                         "logradouro" => $request->getParam("fLogradouro"),
