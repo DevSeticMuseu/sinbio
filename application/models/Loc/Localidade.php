@@ -1,7 +1,7 @@
 <?php
-class Loc_Sitio extends Zend_Db_Table_Abstract {
+class Loc_Localidade extends Zend_Db_Table_Abstract {
 
-	protected $_name			= 'loc_sitio';
+	protected $_name			= 'loc_localidade';
 	protected $_primary			= 'id';
 	protected $_erroMensagem	= null;
 	
