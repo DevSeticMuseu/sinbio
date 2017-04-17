@@ -36,7 +36,9 @@ class Sinbio_ExpedicaoController extends Zend_Controller_Action {
 			<script src="/js/sinbio/validacao.js" type="text/javascript"></script>
 		';
 
-        $this->view->layout()->includeCss = '';
+        $this->view->layout()->includeCss = '
+                        <link rel="stylesheet" href="/css/sinbio/datepicker-change.css" />
+                ';
 
         //ALIMENTANDO SELECT DE PROTOCOLO
         $oProtocolo = new Protocolo_Protocolo();
@@ -151,13 +153,13 @@ class Sinbio_ExpedicaoController extends Zend_Controller_Action {
 
             // RECUPERA O Municipio DA EXPEDIÇÃO
             $this->view->vMunicipio = $oMunicipio->fetchAll()->toArray();
-            
+
             // RECUPERA A UF DA EXPEDIÇÃO
             $this->view->vUF = $oUF->fetchAll()->toArray();
-              
+
             // RECUPERA A PROJEÇÃO DA EXPEDIÇÃO
             $this->view->vProjecao = $oProjecao->fetchAll()->toArray();
-              
+
             // VALIDA SE O USUARIO EXISTE
             if (count($vExpedicao)) {
                 $this->view->nId = $vExpedicao["id"];
@@ -308,10 +310,10 @@ class Sinbio_ExpedicaoController extends Zend_Controller_Action {
 
             $oMunicipio = new Loc_Municipio();
             $vMunicipio = $oMunicipio->find($reg['loc_municipio'])->toArray();
-            
+
             $oUF = new Loc_Uf();
             $vUF = $oUF->find($reg['loc_uf_id'])->toArray();
-            
+
             $oSitio = new Loc_Sitio();
             $vSitio = $oSitio->find($reg['loc_sitio_id'])->toArray();
 

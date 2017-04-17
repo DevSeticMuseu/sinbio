@@ -37,7 +37,9 @@ class Sinbio_InstituicaoController extends Zend_Controller_Action {
 			<script src="/js/sinbio/validacao.js" type="text/javascript"></script>
 		';
 
-        $this->view->layout()->includeCss = '';
+        $this->view->layout()->includeCss = '
+                        <link rel="stylesheet" href="/css/sinbio/datepicker-change.css" />
+                ';
 
         $oUf = new Loc_Uf();
         $this->view->vUf = $oUf->fetchAll()->toArray();

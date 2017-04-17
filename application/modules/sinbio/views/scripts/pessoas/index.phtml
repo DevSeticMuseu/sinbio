@@ -2,120 +2,118 @@
 
 <script>
 
-    $(document).ready(function() {
-    var table =   $('#example').DataTable( {
-        responsive: true,
-         scrollY: 400,
+    $(document).ready(function () {
+        var table = $('#example').DataTable({
+            responsive: true,
+            scrollY: 400,
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $('<select style = "width:100px"><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                        );
+                                column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                            });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+
+            }
+
+        });
+
+        table.column('0:visible').order('asc').draw();
+        table.column('3:visible').order('asc').draw();
+        /*  $('#example tbody').on('click', 'tr', function () {
+         var data = table.row( this ).data();
+         //alert( 'You clicked on '+data[3]+'\'s row' );
+         table.row( this ).remove();
+         table.draw();
+         } );*/
 
 
-        initComplete: function () {
-            this.api().columns().every( function () {
-                var column = this;
-                var select = $('<select style = "width:100px"><option value=""></option></select>')
-                    .appendTo( $(column.footer()).empty() )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
 
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                } );
-            } );
-
-        }
-
-    } );
-
-    table.column( '0:visible' ).order( 'asc' ).draw();
-    table.column( '3:visible' ).order( 'asc' ).draw();
-  /*  $('#example tbody').on('click', 'tr', function () {
-        var data = table.row( this ).data();
-        //alert( 'You clicked on '+data[3]+'\'s row' );
-        table.row( this ).remove();
-        table.draw();
-    } );*/
-
-
-    
-    //console.log(table.column( '3' ));
-    //table.column( '3' ).hide();
-    //table.rows('.egressos:').select().hide();
-    //table.rows('.3').select();
-    //table.rows('3').select();
-  /*  $('#example tbody').on( 'click', 'tr', function () {
-        var child = table.row( this ).child;
-
-        if ( child.isShown() ) {
-            child.hide();
-        }
-    } );*/
-/*
+        //console.log(table.column( '3' ));
+        //table.column( '3' ).hide();
+        //table.rows('.egressos:').select().hide();
+        //table.rows('.3').select();
+        //table.rows('3').select();
+        /*  $('#example tbody').on( 'click', 'tr', function () {
+         var child = table.row( this ).child;
+         
+         if ( child.isShown() ) {
+         child.hide();
+         }
+         } );*/
+        /*
          var data = table.row( this ).data();
          console.log("Aqui");
          for (var linha in data) {
-           console.log( 'You clicked on '+linha[3]+'\'s row' );
+         console.log( 'You clicked on '+linha[3]+'\'s row' );
          }*/
-} );
-    </script>
+    });
+</script>
 <h2>Pessoas Cadastradas</h2>
 
 
-    <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span12">
-		<div class="bs-example">
-    <table id="example" class="display" >
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="bs-example">
+                <table id="example" class="display" >
 
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Titula&ccedil;&atilde;o</th>
-                <th>Institui&ccedil;&atilde;o</th>
-                <th>Atribuicao</th>
-                 <th>Protocolo</th>
-                 <th>Nucleo</th>
-                 <th>Projeto/Programa</th>
-                 <th>Ação</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>Nome</th>
-                <th>Titula&ccedil;&atilde;o</th>
-                <th>Institui&ccedil;&atilde;o</th>
-                <th>Atribuicao</th>
-                 <th>Protocolo</th>
-                 <th>Nucleo</th>
-                 <th>Projeto/Programa</th>
-            </tr>
-        </tfoot>
-        <tbody>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Titula&ccedil;&atilde;o</th>
+                            <th>Institui&ccedil;&atilde;o</th>
+                            <th>Atribuicao</th>
+                            <th>Protocolo</th>
+                            <th>Nucleo</th>
+                            <th>Projeto/Programa</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Titula&ccedil;&atilde;o</th>
+                            <th>Institui&ccedil;&atilde;o</th>
+                            <th>Atribuicao</th>
+                            <th>Protocolo</th>
+                            <th>Nucleo</th>
+                            <th>Projeto/Programa</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
 
-            <?php foreach ($this->paginator as $value) {
-                ?>
-            <tr>
+<?php foreach ($this->paginator as $value) {
+    ?>
+                            <tr>
 
-             <td><?php echo $value["nm_usuario"]; ?></td>
-                <td><?php echo $value["nm_titulacao"]; ?></td>
-                <td><?php echo $value["razao_social"]; ?></td>
-                <td><?php echo $value["nm_grupo_usuario"]; ?></td>
-                <td><?php echo $value["nm_protocolo"]; ?></td>
-                <td><?php echo $value["nm_nucleo"]; ?></td>
-                <td><?php echo $value["nm_projeto_programa"]; ?></td>
-                 <td>
-                     <a href="/usuario/alterar/nId/<?php echo $value["id_usuario"]; ?>">Editar</a>
-                 </td>
-                 </tr>
-            <?php } ?>
+                                <td><?php echo $value["nm_usuario"]; ?></td>
+                                <td><?php echo $value["nm_titulacao"]; ?></td>
+                                <td><?php echo $value["razao_social"]; ?></td>
+                                <td><?php echo $value["nm_grupo_usuario"]; ?></td>
+                                <td><?php echo $value["nm_protocolo"]; ?></td>
+                                <td><?php echo $value["nm_nucleo"]; ?></td>
+                                <td><?php echo $value["nm_projeto_programa"]; ?></td>
+                                <td>
+                                    <a href="/usuario/alterar/nId/<?php echo $value["id_usuario"]; ?>">Editar</a>
+                                </td>
+                            </tr>
+<?php } ?>
 
-        </tbody>
-    </table>
-</div>
-		</div>
-	</div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
