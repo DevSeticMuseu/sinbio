@@ -1,0 +1,15 @@
+/*
+    Mudanças bootstrap datepicker.
+*/
+
+.datepicker .datepicker-switch {
+    width: 145px; 
+}
+
+.datepicker .datepicker-switch:hover,
+.datepicker .prev:hover,
+.datepicker .next:hover,
+.datepicker tfoot tr th:hover {
+    cursor: pointer;
+    background: #eeeeee;
+}
