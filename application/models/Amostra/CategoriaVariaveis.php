@@ -1,8 +1,8 @@
 <?php
 
-class Loc_Municipio extends Zend_Db_Table_Abstract {
+class Amostra_CategoriaVariaveis extends Zend_Db_Table_Abstract {
 
-    protected $_name = 'loc_municipio';
+    protected $_name = 'coleta_categoria_variaveis';
     protected $_primary = 'id';
     protected $_erroMensagem = null;
 
@@ -30,7 +30,7 @@ class Loc_Municipio extends Zend_Db_Table_Abstract {
                 "operacao" => $sOperacao,
                 "seg_usuario_id" => $nIdUsuario,
                 "objeto" => serialize($vData),
-                "data" => date("Y-m-d")
+                "dt_log" => date("Y-m-d")
             );
 
             $oLog = new Seg_Log();
@@ -39,7 +39,6 @@ class Loc_Municipio extends Zend_Db_Table_Abstract {
 
             return parent::insert($vData);
         } catch (Zend_Db_Exception $e) {
-            //UtilsFile::printVarDieAjax($e);
             $this->setErroMensagem($e->getMessage());
             return false;
         }
@@ -56,13 +55,8 @@ class Loc_Municipio extends Zend_Db_Table_Abstract {
             $oLog = new Seg_Log();
             $oLog->insert($vLog);
 
-            //UtilsFile::printvardie($vData, $sWhere);
             return parent::update($vData, $sWhere);
-
-            //$teste = parent::update($vData,$sWhere);
-            //UtilsFile::printvardie(parent::update($vData,$sWhere));
         } catch (Zend_Db_Exception $e) {
-            UtilsFile::printvardie($e);
             $this->setErroMensagem($e->getMessage());
             return false;
         }
@@ -79,10 +73,8 @@ class Loc_Municipio extends Zend_Db_Table_Abstract {
             $oLog = new Seg_Log();
             $oLog->insert($vLog);
 
-            //UtilsFile::printvardie($vData, $sWhere);
             return parent::delete($sWhere);
         } catch (Zend_Db_Exception $e) {
-            //UtilsFile::printVarDieAjax($e);
             $this->setErroMensagem($e->getMessage());
             return false;
         }

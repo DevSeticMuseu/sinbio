@@ -20,7 +20,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	
 	protected function _initPlugins() {
 		$this->bootstrap('db');
-    	$db = $this->getResource('db');
+                $db = $this->getResource('db');
 		
 		$bootstrap = $this->getApplication ();
 		if ($bootstrap instanceof Zend_Application) {
