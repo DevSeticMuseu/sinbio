@@ -1,14 +1,22 @@
 <?php
 
-class Loc_Municipio extends Zend_Db_Table_Abstract {
+class Loc_Sitio extends Zend_Db_Table_Abstract {
 
-    protected $_name = 'loc_municipio';
+    protected $_name = 'loc_sitio';
     protected $_primary = 'id';
     protected $_erroMensagem = null;
 
-    public function fetchAll($sWhere = null, $sOrder = null, $nPagina = null, $nResultadoPagina = null) {
+    public function fetchAll($sWhere = null, $sOrder = null, $sJoin = null, $nPagina = null, $nResultadoPagina = null) {
         $sSql = $this->select();
 
+        if ($sJoin) {
+            $sSql->setIntegrityCheck(FALSE);
+            $sSql->from(array('sitio' => 'loc_sitio'));
+            foreach ($sJoin as $joinStatement) {
+                $sSql->joinLeft($joinStatement["table"], $joinStatement["onCols"], $joinStatement["colReturn"]);
+            }
+        }
+        
         if ($sWhere)
             $sSql->where($sWhere);
 
@@ -30,7 +38,7 @@ class Loc_Municipio extends Zend_Db_Table_Abstract {
                 "operacao" => $sOperacao,
                 "seg_usuario_id" => $nIdUsuario,
                 "objeto" => serialize($vData),
-                "data" => date("Y-m-d")
+                "dt_log" => date("Y-m-d")
             );
 
             $oLog = new Seg_Log();
@@ -39,7 +47,6 @@ class Loc_Municipio extends Zend_Db_Table_Abstract {
 
             return parent::insert($vData);
         } catch (Zend_Db_Exception $e) {
-            //UtilsFile::printVarDieAjax($e);
             $this->setErroMensagem($e->getMessage());
             return false;
         }
@@ -56,11 +63,8 @@ class Loc_Municipio extends Zend_Db_Table_Abstract {
             $oLog = new Seg_Log();
             $oLog->insert($vLog);
 
-            //UtilsFile::printvardie($vData, $sWhere);
             return parent::update($vData, $sWhere);
 
-            //$teste = parent::update($vData,$sWhere);
-            //UtilsFile::printvardie(parent::update($vData,$sWhere));
         } catch (Zend_Db_Exception $e) {
             UtilsFile::printvardie($e);
             $this->setErroMensagem($e->getMessage());
@@ -79,19 +83,11 @@ class Loc_Municipio extends Zend_Db_Table_Abstract {
             $oLog = new Seg_Log();
             $oLog->insert($vLog);
 
-            //UtilsFile::printvardie($vData, $sWhere);
             return parent::delete($sWhere);
         } catch (Zend_Db_Exception $e) {
-            //UtilsFile::printVarDieAjax($e);
             $this->setErroMensagem($e->getMessage());
             return false;
         }
-    }
-
-    public function totalRegistro() {
-        $vReg = parent::fetchAll();
-
-        return count($vReg);
     }
 
     public function setErroMensagem($erroMensagem) {
@@ -101,5 +97,4 @@ class Loc_Municipio extends Zend_Db_Table_Abstract {
     public function getErroMensagem() {
         return $this->_erroMensagem;
     }
-
 }

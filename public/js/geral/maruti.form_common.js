@@ -10,6 +10,7 @@ $(document).ready(function(){
     $('.colorpicker').colorpicker();
     $('.datepicker').datepicker({
         clearBtn: true,
+        autoclose: true,
         language: 'pt-BR'
     });
 });

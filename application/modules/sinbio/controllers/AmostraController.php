@@ -30,96 +30,232 @@ class Sinbio_AmostraController extends Zend_Controller_Action {
     }
 
     public function cadastrarAction() {
-        $this->view->layout()->nmPrograma = "Amostra";
-        $this->view->layout()->nmOperacao = "Cadastrar";
+        $op = $this->_request->getParam('op');
+        if ($op == 'filtrarCep' || $op == 'filtrarExp') {
+            $this->filtrar();
+        } else if ($op == 'filtrarVariaveis') {
+            $this->filtrarVaiaveis();
+        } else {
+            $this->view->layout()->nmPrograma = "Amostra";
+            $this->view->layout()->nmOperacao = "Cadastrar";
 
-        $this->view->layout()->includeJs = '
-			<script src="/js/geral/jquery.validate.js" type="text/javascript"></script>
-			<script src="/js/sinbio/validacao.js" type="text/javascript"></script>
-		';
+            $this->view->layout()->includeJs = '
+                            <script src="/js/geral/jquery.validate.js" type="text/javascript"></script>
+                            <script src="/js/sinbio/validacao.js" type="text/javascript"></script>
+                            <script src="/js/sinbio/amostra-scripts.js" type="text/javascript"></script>
+                    ';
 
-        $this->view->layout()->includeCss = '';
+            $this->view->layout()->includeCss = '';
 
-        //ALIMENTANDO SELECT DE PROTOCOLO
-        $oProtocolo = new Protocolo_Protocolo();
-        $sOrder = "sigla";
-        $this->view->vProtocolo = $oProtocolo->fetchAll()->toArray();
+            $oUf = new Loc_Uf();
+            $this->view->vUf = $oUf->fetchAll(null, array('nm_uf'))->toArray();
 
-        //ALIMENTANDO SELECT EXPEDIÇÃO
-        $oExpedicao = new Expedicao_Expedicao();
-        $this->view->vExpedicao = $oExpedicao->findBySitio()->toArray();
+            $oProtocolo = new Protocolo_Protocolo();
+            $this->view->vProtocolo = $oProtocolo->fetchAll()->toArray();
 
-        //ALIMENTANDO SELECT METODOS
-        $oMetodo = new Protocolo_Metodo();
-        $this->view->vMetodo = $oMetodo->fetchAll()->toArray();
+            $oProjecao = new Amostra_Projecao();
+            $this->view->vProjecao = $oProjecao->fetchAll()->toArray();
 
-        //ALIMENTANDO SELECT ATRATIVOS
-        $oAtrativos = new Protocolo_Atrativos();
-        $this->view->vAtrativos = $oAtrativos->fetchAll()->toArray();
+            $oMetodo = new Protocolo_Metodo();
+            $this->view->vMetodo = $oMetodo->fetchAll()->toArray();
 
-        //ALIMENTANDO SELECT PROJEÇÃO
-        $oProjecao = new Amostra_Projecao();
-        $this->view->vProjecao = $oProjecao->fetchAll()->toArray();
+            $oCategoriaVariaveis = new Amostra_CategoriaVariaveis();
+            $this->view->vVariaveisCategoria = $oCategoriaVariaveis->fetchAll()->toArray();
 
-        //ALIMENTANDO SELECT CONSERVAÇÃO
-        $oConservacao = new Amostra_Conservacao();
-        $this->view->vConservacao = $oConservacao->fetchAll()->toArray();
+            $oConservacao = new Amostra_Conservacao();
+            $this->view->vConservacao = $oConservacao->fetchAll()->toArray();
 
-        //ALIMENTANDO SELECT DESTINAÇÃO
-        $oDestinacao = new Amostra_Destinacao();
-        $this->view->vDestinacao = $oDestinacao->fetchAll()->toArray();
+            $oDestinacao = new Amostra_Destinacao();
+            $this->view->vDestinacao = $oDestinacao->fetchAll()->toArray();
 
-        //INSERINDO NO BANCO
-        $request = $this->_request;
+            $request = $this->_request;
+            if ($request->getParam("sOP") == "cadastrar") {
+                try {
+                    $vData = array(
+                        "coleta_expedicao_id" => $request->getParam("fIdExpedicao"),
+                        "latitude" => $request->getParam("fIdLatitude"),
+                        "longitude" => $request->getParam("fIdLongitude"),
+                        "direcao_latitude" => $request->getParam("direcaoLatitude"),
+                        "direcao_longitude" => $request->getParam("direcaoLongitude"),
+                        "codigo_amostra_numero_coletor" => $request->getParam("fIdAmostraColeta"),
+                        "coleta_metodos_id" => $request->getParam("fIdMetodos")
+                    );
+                    $sitio = $request->getParam("fIdSitio");
+                    if (strlen(trim($sitio)) > 0)
+                        $vData["loc_sitio_id"] = $sitio;
 
-        if ($request->getParam("sOP") == "cadastrar") {
-            try {
-                $vData = array(
-                    "coleta_protocolo_id" => $request->getParam("fIdProtocolo"),
-                    "coleta_metodos_id" => $request->getParam("fIdMetodos"),
-                    "coleta_expedicao_id" => $request->getParam("fIdExpedicao"),
-                    "coleta_atrativos_id" => $request->getParam("fIdAtrativos"),
-                    "coleta_projecao_id" => $request->getParam("fIdProjecao"),
-                    "coleta_conservacao_id" => $request->getParam("fIdConservacao"),
-                    "id_amostra_coleta" => $request->getParam("fIdAmostraColeta"),
-                    "id_amostra_projeto" => $request->getParam("fidAmostraProjeto"),
-                    "data_coleta" => $request->getParam("fDataColeta"),
-                    "hora_coleta" => $request->getParam("fHoraColeta"),
-                    "latitude" => $request->getParam("fLatitude"),
-                    "longitude" => $request->getParam("fLongitude"),
-                    "direcao_latitude" => $request->getParam("fDirecaoLatitude"),
-                    "direcao_longitude" => $request->getParam("fDirecaoLongitude")
-                );
+                    $coletaProjecao = $request->getParam("fIdProjecao");
+                    if (strlen(trim($coletaProjecao)) > 0)
+                        $vData["coleta_projecao_id"] = $coletaProjecao;
 
-                $aDestinacoes = $request->getParam("fIdDestinacao");
+                    $dataColeta = $request->getParam("fIdDataColeta");
+                    if (strlen(trim($dataColeta)) > 0)
+                        $vData["data_coleta"] = $dataColeta;
 
-                $sAtributosChave = "coleta_protocolo_id,coleta_metodos_id,coleta_metodos_id";
-                $sNmAtributosChave = "Nome do Protocolo, Nome do Metodo , Nome da Expedicao";
-                $sMsg = UtilsFile::verificaArrayVazio($vData, $sAtributosChave, $sNmAtributosChave);
+                    $horaColeta = $request->getParam("fIdHoraColeta");
+                    if (strlen(trim($horaColeta)) > 0)
+                        $vData["hora_coleta"] = $horaColeta;
 
-                if ($sMsg) {
-                    $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadastrar Amostra", $sMsg);
-                } else {
-                    $oAmostra = new Amostra_Amostra();
-                    $auth = Zend_Auth::getInstance();
-                    $vUsuarioLogado = $auth->getIdentity();
-                    $nIdUsuario = $vUsuarioLogado["id"];
-                    $nId = $oAmostra->insert($vData, "cadastrar-amostra", $nIdUsuario);
+                    $variaveis = $request->getParam("fIdVariaveis");
+                    if (strlen(trim($variaveis)) > 0)
+                        $vData["coleta_variaveis_id"] = $variaveis;
 
-                    $oAmostraDestinacao = new Amostra_AmostraDestinacao();
-                    $oAmostraDestinacao->insert($aDestinacoes, $nId, "cadastrar-amostra", $nIdUsuario);
+                    $conservacao = $request->getParam("fIdConservacao");
+                    if (strlen(trim($conservacao)) > 0)
+                        $vData["coleta_conservacao_id"] = $conservacao;
 
-                    if (!$nId) {
-                        $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadastrar Amostra", $oAmostra->getErroMensagem());
+
+                    $aDestinacoes = $request->getParam("fIdDestinacao");
+                    $sVariaveis = $request->getParam("hVariaveis");
+                    $aVariaveis = explode(',', $sVariaveis);
+
+                    $sAtributosChave = "codigo_amostra_numero_coletor, coleta_metodos_id";
+                    $sNmAtributosChave = "Código Amostra/Número Coletor , Método Coleta";
+                    $sMsg = UtilsFile::verificaArrayVazio($vData, $sAtributosChave, $sNmAtributosChave);
+
+                    if ($sMsg) {
+                        $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadastrar Amostra", $sMsg);
+                    } else if ($aDestinacoes == null) {
+                        $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadastrar Amostra", "Selecione uma destinação.");
+                    } else if ($vData['coleta_expedicao_id'] == "null") {
+                        $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadastrar Amostra", "Selecione uma expedição.");
                     } else {
-                        $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(1, "Sucesso", "Cadastro realizado com sucesso!");
-                        $this->_redirect('/amostra');
+                        $oAmostra = new Amostra_Amostra();
+                        $auth = Zend_Auth::getInstance();
+                        $vUsuarioLogado = $auth->getIdentity();
+                        $nIdUsuario = $vUsuarioLogado["id"];
+                        $nId = $oAmostra->insert($vData, "cadastrar-amostra", $nIdUsuario);
+
+                        $oAmostraDestinacao = new Amostra_AmostraDestinacao();
+                        $oAmostraDestinacao->insert($aDestinacoes, $nId, "cadastrar-amostra", $nIdUsuario);
+
+                        $oAmostraVariaveis = new Amostra_AmostraVariaveis();
+                        $oAmostraVariaveis->insert($aVariaveis, $nId, "cadastrar-amostra", $nIdUsuario);
+
+                        if (!$nId) {
+                            $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadastrar Amostra", $oAmostra->getErroMensagem());
+                        } else {
+                            $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(1, "Sucesso", "Cadastro realizado com sucesso!");
+                            $this->_redirect('/amostra');
+                        }
                     }
+                } catch (Zend_Db_Exception $e) {
+                    $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadastrar Amostra", $e);
                 }
-            } catch (Zend_Db_Exception $e) {
-                $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadastrar Amostra", $e);
             }
         }
+    }
+
+    public function filtrarDadosExp() {
+        $this->view->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idExpedicao = $this->_request->getParam('idExpedicao');
+        $oExpedicao = new Expedicao_Expedicao();
+        $whereExp = "id = $idExpedicao";
+        $aExpedicao = $oExpedicao->fetchAll($whereExp)->toArray();
+
+        $idSitio = $aExpedicao[0]['loc_sitio_id'];
+        $whereSitio = "sitio.id = $idSitio";
+
+        $joins = array();
+        $joinProjecao = array(table => array('projecao' => 'coleta_projecao'), onCols => ' sitio.coleta_projecao_id = projecao.id', colReturn => array('id', 'sistema_projecao'));
+        array_push($joins, $joinProjecao);
+
+        $oSitio = new Loc_Sitio();
+        $json = $oSitio->fetchAll($whereSitio, null, $joins)->toArray();
+
+        $this->_helper->json->sendJson($json);
+    }
+
+    public function filtrar() {
+        $this->view->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $filtro = $this->getRequest()->getParam('filtro');
+        if ($filtro == 'municipio')
+            $aMunicipios = $this->filtrarMunicipios();
+        if ($filtro == 'localidade')
+            $aLocalidades = $this->filtrarLocalidades();
+        if ($filtro == 'sitio')
+            $aSitios = $this->filtrarSitios();
+
+        $aExpedicoes = $this->filtrarExpedicoes();
+
+        $json = array(expedicoes => $aExpedicoes,
+            municipios => $aMunicipios,
+            localidades => $aLocalidades,
+            sitios => $aSitios);
+
+        $this->_helper->json->sendJson($json);
+    }
+
+    public function filtrarMunicipios() {
+        $idUf = $this->getRequest()->getParam('idUf');
+        $where = "loc_uf_id = $idUf";
+        $order = array('nm_municipio ASC');
+        $oMunicipio = new Loc_Municipio();
+        return $oMunicipio->fetchAll($where, $order)->toArray();
+    }
+
+    public function filtrarLocalidades() {
+        $idMunicipio = $this->getRequest()->getParam('idMunicipio');
+        $where = "loc_municipio_id = $idMunicipio";
+        $order = array('nm_localidade ASC');
+        $oLocalidade = new Loc_Localidade();
+        return $oLocalidade->fetchAll($where, $order)->toArray();
+    }
+
+    public function filtrarSitios() {
+        $idLocalidade = $this->getRequest()->getParam('idLocalidade');
+        $where = "loc_localidade_id = $idLocalidade";
+        $order = array('nm_sitio ASC');
+        $oSitio = new Loc_Sitio();
+        return $oSitio->fetchAll($where, $order)->toArray();
+    }
+
+    public function filtrarExpedicoes() {
+        $joins = array();
+        $joinLocalidades = array(table => array('localidade' => 'loc_localidade'), onCols => ' expedicao.loc_localidade_id = localidade.id', colReturn => array('nm_localidade'));
+        array_push($joins, $joinLocalidades);
+
+        $where = array();
+
+        $data = $this->getRequest()->getParam('data');
+        if (strlen(trim($data)) > 0)
+            array_push($where, "expedicao.data_inicio = '$data'");
+
+        $protocolo = $this->getRequest()->getParam('idProtocolo');
+        if ($protocolo != "null")
+            array_push($where, "expedicao.coleta_protocolo_id = '$protocolo'");
+
+        $idUf = $this->getRequest()->getParam('idUf');
+        if ($idUf != "null")
+            array_push($where, "expedicao.loc_uf_id = $idUf");
+
+        $idMunicipio = $this->getRequest()->getParam('idMunicipio');
+        if ($idMunicipio != "null")
+            array_push($where, "expedicao.loc_municipio_id = $idMunicipio");
+
+        $idLocalidade = $this->getRequest()->getParam('idLocalidade');
+        if ($idLocalidade != "null")
+            array_push($where, "expedicao.loc_localidade_id = $idLocalidade");
+
+        $order = array('data_inicio ASC');
+        $oExpedicao = new Expedicao_Expedicao();
+        return $oExpedicao->fetchAll($where, $order, $joins)->toArray();
+    }
+
+    public function filtrarVaiaveis() {
+        $this->view->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $idCategoriaVariavel = $this->_request->getParam('idCategoriaVariavel');
+        $where = "coleta_categoria_variaveis_id = $idCategoriaVariavel";
+        $oVariaveis = new Amostra_Variaveis();
+        $aVariaveis = $oVariaveis->fetchAll($where)->toArray();
+
+        $this->_helper->json->sendJson($aVariaveis);
     }
 
     public function alterarAction() {
@@ -129,21 +265,26 @@ class Sinbio_AmostraController extends Zend_Controller_Action {
         $this->view->layout()->includeJs = '
 			<script src="/js/geral/jquery.validate.js" type="text/javascript"></script>
 			<script src="/js/sinbio/validacao.js" type="text/javascript"></script>
+                        <script src="/js/sinbio/amostra-scripts.js" type="text/javascript"></script>
 		';
 
         $this->view->layout()->includeCss = '
 
 		';
-        
-        $oProtocolo = new Protocolo_Protocolo();
-        $oExpedicao = new Expedicao_Expedicao();
-        $oMetodo = new Protocolo_Metodo();
+
         $oAmostra = new Amostra_Amostra();
-        $oAtrativos = new Protocolo_Atrativos();
+        $oProtocolo = new Protocolo_Protocolo();
+        $oUf = new Loc_Uf();
+        $oExpedicao = new Expedicao_Expedicao();
+        $oSitio = new Loc_Sitio();
         $oProjecao = new Amostra_Projecao();
+        $oMetodo = new Protocolo_Metodo();
+        $oCategoriaVariaveis = new Amostra_CategoriaVariaveis();
+        $oVariaveis = new Amostra_Variaveis();
+        $oAmostraVariavel = new Amostra_AmostraVariaveis();
         $oConservacao = new Amostra_Conservacao();
         $oDestinacao = new Amostra_Destinacao();
-        $oAmostraDestinacao = new Amostra_AmostraDestinacao;
+        $oAmostraDestinacao = new Amostra_AmostraDestinacao();
 
 
         $request = $this->_request;
@@ -155,117 +296,152 @@ class Sinbio_AmostraController extends Zend_Controller_Action {
             $vAmostraRetorno = $oAmostra->find($nId);
             $vAmostra = $vAmostraRetorno->toArray();
             $vAmostra = $vAmostra[0];
+            $vAmostraRow = $vAmostraRetorno->current();
 
+            $this->view->vUf = $oUf->fetchAll(null, array('nm_uf'))->toArray();
+
+            $joins = array();
+            $joinLocalidades = array(table => array('localidade' => 'loc_localidade'), onCols => ' expedicao.loc_localidade_id = localidade.id', colReturn => array('nm_localidade'));
+            array_push($joins, $joinLocalidades);
+            $this->view->vExpedicao = $oExpedicao->fetchAll(null, array('data_inicio ASC'), $joins)->toArray();
+            
             $this->view->vProtocolo = $oProtocolo->fetchAll()->toArray();
 
-            $this->view->vExpedicao = $oExpedicao->fetchAll()->toArray();
+            $this->view->vSitio = $oSitio->fetchAll(null, array('nm_sitio ASC'))->toArray();
+
+            $this->view->vProjecao = $oProjecao->fetchAll()->toArray();
 
             $this->view->vMetodo = $oMetodo->fetchAll()->toArray();
 
-            $this->view->vAtrativos = $oAtrativos->fetchAll()->toArray();
+            $this->view->vVariaveisCategoria = $oCategoriaVariaveis->fetchAll()->toArray();
 
-            $this->view->vProjecao = $oProjecao->fetchAll()->toArray();
+            $vVariaveisRetorno = $oVariaveis->fetchAll()->toArray();
+            $vAmostraVariaveis = $oAmostraVariavel->findVariaveis($vAmostraRow);
+
+            $vVariaveis = array();
+            foreach ($vVariaveisRetorno as $variavel) {
+                foreach ($vAmostraVariaveis as $amostraVariavel) {
+                    if ($amostraVariavel["id"] == $variavel["id"]) {
+                        $variavel["selected"] = "selected";
+                        $vVariaveis[] = $variavel;
+                        continue 2;
+                    }
+                }
+                $vVariaveis[] = $variavel;
+            }
+            $this->view->vVariaveis = $vVariaveis;
 
             $this->view->vConservacao = $oConservacao->fetchAll()->toArray();
 
             $vDestinacoesRetorno = $oDestinacao->fetchAll()->toArray();
-            
-            $vAmostraRow = $vAmostraRetorno->current();
             $vAmostraDestinacoes = $oAmostraDestinacao->findDestinacoes($vAmostraRow);
-            
+
             $vDestinacoes = array();
             foreach ($vDestinacoesRetorno as $destinacao) {
                 foreach ($vAmostraDestinacoes as $amostraDestinacao) {
-                    if($amostraDestinacao["id"] == $destinacao["id"]) {
+                    if ($amostraDestinacao["id"] == $destinacao["id"]) {
                         $destinacao["selected"] = "selected";
                         $vDestinacoes[] = $destinacao;
                         continue 2;
-                    } 
+                    }
                 }
                 $vDestinacoes[] = $destinacao;
             }
             $this->view->vDestinacoes = $vDestinacoes;
 
-
-            //VALIDA SE O USUARIO EXISTE
             if (count($vAmostra)) {
                 $this->view->nId = $vAmostra["id"];
-                $this->view->nIdProtocolo = $vAmostra["coleta_protocolo_id"];
-                $this->view->nIdMetodo = $vAmostra["coleta_metodos_id"];
-
-                $this->view->nIdAtrativos = $vAmostra["coleta_atrativos_id"];
-                $this->view->nIdProjecao = $vAmostra["coleta_projecao_id"];
-                $this->view->nIdConservacao = $vAmostra["coleta_conservacao_id"];
-                $this->view->nIdDestinacao = $vAmostra["coleta_destinacao_id"];
-
                 $this->view->nIdExpedicao = $vAmostra["coleta_expedicao_id"];
-
-                $this->view->sIdAmostraColeta = $vAmostra["id_amostra_coleta"];
-                $this->view->sIdAmostraProjeto = $vAmostra["id_amostra_projeto"];
-
-                $this->view->sDtColeta = $vAmostra["data_coleta"];
-                $this->view->sHoraColeta = $vAmostra["hora_coleta"];
-                $this->view->sLatitude = $vAmostra["latitude"];
-                $this->view->sLongitude = $vAmostra["longitude"];
+                $this->view->nIdSitio = $vAmostra["loc_sitio_id"];
+                $this->view->nLatitude = $vAmostra["latitude"];
+                $this->view->nLongitude = $vAmostra["longitude"];
                 $this->view->sDirecaoLatitude = $vAmostra["direcao_latitude"];
                 $this->view->sDirecaoLongitude = $vAmostra["direcao_longitude"];
-
-
+                $this->view->nIdProjecao = $vAmostra["coleta_projecao_id"];
+                $this->view->sCodigoAmostraNumeroColetor = $vAmostra["codigo_amostra_numero_coletor"];
+                $this->view->sDtColeta = isset($vAmostra["data_coleta"]) ? $vAmostra["data_coleta"] : '';
+                $this->view->sHoraColeta = $vAmostra["hora_coleta"];
+                $this->view->nIdMetodo = $vAmostra["coleta_metodos_id"];
+                $this->view->nIdVariavel = $vAmostra["coleta_variaveis_id"];
+                $this->view->nIdConservacao = $vAmostra["coleta_conservacao_id"];
+                $this->view->nIdDestinacao = $vAmostra["coleta_destinacao_id"];
 
                 //VALIDA SE FOI SUBMETIDO O FORMULARIO
                 if ($sOP == "alterar") {
 
-
                     $vData = array(
                         "id" => $request->getParam("nId"),
-                        "coleta_protocolo_id" => $request->getParam("fIdProtocolo"),
-                        "coleta_metodos_id" => $request->getParam("fIdMetodos"),
-                        "coleta_expedicao_id" => $request->getParam("fIdExpedicao"),
-                        "coleta_atrativos_id" => $request->getParam("fIdAtrativos"),
-                        "coleta_projecao_id" => $request->getParam("fIdProjecao"),
-                        "coleta_conservacao_id" => $request->getParam("fIdConservacao"),
-                        "id_amostra_coleta" => $request->getParam("fIdAmostraColeta"),
-                        "id_amostra_projeto" => $request->getParam("fidAmostraProjeto"),
-                        "data_coleta" => $request->getParam("fDataColeta"),
-                        "hora_coleta" => $request->getParam("fHoraColeta"),
-                        "latitude" => $request->getParam("fLatitude"),
-                        "longitude" => $request->getParam("fLongitude"),
-                        "direcao_latitude" => $request->getParam("fDirecaoLatitude"),
-                        "direcao_longitude" => $request->getParam("fDirecaoLongitude")
+                        "latitude" => $request->getParam("fIdLatitude"),
+                        "longitude" => $request->getParam("fIdLongitude"),
+                        "direcao_latitude" => $request->getParam("direcaoLatitude"),
+                        "direcao_longitude" => $request->getParam("direcaoLongitude"),
+                        "codigo_amostra_numero_coletor" => $request->getParam("fIdAmostraColeta"),
+                        "coleta_metodos_id" => $request->getParam("fIdMetodos")
                     );
+
+                    $expedicao = $request->getParam("fIdExpedicao");
+                    $vData["coleta_expedicao_id"] = $expedicao != "null" ? $expedicao : $vAmostra["coleta_expedicao_id"];
+
+                    $sitio = $request->getParam("fIdSitio");
+                    if (strlen(trim($sitio)) > 0)
+                        $vData["loc_sitio_id"] = $sitio;
+
+                    $coletaProjecao = $request->getParam("fIdProjecao");
+                    if (strlen(trim($coletaProjecao)) > 0)
+                        $vData["coleta_projecao_id"] = $coletaProjecao;
+
+                    $dataColeta = $request->getParam("fIdDataColeta");
+                    if (strlen(trim($dataColeta)) > 0)
+                        $vData["data_coleta"] = $dataColeta;
+
+                    $horaColeta = $request->getParam("fIdHoraColeta");
+                    if (strlen(trim($horaColeta)) > 0)
+                        $vData["hora_coleta"] = $horaColeta;
+
+                    $conservacao = $request->getParam("fIdConservacao");
+                    if (strlen(trim($conservacao)) > 0)
+                        $vData["coleta_conservacao_id"] = $conservacao;
 
                     $auth = Zend_Auth::getInstance();
                     $vUsuarioLogado = $auth->getIdentity();
 
-                    //---------------ATUALIZANDO DESTINAÇÕES---------------
-                    $sWhere = "coleta_amostra_id = " . $vData["id"];
                     $aDestinacoes = $request->getParam("fIdDestinacao");
-                    $oAmostraDestinacao = new Amostra_AmostraDestinacao();
 
-                    $oAmostraDestinacao->delete($sWhere, "alterar-usuario", $vUsuarioLogado["id"]);
-                    $oAmostraDestinacao->insert($aDestinacoes, $nId, "alterar-usuario", $vUsuarioLogado["id"]);
-                    //-----------------------------------------------------
-                    
-                    //VERIFICA SE O REGISTRO VAI SER ALTERADO
-                    $sWhere = "id = " . $vData["id"];
-                    if ($oAmostra->update($vData, $sWhere, "alterar-amostra", $vUsuarioLogado["id"])) {
-                        $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(1, "Sucesso", "Amostra foi alterado com sucesso.");
-                        $this->_redirect('/sinbio/amostra');
+                    if ($aDestinacoes != null) {
+                        $sWhere = "coleta_amostra_id = " . $vData["id"];
+                        $oAmostraDestinacao = new Amostra_AmostraDestinacao();
+                        $oAmostraDestinacao->delete($sWhere, "alterar-usuario", $vUsuarioLogado["id"]);
+                        $oAmostraDestinacao->insert($aDestinacoes, $nId, "alterar-usuario", $vUsuarioLogado["id"]);
+
+                        $sWhere = "id = " . $vData["id"];
+                        if ($oAmostra->update($vData, $sWhere, "alterar-amostra", $vUsuarioLogado["id"])) {
+                            $sWhere = "coleta_amostra_id = " . $vData["id"];
+                            $sVariaveis = $request->getParam("hVariaveis");
+                            $aVariaveis = explode(',', $sVariaveis);
+                            $oAmostraVariaveis = new Amostra_AmostraVariaveis();
+
+                            $oAmostraVariaveis->delete($sWhere, "alterar-usuario", $vUsuarioLogado["id"]);
+                            $oAmostraVariaveis->insert($aVariaveis, $nId, "alterar-usuario", $vUsuarioLogado["id"]);
+
+                            $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(1, "Sucesso", "Amostra foi alterado com sucesso.");
+                            $this->_redirect('/sinbio/amostra');
+                        } else {
+                            $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Alterar Amostra", $oAmostra->getErroMensagem());
+                        }
                     } else {
-                        //UtilsFile::printvardie($oPrograma->getErroMensagem());
-                        $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Alterar Amostra", $oAmostra->getErroMensagem());
+                        $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadastrar Amostra", "Selecione uma destinação.");
                     }
-                }//VALIDA SE FOI SUBMETIDO O FORMULARIO
+                }
             } else {
                 unset($_SESSION["sMsg"]);
                 $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(2, "Erro ao Alterar Amostra", "Este Amostra não foi encontrado no sistema, por favor tente novamente.");
                 $this->_redirect('/amostra');
-            }//VALIDA SE O USUARIO EXISTE
+            }
         } else {
             unset($_SESSION["sMsg"]);
             $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(2, "Erro ao Alterar Amostra", "Ocorreu um erro inexperado, por favor tente novamente.");
             $this->_redirect('/amostra');
-        }//VALIDA O ID
+        }
     }
 
     public function excluirAction() {

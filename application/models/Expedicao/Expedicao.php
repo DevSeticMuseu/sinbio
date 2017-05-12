@@ -6,11 +6,22 @@ class Expedicao_Expedicao extends Zend_Db_Table_Abstract {
     protected $_primary = 'id';
     protected $_erroMensagem = null;
 
-    public function fetchAll($sWhere = null, $sOrder = null, $nPagina = null, $nResultadoPagina = null) {
+    public function fetchAll($sWhere = null, $sOrder = null, $sJoin = null, $nPagina = null, $nResultadoPagina = null) {
         $sSql = $this->select();
 
-        if ($sWhere)
-            $sSql->where($sWhere);
+        if ($sJoin) {
+            $sSql->setIntegrityCheck(FALSE);
+            $sSql->from(array('expedicao' => 'coleta_expedicao'));
+            foreach ($sJoin as $joinStatement) {
+                $sSql->joinInner($joinStatement["table"], $joinStatement["onCols"], $joinStatement["colReturn"]);
+            }
+        }
+
+        if ($sWhere) {
+            foreach ($sWhere as $where) {
+                $sSql->where($where);
+            }
+        }
 
         if ($sOrder)
             $sSql->order($sOrder);
@@ -19,7 +30,7 @@ class Expedicao_Expedicao extends Zend_Db_Table_Abstract {
             $nInicio = (($nPagina - 1) * $nResultadoPagina);
             $sSql->limit($nResultadoPagina, $nInicio);
         }
-
+        
         return parent::fetchAll($sSql);
     }
 
@@ -87,7 +98,7 @@ class Expedicao_Expedicao extends Zend_Db_Table_Abstract {
             return false;
         }
     }
-    
+
     public function findBySitio() {
         $sSql = $this->select()
                 ->setIntegrityCheck(FALSE)
