@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-info-sign"></i></span>
+                    <h5>Detalhes da Amostra</h5>
+                </div>
+                <div class="widget-content nopadding">
+
+
+                    <?php
+                    foreach ($this->Amostra as $amostra) {
+                        ?>
+                        <div style="margin-top: 50px; margin-bottom: 50px;">
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Estado : </strong><?=$amostra["nm_uf"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Município : </strong><?=$amostra["nm_municipio"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Localidade : </strong><?=$amostra["nm_localidade"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Sítio : </strong><?=$amostra["nm_sitio"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Latitude : </strong><?=$amostra["latitude"].' - '.$amostra["direcao_latitude"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Longitude : </strong><?=$amostra["longitude"].' - '.$amostra["direcao_longitude"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Data inicial da Expedição : </strong><?=$amostra["data_inicio"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Data final da Expedição : </strong><?=$amostra["data_fim"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Código Amostra / Nº Coletor : </strong><?=$amostra["codigo_amostra_numero_coletor"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Data da Coleta : </strong><?=$amostra["data_coleta"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Hora da Coleta : </strong><?=$amostra["hora_coleta"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Protocolo : </strong><?=$amostra["nm_protocolo"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Método : </strong><?=$amostra["nm_metodo"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Variáveis : </strong>
+                                <ul>
+                                <?php
+                                    foreach ($this->Variaveis as $variavel) {
+                                        echo '<li>' . $variavel["nm_variavel"], '<br>';
+                                    }
+                                ?>
+                                </ul>
+                            </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Conservação : </strong><?=$amostra["conservacao_material"]?> </div>
+                            <div style="margin-left: 350px; margin-bottom: 10px;font-size: 18px"> <strong> Destinação : </strong>
+                                <ul>
+                                <?php
+                                    foreach ($this->Destinacao as $destinacao) {
+                                        echo '<li>' . $destinacao["nm_destinacao"], '<br>';
+                                    }
+                                ?>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+
+
+                    <form class="form-horizontal" method="post" action="/amostra/index" name="" id="insere-altera" novalidate="novalidate">
+                        <input style=" margin-left: 350px;" type="submit" value="Voltar para todas as amostras" class="btn btn-success">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

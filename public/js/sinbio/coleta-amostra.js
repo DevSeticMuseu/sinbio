@@ -1,140 +1,22 @@
-$().ready(function() {
-    $(".grid").flexigrid({
-        url : '/amostra/gera-xml',
-        dataType : 'xml',
-        colModel : [ {
-            display : 'Id',
-            name : 'id',
-            width : 40,
-            sortable : true,
-            align : 'center'
-        },{
-            display : 'C&oacute;digo Amostra',
-            name : 'id_amostra_coleta',
-            width : 140,
-            sortable : true,
-            align : 'left'
-        },{
-            display : 'Coletores',
-            name : 'citacao',
-            width : 140,
-            sortable : true,
-            align : 'left'
-        },
-        {
-            display : 'Protocolo',
-            name : 'nm_protocolo',
-            width : 140,
-            sortable : true,
-            align : 'left'
-        },
-        {
-            display : 'Nome Metodos',
-            name : 'nm_metodo',
-            width : 120,
-            sortable : true,
-            align : 'left'
-        },{
-            display : 'Expedicao',
-            name : 'coleta_expedicao_id',
-            width : 80,
-            sortable : true,
-            align : 'left'
-        },{
-            display : 'Atrativos',
-            name : 'nm_atrativos',
-            width : 40,
-            sortable : true,
-            align : 'left'
-        },{
-            display : 'Conservacao',
-            name : 'conservacao_material',
-            width : 100,
-            sortable : true,
-            align : 'left'
-        },{
-            display : 'Destinacao',
-            name : 'nm_destinacao',
-            width : 220,
-            sortable : true,
-            align : 'left'
-        },{
-            display : 'Data Coleta',
-            name : 'data_coleta',
-            width : 80,
-            sortable : true,
-            align : 'left'
-        }, {
-            display : 'Hora coleta',
-            name : 'hora_coleta',
-            width : 90,
-            sortable : true,
-            align : 'left'
-        }, {
-            display : 'Latitude',
-            name : 'latitude',
-            width : 70,
-            sortable : true,
-            align : 'left'
-        }, {
-            display : 'Direção Latitude',
-            name : 'direcao_latitude',
-            width : 40,
-            sortable : true,
-            align : 'left'
-        }, {
-            display : 'Longitude',
-            name : 'longitude',
-            width : 70,
-            sortable : true,
-            align : 'left'
-        }, {
-            display : 'Direção Longitude',
-            name : 'direcao_longitude',
-            width : 40,
-            sortable : true,
-            align : 'left'
-        },{
-            display : 'Projecao',
-            name : 'sistema_projecao',
-            width : 100,
-            sortable : true,
-            align : 'left'
-        }],
-        buttons : [ {
-            name : 'Novo',
-            bclass : 'add',
-            onpress : novoPrograma
-        }, {
-            name : 'Alterar',
-            bclass : 'edit',
-            onpress : alterarPrograma
-        }, {
-            name : 'Excluir',
-            bclass : 'delete',
-            onpress : excluirPrograma
-        }, {
-            separator : true
-        }, {
-            name : 'Atibuir Coletores Participantes da Amostra',
-            bclass : 'variavel',
-            onpress : setParticipantes
-        } ],
-        searchitems : [ {
-            display : 'Nome Protocolo',
-            name : 'nm_protocolo',
-            isdefault : true
-        } ],
-        sortname : "id",
-        sortorder : "desc",
-        usepager : true,
-        useRp : true,
-        rp : 15,
-        showTableToggleBtn : true,
-        width : '100%',
-        height : 460
+$(document).ready(function () {
+    $('.tabela tbody').on('dblclick', 'tr', function () {
+        var row = table.row(this).data();
+        detalharAmostra(row[0]);
     });
 });
+
+function detalharAmostra(idAmostra){
+    $.post('/amostra-detalhada/verifica-permissao', {
+        sOP: "Cadastrar"
+    }, function(data) {
+        if (data) {
+            $(window.document.location).attr('href',"/amostra-detalhada/index/nId/" + idAmostra);
+        }
+        else {
+            jAlert("Voce não possui permissão de acessar essa área.","Acesso Negado");
+        }
+    });
+}
 
 function setParticipantes(){
     $.post('/participantes-amostra/verifica-permissao', {
@@ -158,8 +40,7 @@ function setParticipantes(){
     });
 }
 
-
-function novoPrograma() {
+function novoModulo() {
     $.post('/amostra/verifica-permissao', {
         sOP: "Cadastrar"
     } ,function(data) {
@@ -172,19 +53,19 @@ function novoPrograma() {
     });
 }
 
-function alterarPrograma() {
+function alterarModulo() {
     $.post('/amostra/verifica-permissao', {
         sOP: "Alterar"
     }, function(data) {
         if (data) {
-            if ($('.trSelected').length > 1) {
+            if (table.$('tr.selected').length > 1) {
                 jAlert("Você deve selecionar apenas um item para alterar.","Atenção");
             }
-            else if ($('.trSelected').length == 0) {
+            else if (table.$('tr.selected').length == 0) {
                 jAlert("Você deve selecionar um item para alterar.","Atenção");
             }
             else {
-                var nId = $('.trSelected td:first-child div').text();
+                var nId = table.row(table.$('tr.selected')).data()[0];
                 $(window.document.location).attr('href',"/amostra/alterar/nId/"+nId);
             }
         }
@@ -194,25 +75,34 @@ function alterarPrograma() {
     });
 }
 
-function excluirPrograma() {
-    if ($('.trSelected').length == 0) {
+function excluirModulo() {
+    if (table.$('tr.selected').length == 0) {
         jAlert("Você deve selecionar ao menos um ítem.","Atenção");
     }
     else {
-        if (confirm('Você tem certeza que deseja excluir ' + $('.trSelected').length + ' Expedição(ões)?')) {
+        var info = [];
+        var columnInfo;
+        table.$('tr.selected').each(function () {
+            columnInfo = table.row(this).data()[2];
+            info.push(columnInfo);
+        });
+        if (confirm('Você tem certeza que deseja excluir ' + table.$('tr.selected').length + ' Expedição(ões)?')) {
             $.post('/amostra/verifica-permissao', {
                 sOP: "Excluir"
-            } ,function(data) {
+            } , function(data) {
                 if (data) {
                     var selArry = [];
-                    var nI = 1;
-                    $("div.flexigrid .trSelected").each(function(trI,tr){
-                        selArry.push($(tr).attr("id").substr(3));
+                    var nId;
+
+                    table.$('tr.selected').each(function () {
+                        nId = table.row(this).data()[0];
+                        selArry.push(nId);
                     });
+
                     $.post('/amostra/excluir', {
                         fId: selArry, 
                         sOP: "Excluir"
-                    } ,function(data) {
+                    }, function (data) {
                         location.reload();
                     });
                 }
@@ -223,3 +113,4 @@ function excluirPrograma() {
         }
     }
 }
+

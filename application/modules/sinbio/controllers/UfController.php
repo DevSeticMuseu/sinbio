@@ -17,7 +17,6 @@ class Sinbio_UfController extends Zend_Controller_Action {
 
     public function indexAction() {
         $this->view->layout()->includeJs = '
-				<script src="/js/jquery-1.12.0.min.js"></script>
                                 <script src="/js/jquery.dataTables.min.js"></script>
                                 <script src="/js/dataTables.buttons.min.js"></script>
                                 <script src="/js/sinbio/tabelas-datatable.js"></script>

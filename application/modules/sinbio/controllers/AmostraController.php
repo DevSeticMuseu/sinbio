@@ -19,14 +19,36 @@ class Sinbio_AmostraController extends Zend_Controller_Action {
 
     public function indexAction() {
         $this->view->layout()->includeJs = '
-				<script src="/plugin/flexigrid/js/flexigrid.pack.js"></script>
 				<script src="/js/sinbio/coleta-amostra.js"></script>
+                                <script src="/js/dataTables.buttons.min.js"></script>
+                                <script src="/js/sinbio/tabelas-datatable.js"></script>
 		';
 
         $this->view->layout()->includeCss = '
-				<link href="/plugin/flexigrid/css/flexigrid.css" rel="stylesheet" type="text/css"/>
-				';
+                        
+		';
+
+
         $this->view->layout()->nmOperacao = "Listar";
+
+        $joins = array();
+        $joinExpedicao= array(table => array('expedicao' => 'coleta_expedicao'), onCols => ' amostra.coleta_expedicao_id = expedicao.id', colReturn => array('data_inicio', 'coleta_protocolo_id', 'loc_localidade_id'));
+        array_push($joins, $joinExpedicao);
+        $joinProtocolo = array(table => array('protocolo' => 'coleta_protocolo'), onCols => ' expedicao.coleta_protocolo_id = protocolo.id', colReturn => array('nm_protocolo'));
+        array_push($joins, $joinProtocolo);
+        $joinMetodo = array(table => array('metodo' => 'coleta_metodos'), onCols => ' amostra.coleta_metodos_id = metodo.id', colReturn => array('nm_metodo'));
+        array_push($joins, $joinMetodo);
+        $joinLocalidade = array(table => array('localidade' => 'loc_localidade'), onCols => ' expedicao.loc_localidade_id = localidade.id', colReturn => array('nm_localidade'));
+        array_push($joins, $joinLocalidade);
+        
+        $oAmostra = new Amostra_Amostra();
+        $vAmostra = $oAmostra->fetchAll(null, array('id DESC'), $joins);
+        
+        foreach ($vAmostra as $amostra) {
+            $amostra['data_inicio'] = date("d/m/Y", strtotime($amostra['data_inicio']));
+        }
+        
+        $this->view->paginator = $vAmostra;
     }
 
     public function cadastrarAction() {
@@ -42,6 +64,7 @@ class Sinbio_AmostraController extends Zend_Controller_Action {
             $this->view->layout()->includeJs = '
                             <script src="/js/geral/jquery.validate.js" type="text/javascript"></script>
                             <script src="/js/sinbio/validacao.js" type="text/javascript"></script>
+                            <script src="/js/sinbio/tabelas-datatable.js"></script>
                             <script src="/js/sinbio/amostra-scripts.js" type="text/javascript"></script>
                     ';
 
@@ -265,6 +288,7 @@ class Sinbio_AmostraController extends Zend_Controller_Action {
         $this->view->layout()->includeJs = '
 			<script src="/js/geral/jquery.validate.js" type="text/javascript"></script>
 			<script src="/js/sinbio/validacao.js" type="text/javascript"></script>
+                        <script src="/js/sinbio/tabelas-datatable.js"></script>
                         <script src="/js/sinbio/amostra-scripts.js" type="text/javascript"></script>
 		';
 
@@ -293,7 +317,7 @@ class Sinbio_AmostraController extends Zend_Controller_Action {
 
         //VALIDA O ID
         if ($nId) {
-            $vAmostraRetorno = $oAmostra->find($nId);
+            $vAmostraRetorno = $oAmostra->fetchAll("id = $nId", array('id DESC'));
             $vAmostra = $vAmostraRetorno->toArray();
             $vAmostra = $vAmostra[0];
             $vAmostraRow = $vAmostraRetorno->current();

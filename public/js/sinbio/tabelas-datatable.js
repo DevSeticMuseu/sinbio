@@ -30,6 +30,7 @@
                     "searchable": false
                 }
             ],
+            "order": [[1, 'desc']],
             oLanguage: {
                 "sInfo": "Mostrando _START_ até _END_ de _TOTAL_ entradas",
                 "oPaginate": {
@@ -47,25 +48,22 @@
                     }
                 });
             }
-
         });
 
         criarPesqBasica();
         criarPesqAvan();
-        addButton();
 
     });
     
-    function addButton() {
+    function addButton(nome, funcao) {
 
        
 
         new $.fn.dataTable.Buttons(table, {
             buttons: [
                 {
-                    text: 'teste',
-                    action: function () {
-                    }
+                    text: nome,
+                    action: funcao
                 }
             ]
         });

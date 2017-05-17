@@ -18,11 +18,22 @@ class Amostra_AmostraDestinacao extends Zend_Db_Table_Abstract {
         )
     );
 
-    public function fetchAll($sWhere = null, $sOrder = null, $nPagina = null, $nResultadoPagina = null) {
+    public function fetchAll($sWhere = null, $sOrder = null, $sJoin = null, $nPagina = null, $nResultadoPagina = null) {
         $sSql = $this->select();
 
-        if ($sWhere)
-            $sSql->where($sWhere);
+        if ($sJoin) {
+            $sSql->setIntegrityCheck(FALSE);
+            $sSql->from(array('ad' => 'amostra_destinacao'));
+            foreach ($sJoin as $joinStatement) {
+                $sSql->joinInner($joinStatement["table"], $joinStatement["onCols"], $joinStatement["colReturn"]);
+            }
+        }
+
+        if ($sWhere) {
+            foreach ($sWhere as $where) {
+                $sSql->where($where);
+            }
+        }
 
         if ($sOrder)
             $sSql->order($sOrder);
