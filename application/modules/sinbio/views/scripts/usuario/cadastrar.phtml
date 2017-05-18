@@ -14,15 +14,27 @@
                                 <input tabindex="1" type="text" name="fNmUsuario" class="required">
                             </div>
                         </div>
+                        
                         <div class="control-group">
-                            <label class="control-label">E-mail :</label>
+                            <label class="control-label">E-mail <i class="icon-asterisk email-icon"></i>:</label>
                             <div class="controls">
-                                <input type="text" name="fEmail">
+                                <input type="text" name="fEmail" id="email-input" class="required" onkeyup="checaEmailFone()">
 
                             </div>
                         </div>
+                        
+                        <!--Alternar entre obrigatoriedade no arquivo de validação-->
+                        
                         <div class="control-group">
-                            <label class="control-label">Grupo Usuário :</label>
+                            <label class="control-label">Telefone <i class="icon-asterisk phone-icon"></i>:</label>
+                            <div class="controls">
+                                <input type="text" name="fNumTelefone" id="phone-input" class="required" onkeyup="checaEmailFone()">
+
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Atribuição :</label>
                             <div class="controls ">
                                 <select name="fIdGrupoUsuario" style="width: 200px;">
                                     <?php
@@ -117,9 +129,9 @@
                         </div>
 
                         <div class="control-group">
-                            <label class="control-label">Data Entrada: </label>
+                            <label class="control-label">Data Entrada no Programa: </label>
                             <div class="controls">
-                                <input type="text" name="fDatadeCadastro" data-date-format="dd-mm-yyyy" value="<?php echo date("d-m-Y") ?>" class="datepicker" />
+                                <input type="text" name="fDatadeCadastro" data-date-format="dd/mm/yyyy" value="<?php echo date("d/m/Y") ?>" class="datepicker" readonly="true"/>
                             </div>
                         </div>
 
@@ -156,14 +168,14 @@
 
 
                         <div class="control-group">
-                            <label class="control-label">Cpf:</label>
+                            <label class="control-label">Cpf <i class="icon-asterisk"></i>:</label>
                             <div class="controls">
-                                <input type="text" id="fCpf" name="fCpf">
+                                <input type="text" id="fCpf" name="fCpf" class="required">
                             </div>
                         </div>
 
                         <div class="control-group">
-                            <label class="control-label">Sinbio:</label>
+                            <label class="control-label">Sisbio:</label>
                             <div class="controls">
                                 <input type="text" id="fSisbio" name="fSisbio">
                             </div>
@@ -181,6 +193,7 @@
                             <label class="control-label">Banco:</label>
                             <div class="controls ">
                                 <select name="fIdBanco" style="width: 200px;">
+                                    <option disabled selected value>Selecione uma opção</option>
                                     <?php
                                     foreach ($this->vBanco as $banco) {
                                         ?>
@@ -208,30 +221,13 @@
 
 
                         <div class="control-group">
-                            <label class="control-label">Bolsista:</label>
-                            <div class="controls">
-                                <input type="checkbox" id="fVinculoEmpregaticio" name="fBolsista" value ="1">
-                            </div>
-                        </div>
-
-                        <div class="control-group">
                             <label class="control-label">Vinculo Empregaticio:</label>
                             <div class="controls">
                                 <input type="checkbox" id="fVinculoEmpregaticio" name="fVinculoEmpregaticio" value ="1">
+                                Bolsista: <input type="checkbox" id="fVinculoEmpregaticio" name="fBolsista" value ="1">
+                                Outros: <input type="text" id="fOutro" value="" name="fOutro">
                             </div>
                         </div>
-
-                        <div class="control-group">
-                            <label class="control-label">Outros:</label>
-                            <div class="controls">
-                                <input type="text" id="fOutro" value="" name="fOutro">
-                            </div>
-                        </div>
-
-
-
-
-
 
                         <input type="hidden" name="fDtUtimaAtualizacao" data-date-format="dd-mm-yyyy" value="<?php echo date("d-m-Y") ?>" class="datepicker" />
 

@@ -7,21 +7,28 @@ class Seg_Usuario extends Zend_Db_Table_Abstract {
     protected $_dependentTables = array('usuario_nucleo');
     protected $_erroMensagem = null;
 
-    public function fetchAll($sWhere = null, $sOrder = null, $nPagina = null, $nResultadoPagina = null) {
+    public function fetchAll($sWhere = null, $sOrder = null, $sJoin = null, $nPagina = null, $nResultadoPagina = null) {
         $sSql = $this->select();
+        
+        if ($sJoin) {
+            $sSql->setIntegrityCheck(FALSE);
+            $sSql->from(array('usuario' => 'seg_usuario'));
+            foreach ($sJoin as $joinStatement) {
+                $sSql->joinInner($joinStatement["table"], $joinStatement["onCols"], $joinStatement["colReturn"]);
+            }
+        }
 
         if ($sWhere)
             $sSql->where($sWhere);
 
         if ($sOrder)
             $sSql->order($sOrder);
+        
 
         if ($nPagina && $nResultadoPagina) {
             $nInicio = (($nPagina - 1) * $nResultadoPagina);
             $sSql->limit($nResultadoPagina, $nInicio);
         }
-
-
 
         return parent::fetchAll($sSql);
     }

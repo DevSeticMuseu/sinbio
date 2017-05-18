@@ -17,13 +17,24 @@ class Sinbio_UsuarioController extends Zend_Controller_Action {
 
     public function indexAction() {
         $this->view->layout()->includeJs = '
-				<script src="/plugin/flexigrid/js/flexigrid.pack.js"></script>
+                                <script src="/js/jquery-1.12.0.min.js"></script>
+                                <script src="/js/jquery.dataTables.min.js"></script>
+                                <script src="/js/dataTables.buttons.min.js"></script>
+                                <script src="/js/sinbio/tabelas-datatable.js"></script>
 				<script src="/js/sinbio/seguranca-seg-usuario.js"></script>
 		';
         $this->view->layout()->includeCss = '
-				<link href="/plugin/flexigrid/css/flexigrid.css" rel="stylesheet" type="text/css"/>
-		';
+                                <link href="/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+                                <link href="/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css"/>
+                ';
         $this->view->layout()->nmOperacao = "Listar";
+        
+        $joins = array();
+        $joinGrupo= array(table => array('grupo' => 'seg_grupo_usuario'), onCols => ' usuario.seg_grupo_usuario_id = grupo.id', colReturn => array('nm_grupo_usuario'));
+        array_push($joins, $joinGrupo);
+        
+        $user = new Seg_Usuario();
+        $this->view->paginator = $user->fetchAll(null, null, $joins);
     }
 
     public function cadastrarAction() {
@@ -42,109 +53,96 @@ class Sinbio_UsuarioController extends Zend_Controller_Action {
 
 		';
 
-        $this->view->layout()->includeCss = '';
+        $this->view->layout()->includeCss = '
+                 <link rel="stylesheet" href="/css/sinbio/datepicker-change.css" />
+                ';
 
         //RECUPERA GRUPO USUARIO PARA SELECT
         $oGrupoUsuario = new Seg_GrupoUsuario();
-        $this->view->vGrupoUsuario = $oGrupoUsuario->fetchAll()->toArray();
+        $this->view->vGrupoUsuario = $oGrupoUsuario->fetchAll(null, 'nm_grupo_usuario')->toArray();
 
         $oInstituicao = new Instituicao_Instituicao();
-        $this->view->vInstituicao = $oInstituicao->fetchAll()->toArray();
+        $this->view->vInstituicao = $oInstituicao->fetchAll(null, 'razao_social')->toArray();
 
         $oTitulacao = new Seg_Titulacao();
-        $this->view->vTitulacao = $oTitulacao->fetchAll()->toArray();
+        $this->view->vTitulacao = $oTitulacao->fetchAll(null, 'hierarquia')->toArray();
 
         $oBanco = new Seg_Banco();
         $this->view->vBanco = $oBanco->fetchAll()->toArray();
 
         $oProtocolo = new Protocolo_Protocolo();
-        $this->view->vProtocolo = $oProtocolo->fetchAll()->toArray();
+        $this->view->vProtocolo = $oProtocolo->fetchAll(null, 'sigla')->toArray();
 
         $oNucleo = new Loc_Nucleo();
-        $this->view->vNucleo = $oNucleo->fetchAll()->toArray();
+        $this->view->vNucleo = $oNucleo->fetchAll()->toArray(null, 'nm_nucleo');
 
         //INSERINDO NO BANCO
         $request = $this->_request;
 
         if ($request->getParam("sOP") == "cadastrar") {
 
-            if ($request->getParam("fCpf") == "") {
-                $vData = array(
-                    "seg_grupo_usuario_id" => $request->getParam("fIdGrupoUsuario"),
-                    "seg_banco_id" => $request->getParam("fIdBanco"),
-                    "seg_titulacao_id" => $request->getParam("fIdTitulacao"),
-                    "coleta_protocolo_id" => $request->getParam("fIdProtocolo"),
-                    "nm_usuario" => $request->getParam("fNmUsuario"),
-                    "email" => $request->getParam("fEmail"),
-                    "login" => $request->getParam("fLogin"),
-                    "senha" => $request->getParam("fSenha"),
-                    "dt_cadastro" => $request->getParam("fDatadeCadastro"),
-                    "dt_saida" => $request->getParam("fDtSaida"),
-                    "citacao" => $request->getParam("fCitacao"),
-                    "rg" => $request->getParam("fRg"),
-                    "sisbio" => $request->getParam("fSisbio"),
-                    "lattes" => $request->getParam("fLattes"),
-                    "banco_agencia" => $request->getParam("fBancoAgencia"),
-                    "banco_conta" => $request->getParam("fBancoConta"),
-                    "bolsista" => $request->getParam("fBolsista"),
-                    "vinculo_empregaticio" => $request->getParam("fVinculoEmpregaticio"),
-                    "outro" => $request->getParam("fOutro"),
-                    "ultima_atualizacao" => $request->getParam("fDtUtimaAtualizacao"),
-                    "seg_instituicao_id" => $request->getParam("fIdInstituicao")
-                );
+            $vData = array(
+                "seg_grupo_usuario_id" => $request->getParam("fIdGrupoUsuario"),
+                "seg_banco_id" => $request->getParam("fIdBanco"),
+                "seg_titulacao_id" => $request->getParam("fIdTitulacao"),
+                "coleta_protocolo_id" => $request->getParam("fIdProtocolo"),
+                "nm_usuario" => $request->getParam("fNmUsuario"),
+                "email" => $request->getParam("fEmail"),
+                "telefone" => $request->getParam("fNumTelefone"),
+                "login" => $request->getParam("fLogin"),
+                "senha" => $request->getParam("fSenha"),
+                "dt_cadastro" => $request->getParam("fDatadeCadastro"),
+                "dt_saida" => $request->getParam("fDtSaida"),
+                "citacao" => $request->getParam("fCitacao"),
+                "rg" => $request->getParam("fRg"),
+                "cpf" => $request->getParam("fCpf"),
+                "sisbio" => $request->getParam("fSisbio"),
+                "lattes" => $request->getParam("fLattes"),
+                "banco_agencia" => $request->getParam("fBancoAgencia"),
+                "banco_conta" => $request->getParam("fBancoConta"),
+                "bolsista" => $request->getParam("fBolsista"),
+                "vinculo_empregaticio" => $request->getParam("fVinculoEmpregaticio"),
+                "outro" => $request->getParam("fOutro"),
+                "ultima_atualizacao" => $request->getParam("fDtUtimaAtualizacao"),
+                "seg_instituicao_id" => $request->getParam("fIdInstituicao")
+            );
+
+
+            $sAtributosChave = "nm_usuario,login,senha,cpf";
+            $sNmAtributosChave = "Nome de Usuário,Login,Senha,Cpf";
+            $sMsg = UtilsFile::verificaArrayVazio($vData, $sAtributosChave, $sNmAtributosChave);
+
+            if ($sMsg) {
+                $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadastrar Usuário", $sMsg);
             } else {
-                $vData = array(
-                    "seg_grupo_usuario_id" => $request->getParam("fIdGrupoUsuario"),
-                    "seg_banco_id" => $request->getParam("fIdBanco"),
-                    "seg_titulacao_id" => $request->getParam("fIdTitulacao"),
-                    "coleta_protocolo_id" => $request->getParam("fIdProtocolo"),
-                    "nm_usuario" => $request->getParam("fNmUsuario"),
-                    "email" => $request->getParam("fEmail"),
-                    "login" => $request->getParam("fLogin"),
-                    "senha" => $request->getParam("fSenha"),
-                    "dt_cadastro" => $request->getParam("fDatadeCadastro"),
-                    "dt_saida" => $request->getParam("fDtSaida"),
-                    "citacao" => $request->getParam("fCitacao"),
-                    "rg" => $request->getParam("fRg"),
-                    "cpf" => $request->getParam("fCpf"),
-                    "sisbio" => $request->getParam("fSisbio"),
-                    "lattes" => $request->getParam("fLattes"),
-                    "banco_agencia" => $request->getParam("fBancoAgencia"),
-                    "banco_conta" => $request->getParam("fBancoConta"),
-                    "bolsista" => $request->getParam("fBolsista"),
-                    "vinculo_empregaticio" => $request->getParam("fVinculoEmpregaticio"),
-                    "outro" => $request->getParam("fOutro"),
-                    "ultima_atualizacao" => $request->getParam("fDtUtimaAtualizacao"),
-                    "seg_instituicao_id" => $request->getParam("fIdInstituicao")
-                );
-            }
 
-            try {
-                $oUsuario = new Seg_Usuario();
-                $auth = Zend_Auth::getInstance();
-                $vUsuarioLogado = $auth->getIdentity();
-                $nId = $oUsuario->insert($vData, "cadastrar-usuario", $vUsuarioLogado["id"]);
-                
-                //Salvando núcleos
-                $aNucleos = $request->getParam("fIdNucleo");
-                
-                $oUsuarioNucleo = new UsuarioNucleo_UsuarioNucleo();
-                $oUsuarioNucleo->insert($aNucleos, $nId, "cadastrar-usuario", $vUsuarioLogado["id"]);
+                try {
+                    $oUsuario = new Seg_Usuario();
+                    $auth = Zend_Auth::getInstance();
+                    $vUsuarioLogado = $auth->getIdentity();
+                    $nId = $oUsuario->insert($vData, "cadastrar-usuario", $vUsuarioLogado["id"]);
 
-                if (!$nId) {
-                    $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro 2 ao Cadasrar Usuário", $oUsuario->getErroMensagem());
-                } else {
-                    $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(1, "Sucesso", "Cadastro realizado com sucesso!");
-                    $this->_redirect('/usuario');
-                }
-            } catch (Zend_Db_Exception $e) {
-                $sString = $e->getMessage();
-                $bErro = strstr($sString, "SQLSTATE[23000]");
+                    //Salvando núcleos
+                    $aNucleos = $request->getParam("fIdNucleo");
 
-                if ($bErro) {
-                    $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadasrar Usuário", "Login já existente no sistema.");
-                } else {
-                    $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro 3 ao Cadasrar Usuário", $sString);
+                    $oUsuarioNucleo = new UsuarioNucleo_UsuarioNucleo();
+                    $oUsuarioNucleo->insert($aNucleos, $nId, "cadastrar-usuario", $vUsuarioLogado["id"]);
+
+                    if (!$nId) {
+                        $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro 2 ao Cadasrar Usuário", $oUsuario->getErroMensagem());
+                    } else {
+                        $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(1, "Sucesso", "Cadastro realizado com sucesso!");
+                        $this->_redirect('/usuario');
+                    }
+                } catch (Zend_Db_Exception $e) {
+                    $sString = $e->getMessage();
+                    $bErro = strstr($sString, "SQLSTATE[23000]");
+
+                    if ($bErro) {
+                        $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadasrar Usuário", "Login já existente no sistema.");
+                    } else {
+                        $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro 3 ao Cadasrar Usuário", $sString);
+                    }
                 }
             }
         }
@@ -159,7 +157,9 @@ class Sinbio_UsuarioController extends Zend_Controller_Action {
 			<script src="/js/sinbio/validacao.js" type="text/javascript"></script>
 		';
 
-        $this->view->layout()->includeCss = '';
+        $this->view->layout()->includeCss = '
+                <link rel="stylesheet" href="/css/sinbio/datepicker-change.css" />
+                ';
 
         $oUsuario = new Seg_Usuario();
         $oGrupoUsuario = new Seg_GrupoUsuario();
@@ -181,34 +181,34 @@ class Sinbio_UsuarioController extends Zend_Controller_Action {
             $vUsuario = $vUsuario[0];
 
             //RECUPERA GRUPO USUARIO PARA SELECT
-            $this->view->vGrupoUsuario = $oGrupoUsuario->fetchAll()->toArray();
+            $this->view->vGrupoUsuario = $oGrupoUsuario->fetchAll(null, 'nm_grupo_usuario')->toArray();
 
             //RECUPERA INSTITUICAO PARA O SELECT
-            $this->view->vInstituicao = $oInstituicao->fetchAll()->toArray();
+            $this->view->vInstituicao = $oInstituicao->fetchAll(null, 'razao_social')->toArray();
 
             //RECUPERA BANCO PARA O SELECT
             $this->view->vBanco = $oBanco->fetchAll()->toArray();
 
             //RECUPERA TITULACAO PARA O SELECT
-            $this->view->vTitulacao = $oTitulacao->fetchAll()->toArray();
-            
+            $this->view->vTitulacao = $oTitulacao->fetchAll()->toArray(null, 'hierarquia');
+
             //RECUPERA PROTOCOLO PARA O SELECT
-            $this->view->vProtocolo = $oProtocolo->fetchAll()->toArray();
+            $this->view->vProtocolo = $oProtocolo->fetchAll()->toArray(null, 'sigla');
 
             //RECUPERA NUCLEO PARA O SELECT
-            $vNucleosRetorno = $oNucleo->fetchAll()->toArray();
+            $vNucleosRetorno = $oNucleo->fetchAll()->toArray(null, 'nm_nucleo');
 
             $vUsuarioRow = $vUsuarioRetorno->current();
-            $vNucleosUsuario = $oUsuarioNucleo->findNucleos($vUsuarioRow);//BUSCA OS NUCLEOS NA TABELA DE JUNCAO
-            
+            $vNucleosUsuario = $oUsuarioNucleo->findNucleos($vUsuarioRow); //BUSCA OS NUCLEOS NA TABELA DE JUNCAO
+
             $vNucleos = array();
             foreach ($vNucleosRetorno as $nucleo) {
                 foreach ($vNucleosUsuario as $nucleoUsuario) {
-                    if($nucleoUsuario["id"] == $nucleo["id"]) {
+                    if ($nucleoUsuario["id"] == $nucleo["id"]) {
                         $nucleo["selected"] = "selected";
                         $vNucleos[] = $nucleo;
                         continue 2;
-                    } 
+                    }
                 }
                 $vNucleos[] = $nucleo;
             }
@@ -216,12 +216,13 @@ class Sinbio_UsuarioController extends Zend_Controller_Action {
 
             //VALIDA SE O USUARIO EXISTE
             if (count($vUsuario)) {
-                
+
                 $this->view->nId = $vUsuario["id"];
                 $this->view->sNome = $vUsuario["nm_usuario"];
                 $this->view->sLogin = $vUsuario["login"];
                 $this->view->sSenha = $vUsuario["senha"];
                 $this->view->sEmail = $vUsuario["email"];
+                $this->view->sTelefone = $vUsuario["telefone"];
                 $this->view->nIdGrupo = $vUsuario["seg_grupo_usuario_id"];
                 $this->view->nIdInstituicao = $vUsuario["seg_instituicao_id"];
                 $this->view->nIdTitulacao = $vUsuario["seg_titulacao_id"];
@@ -254,7 +255,7 @@ class Sinbio_UsuarioController extends Zend_Controller_Action {
                     if ($sSenha && $sSenhaConf && $sSenhaConf != $sSenha) {
                         $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Alterar Usuário", "As senhas digitadas não são iguais. Por favor tente novamente.");
                     } else {
-                        if ($request->getParam("fDtSaida") == "" && $request->getParam("fDatadeCadastro") == "" || $request->getParam("fCpf") == "") {
+                        if ($request->getParam("fDtSaida") == "" && $request->getParam("fDatadeCadastro") == "") {
                             $vData = array(
                                 "id" => $nId,
                                 "seg_grupo_usuario_id" => $request->getParam("fIdGrupoUsuario"),
@@ -263,6 +264,7 @@ class Sinbio_UsuarioController extends Zend_Controller_Action {
                                 "seg_banco_id" => $request->getParam("fIdBanco"),
                                 "nm_usuario" => $request->getParam("fNmUsuario"),
                                 "email" => $request->getParam("fEmail"),
+                                "telefone" => $request->getParam("fNumTelefone"),
                                 "login" => $request->getParam("fLogin"),
                                 "senha" => $request->getParam("fSenha"),
                                 "citacao" => $request->getParam("fCitacao"),
@@ -310,27 +312,35 @@ class Sinbio_UsuarioController extends Zend_Controller_Action {
                             $vData += array("senha" => $sSenha);
                         }
                         //---------------------------------------------------
-                        
-                        $auth = Zend_Auth::getInstance();
-                        $vUsuarioLogado = $auth->getIdentity();
-                        
-                        //---------------ATUALIZANDO NUCLEOS---------------
-                        $sWhere = "seg_usuario_id = " . $vData["id"];
-                        $aNucleos = $request->getParam("fIdNucleo");
-                        $oUsuarioNucleo = new UsuarioNucleo_UsuarioNucleo();
-                        
-                        $oUsuarioNucleo->delete($sWhere, "alterar-usuario", $vUsuarioLogado["id"]);
-                        $oUsuarioNucleo->insert($aNucleos, $nId, "alterar-usuario", $vUsuarioLogado["id"]);
-                        //-------------------------------------------------
 
-                        //VERIFICA SE O REGISTRO VAI SER ALTERADO
-                        $sWhere = "id = " . $vData["id"];
-                        if ($oUsuario->update($vData, $sWhere, "alterar-usuario", $vUsuarioLogado["id"])) {
-                            $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(1, "Sucesso", "O Usuário foi alterado com sucesso.");
-                            $this->_redirect('/usuario');
+                        $sAtributosChave = "nm_usuario,login,senha,cpf";
+                        $sNmAtributosChave = "Nome de Usuário,Login,Senha,Cpf";
+                        $sMsg = UtilsFile::verificaArrayVazio($vData, $sAtributosChave, $sNmAtributosChave);
+
+                        if ($sMsg) {
+                            $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Alterar Usuário", $sMsg);
                         } else {
-                            $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Alterar Usuário", $oUsuario->getErroMensagem());
-                        }//VERIFICA SE O REGISTRO VAI SER ALTERADO
+
+                            $auth = Zend_Auth::getInstance();
+                            $vUsuarioLogado = $auth->getIdentity();
+
+                            //---------------ATUALIZANDO NUCLEOS---------------
+                            $sWhere = "seg_usuario_id = " . $vData["id"];
+                            $aNucleos = $request->getParam("fIdNucleo");
+                            $oUsuarioNucleo = new UsuarioNucleo_UsuarioNucleo();
+
+                            $oUsuarioNucleo->delete($sWhere, "alterar-usuario", $vUsuarioLogado["id"]);
+                            $oUsuarioNucleo->insert($aNucleos, $nId, "alterar-usuario", $vUsuarioLogado["id"]);
+                            //-------------------------------------------------
+                            //VERIFICA SE O REGISTRO VAI SER ALTERADO
+                            $sWhere = "id = " . $vData["id"];
+                            if ($oUsuario->update($vData, $sWhere, "alterar-usuario", $vUsuarioLogado["id"])) {
+                                $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(1, "Sucesso", "O Usuário foi alterado com sucesso.");
+                                $this->_redirect('/usuario');
+                            } else {
+                                $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Alterar Usuário", $oUsuario->getErroMensagem());
+                            }//VERIFICA SE O REGISTRO VAI SER ALTERADO
+                        }
                     }//VERIFICA SE O USUARIO ESTA TENTADO TROCAR SENHA
                 }//VALIDA SE FOI SUBMETIDO O FORMULARIO
             } else {

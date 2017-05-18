@@ -7,22 +7,32 @@
                     <h5>Alterar Usuário</h5>
                 </div>
                 <div class="widget-content nopadding">
-                    <form class="form-horizontal" method="post" action="/usuario/alterar/nId/<?=$this->nId?>" name="" id="insere-altera" novalidate="novalidate">
+                    <form class="form-horizontal" method="post" action="/usuario/alterar/nId/<?= $this->nId ?>" name="" id="insere-altera" novalidate="novalidate">
                         <div class="control-group">
                             <label class="control-label">Nome <i class="icon-asterisk"></i>:</label>
                             <div class="controls">
-                                <input tabindex="1" type="text" name="fNmUsuario" class="required" value="<?=$this->sNome?>">
+                                <input tabindex="1" type="text" name="fNmUsuario" class="required" value="<?= $this->sNome ?>">
                             </div>
                         </div>
+
                         <div class="control-group">
-                            <label class="control-label">E-mail :</label>
+                            <label class="control-label">E-mail <i class="icon-asterisk email-icon"></i>:</label>
                             <div class="controls">
-                                <input tabindex="2" type="text" name="fEmail" value="<?=$this->sEmail?>">
+                                <input tabindex="2" type="text" name="fEmail" id="email-input" class="required" value="<?= $this->sEmail ?>" onkeyup="checaEmailFone()">
 
                             </div>
                         </div>
+
                         <div class="control-group">
-                            <label class="control-label">Grupo Usuário :</label>
+                            <label class="control-label">Telefone <i class="icon-asterisk phone-icon"></i>:</label>
+                            <div class="controls">
+                                <input tabindex="2" type="text" name="fNumTelefone" id="phone-input" class="required" value="<?= $this->sTelefone ?>" onkeyup="checaEmailFone()">
+
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Atribuição :</label>
                             <div class="controls">
                                 <select tabindex="3" name="fIdGrupoUsuario"  style="width: 200px;">
                                     <?php
@@ -32,7 +42,7 @@
                                         else
                                             $sSel = "";
                                         ?>
-                                        <option value="<?=$grupoUsuario["id"]?>" <?=$sSel?>><?=$grupoUsuario["nm_grupo_usuario"]?></option>
+                                        <option value="<?= $grupoUsuario["id"] ?>" <?= $sSel ?>><?= $grupoUsuario["nm_grupo_usuario"] ?></option>
                                         <?php
                                     }
                                     ?>
@@ -53,7 +63,7 @@
                                         else
                                             $sSel = "";
                                         ?>
-                                        <option value="<?=$instituicao["id"]?>" <?=$sSel?>><?=$instituicao["razao_social"]?></option>
+                                        <option value="<?= $instituicao["id"] ?>" <?= $sSel ?>><?= $instituicao["razao_social"] ?></option>
                                         <?php
                                     }
                                     ?>
@@ -73,7 +83,7 @@
                                         else
                                             $sSel = "";
                                         ?>
-                                        <option value="<?=$titulacao["id"]?>" <?=$sSel?>><?=$titulacao["nm_titulacao"]?></option>
+                                        <option value="<?= $titulacao["id"] ?>" <?= $sSel ?>><?= $titulacao["nm_titulacao"] ?></option>
                                         <?php
                                     }
                                     ?>
@@ -92,14 +102,14 @@
                                         else
                                             $sSel = "";
                                         ?>
-                                        <option value="<?=$protocolo["id"]?>" <?=$sSel?>><?=$protocolo["nm_protocolo"]?></option>
+                                        <option value="<?= $protocolo["id"] ?>" <?= $sSel ?>><?= $protocolo["nm_protocolo"] ?></option>
                                         <?php
                                     }
                                     ?>
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="control-group">
                             <label class="control-label">Núcleo :</label>
                             <div class="controls ">
@@ -107,7 +117,7 @@
                                     <?php
                                     foreach ($this->vNucleos as $nucleo) {
                                         ?>
-                                    <option value="<?=$nucleo["id"];?>" <?=$nucleo["selected"]?>><?=$nucleo["nm_nucleo"]?></option>
+                                        <option value="<?= $nucleo["id"]; ?>" <?= $nucleo["selected"] ?>><?= $nucleo["nm_nucleo"] ?></option>
                                         <?php
                                     }
                                     ?>
@@ -118,25 +128,25 @@
                         <div class="control-group">
                             <label class="control-label">Login <i class="icon-asterisk"></i>:</label>
                             <div class="controls">
-                                <input type="text" id="fLogin" name="fLogin" class="required" value="<?=$this->sLogin?>">
+                                <input type="text" id="fLogin" name="fLogin" class="required" value="<?= $this->sLogin ?>">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Senha <i class="icon-asterisk"></i>:</label>
                             <div class="controls">
-                                <input type="password" id="fSenha" name="fSenha" autocomplete="off" value="<?=$this->sSenha?>">
+                                <input type="password" id="fSenha" name="fSenha" autocomplete="off" value="<?= $this->sSenha ?>">
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Confirmar Senha <i class="icon-asterisk"></i>:</label>
                             <div class="controls">
-                                <input type="password" name="fSenhaConf" id="fSenhaConf" autocomplete="off" value="<?=$this->sSenha?>">
+                                <input type="password" name="fSenhaConf" id="fSenhaConf" autocomplete="off" value="<?= $this->sSenha ?>">
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">Data Entrada: </label>
+                            <label class="control-label">Data de Entrada no Programa: </label>
                             <div class="controls">
-                                <input type="text" name="fDatadeCadastro" data-date-format="dd-mm-yyyy" value="<?=UtilsDate::formataDataToShow($this->sDtCadastro)?>" class="datepicker" />
+                                <input type="text" name="fDatadeCadastro" data-date-format="dd/mm/yyyy" value="<?= UtilsDate::formataDataToShow($this->sDtCadastro) ?>" class="datepicker" readonly="true"/>
                             </div>
                         </div>
 
@@ -149,28 +159,27 @@
 
 
                         <div class="control-group">
-                            <label class="control-label">Data Saida: </label>
+                            <label class="control-label">Data de Saida do Programa: </label>
                             <div class="">
-                                <input id="dataSaida" disabled="true" type="text" name="fDtSaida" data-date-format="dd-mm-yyyy"  clear-btn="true" force-parse="false" value="<?=UtilsDate::formataDataToShow($this->sDtSaida)?>" class="datepicker" />
+                                <input id="dataSaida" disabled="true" type="text" name="fDtSaida" data-date-format="dd/mm/yyyy"  clear-btn="true" force-parse="false" value="<?= UtilsDate::formataDataToShow($this->sDtSaida) ?>" class="datepicker" readonly="true"/>
                                 <div class="controls">
-                                    <input type="checkbox" id="fcheckflag" name="fcheckflag"  >
-                                    <label class="control-label">Somente caso seja EGRESSO:</label>
+                                    Somente caso seja EGRESSO: <input type="checkbox" id="fcheckflag" name="fcheckflag"  >
                                 </div>
                             </div>
                         </div>
 
                         <script>
                             /*  if( $("[id='fcheckflag']").prop('checked') ){
-$("[id='dataSaida']").prop('disabled', false);
-                        }else{
-                                 $("[id='dataSaida']").prop('disabled', true);
-                        }*/
+                             $("[id='dataSaida']").prop('disabled', false);
+                             }else{
+                             $("[id='dataSaida']").prop('disabled', true);
+                             }*/
 
-                            $("[id='fcheckflag']").change(function() {
+                            $("[id='fcheckflag']").change(function () {
                                 //$("[id='dataSaida']").attr('disabled',! this.checked)
-                                if( $("[id='fcheckflag']").prop('checked') ){
+                                if ($("[id='fcheckflag']").prop('checked')) {
                                     $("[id='dataSaida']").prop('disabled', false);
-                                }else{
+                                } else {
                                     $("[id='dataSaida']").prop('disabled', true);
                                 }
                             });
@@ -179,7 +188,7 @@ $("[id='dataSaida']").prop('disabled', false);
                         <div class="control-group">
                             <label class="control-label">Citação:</label>
                             <div class="controls">
-                                <input type="text" id="fCitacao" name="fCitacao" value="<?=$this->sCitacao?>">
+                                <input type="text" id="fCitacao" name="fCitacao" value="<?= $this->sCitacao ?>">
                             </div>
                         </div>
 
@@ -187,29 +196,29 @@ $("[id='dataSaida']").prop('disabled', false);
                         <div class="control-group">
                             <label class="control-label">RG:</label>
                             <div class="controls">
-                                <input type="text" id="fRg" name="fRg" value="<?=$this->sRg?>">
+                                <input type="text" id="fRg" name="fRg" value="<?= $this->sRg ?>">
                             </div>
                         </div>
 
 
                         <div class="control-group">
-                            <label class="control-label">Cpf:</label>
+                            <label class="control-label">Cpf <i class="icon-asterisk"></i>:</label>
                             <div class="controls">
-                                <input type="text" id="fCpf" name="fCpf" value="<?=$this->sCpf?>">
+                                <input type="text" id="fCpf" name="fCpf" value="<?= $this->sCpf ?>" class="required">
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label">Sisbio:</label>
                             <div class="controls">
-                                <input type="text" id="fSisbio" name="fSisbio" value="<?=$this->sSisbio?>">
+                                <input type="text" id="fSisbio" name="fSisbio" value="<?= $this->sSisbio ?>">
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label">Lattes:</label>
                             <div class="controls">
-                                <input type="text" id="fLattes" name="fLattes" value="<?=$this->sLattes?>">
+                                <input type="text" id="fLattes" name="fLattes" value="<?= $this->sLattes ?>">
                             </div>
                         </div>
 
@@ -218,26 +227,16 @@ $("[id='dataSaida']").prop('disabled', false);
                             <label class="control-label">Banco:</label>
                             <div class="controls ">
                                 <select name="fIdBanco" style="width: 200px;">
+                                    <option disabled selected value>Selecione uma opção</option>
                                     <?php
-
-                                    function debug_to_console($data) {
-                                        if (is_array($data) || is_object($data)) {
-                                            echo("<script>console.log('PHP: " . json_encode($data) . "');</script>");
-                                        } else {
-                                            echo("<script>console.log('PHP: " . $data . "');</script>");
-                                        }
-                                    }
-
                                     $aux = $this->nIdBanco;
-                                    debug_to_console($this->nIdBanco);
-                                    debug_to_console("ESTOU AQUI");
                                     foreach ($this->vBanco as $banco) {
                                         if ($banco["id"] == $this->nIdBanco)
                                             $sSel = 'selected="selected"';
                                         else
                                             $sSel = "";
                                         ?>
-                                        <option value="<?=$banco["id"]?>" <?=$sSel?>><?=$banco["nm_banco"]?></option>
+                                        <option value="<?= $banco["id"] ?>" <?= $sSel ?>><?= $banco["nm_banco"] ?></option>
                                         <?php
                                     }
                                     ?>
@@ -248,30 +247,14 @@ $("[id='dataSaida']").prop('disabled', false);
                         <div class="control-group">
                             <label class="control-label">Banco Agencia:</label>
                             <div class="controls">
-                                <input type="text" id="fBancoAgencia" value="<?=$this->sBancoAgencia?>" name="fBancoAgencia">
+                                <input type="text" id="fBancoAgencia" value="<?= $this->sBancoAgencia ?>" name="fBancoAgencia">
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label">Banco Conta:</label>
                             <div class="controls">
-                                <input type="text" id="fBancoConta" value="<?=$this->sBancoConta?>" name="fBancoConta">
-                            </div>
-                        </div>
-
-
-                        <div class="control-group">
-                            <label class="control-label">Bolsista:</label>
-                            <div class="controls">
-
-                                <?php
-                                if ($this->sBolsista == true) {
-                                    $checked = 'checked="checked" ';
-                                } else {
-                                    $checked = "";
-                                }
-                                ?>
-                                <input type="checkbox" id="fVinculoEmpregaticio" name="fBolsista"  <?php echo $checked; ?>>
+                                <input type="text" id="fBancoConta" value="<?= $this->sBancoConta ?>" name="fBancoConta">
                             </div>
                         </div>
 
@@ -279,35 +262,33 @@ $("[id='dataSaida']").prop('disabled', false);
                             <label class="control-label">Vinculo Empregaticio:</label>
                             <div class="controls">
 
-                                <?php
-                                if ($this->sVinculoEmpregaticio == true) {
-                                    $checked = 'checked="checked" ';
-                                } else {
-                                    $checked = "";
-                                }
-                                ?>
+<?php
+if ($this->sVinculoEmpregaticio == true) {
+    $checked = 'checked="checked" ';
+} else {
+    $checked = "";
+}
+?>
                                 <input type="checkbox" id="fVinculoEmpregaticio" name="fVinculoEmpregaticio"  <?php echo $checked; ?>>
+
+<?php
+if ($this->sBolsista == true) {
+    $checked = 'checked="checked" ';
+} else {
+    $checked = "";
+}
+?>
+                                Bolsista: <input type="checkbox" id="fVinculoEmpregaticio" name="fBolsista"  <?php echo $checked; ?>>
+
+                                Outros: <input type="text" id="fOutro" value="<?= $this->sOutro ?>" name="fOutro">
                             </div>
                         </div>
-
-
-
-
-
-                        <div class="control-group">
-                            <label class="control-label">Outros:</label>
-                            <div class="controls">
-                                <input type="text" id="fOutro" value="<?=$this->sOutro?>" name="fOutro">
-                            </div>
-                        </div>
-
-
 
                         <input type="hidden" name="fDtUtimaAtualizacao" data-date-format="dd-mm-yyyy" value="<?php echo date("d-m-Y") ?>" class="datepicker" />
 
                         <div class="form-actions">
                             <input type="hidden" name="sOP" value="alterar" />
-                            <input type="hidden" name="nId" value="<?=$this->nId?>" />
+                            <input type="hidden" name="nId" value="<?= $this->nId ?>" />
                             <input type="submit" value="Salvar" class="btn btn-success">
                         </div>
                     </form>
@@ -328,3 +309,9 @@ $("[id='dataSaida']").prop('disabled', false);
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        checaEmailFone();
+    });
+</script>

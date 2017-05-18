@@ -4,47 +4,66 @@ if ($this->vMenu == "") {
     
 } else {
     foreach ($this->vMenu as $vModulo) {
-      
         ?>
-                            <ul class="nav nav-tabs">
-                        <?php
-                                if ($vModulo["modulo"] == "Segurança") {
-                                    
-                             
-                        foreach ($vModulo["programas"] as $vPrograma) {
-                            
+        <ul class="nav nav-tabs">
+            <?php
+            if ($vModulo["modulo"] == "Segurança") {
+
+
+                foreach ($vModulo["programas"] as $vPrograma) {
+
 //                              echo '<pre>';
 //        print_r($vPrograma);
-        
-        if ($vPrograma['controller'] == "usuario") {
-                                            ?>
-                                  <li class="active">  
-                                      <?php
-                    } else {?>
-                                  <li> 
-                                   <?php
-                                        }
-                                        ?>
-                                    <a href="/<?= $vPrograma["controller"] . "/index" ?>"><?= $vPrograma["programa"] ?></a></li>
-                                    <?php
-                                }
-                                ?>
-                            </ul>
-                                <?php
-                            }
-                        }
-                           }
+
+                    if ($vPrograma['controller'] == "usuario") {
                         ?>
-                           
-<!--                        <form class="search">
-                            <input type="text" name="pesquisar" id="pesquisar" />
-                            <input type="submit" class="btn" name="enviar" value="pesquisar">
-                        </form>-->
+                        <li class="active">  
+                            <?php } else {
+                            ?>
+                        <li> 
+                            <?php
+                        }
+                        ?>
+                        <a href="/<?= $vPrograma["controller"] . "/index" ?>"><?= $vPrograma["programa"] ?></a></li>
+                    <?php
+                }
+                ?>
+            </ul>
+            <?php
+        }
+    }
+}
+?>
 
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span12">
-			<table class="grid" style="display: none"></table>
-		</div>
-	</div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="bs-example">
+                <table class="tabela display" >
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nome</th>
+                            <th>Login</th>
+                            <th>Grupo</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <?php foreach ($this->paginator as $value) {
+                            ?>
+                            <tr>
+                                <td><?php echo $value["id"]; ?></td>
+                                <td><?php echo $value["nm_usuario"]; ?></td>
+                                <td><?php echo $value["login"]; ?></td>
+                                <td><?php echo $value["nm_grupo_usuario"]; ?></td>
+                            </tr>
+                        <?php } ?>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
