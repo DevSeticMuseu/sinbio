@@ -132,7 +132,7 @@
                         <div class="control-group">
                             <label class="control-label">Estado <i class="icon-asterisk"></i>:</label>
                             <div class="controls ">
-                                <select tabindex="3" name="fIdUf" class="required" style="width: 200px;">
+                                <select id="fIdUf" tabindex="3" name="fIdUf" class="required" style="width: 200px;">
                                     <?php
                                     foreach ($this->vUf as $uf) {
                                         if ($uf["id"] == $this->nIdUf)
@@ -151,7 +151,7 @@
                         <div class="control-group">
                             <label class="control-label">Município <i class="icon-asterisk"></i>:</label>
                             <div class="controls">
-                                <select tabindex="3" name="fIdMunicipio" class="required" style="width: 200px;">
+                                <select id="fIdMunicipio" tabindex="3" name="fIdMunicipio" class="required" style="width: 200px;">
                                     <?php
                                     foreach ($this->vMunicipio as $municipio) {
                                         if ($municipio["id"] == $this->nIdMunicipio)

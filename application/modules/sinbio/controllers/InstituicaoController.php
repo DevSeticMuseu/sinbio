@@ -28,100 +28,115 @@ class Sinbio_InstituicaoController extends Zend_Controller_Action {
     }
 
     public function cadastrarAction() {
-        $this->view->layout()->nmController = "instituicao";
-        $this->view->layout()->nmPrograma = "Instituição";
-        $this->view->layout()->nmOperacao = "Cadastrar";
+        $op = $this->_request->getParam('op');
+        if ($op == 'filtrarCep') {
+            $this->filtrarCep();
+        } else {
+            $this->view->layout()->nmController = "instituicao";
+            $this->view->layout()->nmPrograma = "Instituição";
+            $this->view->layout()->nmOperacao = "Cadastrar";
 
-        $this->view->layout()->includeJs = '
+            $this->view->layout()->includeJs = '
 			<script src="/js/geral/jquery.validate.js" type="text/javascript"></script>
 			<script src="/js/sinbio/validacao.js" type="text/javascript"></script>
+                        <script src="/js/sinbio/instituicao-scripts.js" type="text/javascript"></script>
+                        
 		';
 
-        $this->view->layout()->includeCss = '
+            $this->view->layout()->includeCss = '
                         <link rel="stylesheet" href="/css/sinbio/datepicker-change.css" />
                 ';
 
-        $oUf = new Loc_Uf();
-        $this->view->vUf = $oUf->fetchAll()->toArray();
-        
-        $oMunicipio = new Loc_Municipio();
-        $this->view->vMunicipio = $oMunicipio->fetchAll()->toArray();
+            $oUf = new Loc_Uf();
+            $this->view->vUf = $oUf->fetchAll()->toArray();
 
-        //RECUPERA NÚCLEO PARA SELECT
-        $oNucleo = new Loc_Nucleo();
-        $this->view->vNucleo = $oNucleo->fetchAll()->toArray();
+            $oNucleo = new Loc_Nucleo();
+            $this->view->vNucleo = $oNucleo->fetchAll()->toArray();
 
-        //INSERINDO NO BANCO
-        $request = $this->_request;
+            $request = $this->_request;
 
-        if ($request->getParam("sOP") == "cadastrar") {
-            $vData = array(
-                "razao_social" => $request->getParam("fRazaoSocial"),
-                "sigla" => $request->getParam("fSigla"),
-                "url" => $request->getParam("fUrl"),
-                "cnpj" => $request->getParam("fCnpj"),
-                "nm_diretor" => $request->getParam("fNmDiretor"),
-                "cargo_diretor" => $request->getParam("fCargoDiretor"),
-                "email" => $request->getParam("fEmail"),
-                "cpf_diretor" => $request->getParam("fCpfDiretor"),
-                "loc_nucleo_id" => $request->getParam("fIdNucleo"),
-                "loc_uf_id" => $request->getParam("fIdUf"),
-                "loc_municipio_id" => $request->getParam("fIdMunicipio"),
-                "logradouro" => $request->getParam("fLogradouro"),
-                "bairro" => $request->getParam("fBairro"),
-                "cep" => $request->getParam("fCep"),
-                "telefone" => $request->getParam("fTelefone"),
-                "descricao" => $request->getParam("fDescricao"),
-                "complemento" => $request->getParam("fComplemento"),
-                "numero" => $request->getParam("fNumero"),
-                "portaria_designacao" => $request->getParam("fPDesignacao"),
-                "convenio" => $request->getParam("fConvenio"),
-                "ini_convenio" => $request->getParam("fIniConvenio"),
-            );
-            $dataFimConvenio = $request->getParam("fFimConvenio");
-            if (!empty($dataFimConvenio))
-                $vData["fim_convenio"] = $request->getParam("fFimConvenio");
+            if ($request->getParam("sOP") == "cadastrar") {
+                $vData = array(
+                    "razao_social" => $request->getParam("fRazaoSocial"),
+                    "sigla" => $request->getParam("fSigla"),
+                    "url" => $request->getParam("fUrl"),
+                    "cnpj" => $request->getParam("fCnpj"),
+                    "nm_diretor" => $request->getParam("fNmDiretor"),
+                    "cargo_diretor" => $request->getParam("fCargoDiretor"),
+                    "email" => $request->getParam("fEmail"),
+                    "cpf_diretor" => $request->getParam("fCpfDiretor"),
+                    "loc_nucleo_id" => $request->getParam("fIdNucleo"),
+                    "loc_uf_id" => $request->getParam("fIdUf"),
+                    "loc_municipio_id" => $request->getParam("fIdMunicipio"),
+                    "logradouro" => $request->getParam("fLogradouro"),
+                    "bairro" => $request->getParam("fBairro"),
+                    "cep" => $request->getParam("fCep"),
+                    "telefone" => $request->getParam("fTelefone"),
+                    "descricao" => $request->getParam("fDescricao"),
+                    "complemento" => $request->getParam("fComplemento"),
+                    "numero" => $request->getParam("fNumero"),
+                    "portaria_designacao" => $request->getParam("fPDesignacao"),
+                    "convenio" => $request->getParam("fConvenio"),
+                    "ini_convenio" => $request->getParam("fIniConvenio"),
+                );
+                $dataFimConvenio = $request->getParam("fFimConvenio");
+                if (!empty($dataFimConvenio))
+                    $vData["fim_convenio"] = $request->getParam("fFimConvenio");
 
 
-            $sAtributosChave = "razao_social";
-            $sNmAtributosChave = "Razão Social ";
-            $sMsg = UtilsFile::verificaArrayVazio($vData, $sAtributosChave, $sNmAtributosChave);
+                $sAtributosChave = "razao_social";
+                $sNmAtributosChave = "Razão Social ";
+                $sMsg = UtilsFile::verificaArrayVazio($vData, $sAtributosChave, $sNmAtributosChave);
 
-            if ($sMsg) {
-                $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadasrar Instituição", $sMsg);
-            } else {
-                try {
-                    $oInstituicao = new Instituicao_Instituicao();
+                if ($sMsg) {
+                    $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadasrar Instituição", $sMsg);
+                } else {
+                    try {
+                        $oInstituicao = new Instituicao_Instituicao();
 
-                    $auth = Zend_Auth::getInstance();
-                    $vUsuarioLogado = $auth->getIdentity();
-                    $nId = $oInstituicao->insert($vData, "cadastrar-instituicao", $vUsuarioLogado["id"]);
+                        $auth = Zend_Auth::getInstance();
+                        $vUsuarioLogado = $auth->getIdentity();
+                        $nId = $oInstituicao->insert($vData, "cadastrar-instituicao", $vUsuarioLogado["id"]);
 
-                    if (!$nId) {
-                        $sString = UtilsFile::recuperaMensagens(2, "Erro ao Cadasrar Instituicao", $oInstituicao->getErroMensagem());
+                        if (!$nId) {
+                            $sString = UtilsFile::recuperaMensagens(2, "Erro ao Cadasrar Instituicao", $oInstituicao->getErroMensagem());
+                            $bErro = strstr($sString, "1062");
+                            if ($bErro) {
+                                $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadasrar Instituicao", "Instituição já existente no sistema.");
+                            } else {
+                                $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadasrar Instituição", $sString);
+                            }
+                        } else {
+                            $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(1, "Sucesso", "Cadastro realizado com sucesso!");
+                            $this->_redirect('/instituicao');
+                        }
+                    } catch (Zend_Db_Exception $e) {
+                        $sString = $e->getMessage();
                         $bErro = strstr($sString, "1062");
                         if ($bErro) {
-                            $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadasrar Instituicao", "Instituição já existente no sistema.");
+                            $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadasrar Instituição", "Módulo já existente no sistema.");
                         } else {
                             $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadasrar Instituição", $sString);
                         }
-                    } else {
-                        $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(1, "Sucesso", "Cadastro realizado com sucesso!");
-                        $this->_redirect('/instituicao');
-                    }
-                } catch (Zend_Db_Exception $e) {
-                    $sString = $e->getMessage();
-                    $bErro = strstr($sString, "1062");
-                    if ($bErro) {
-                        $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadasrar Instituição", "Módulo já existente no sistema.");
-                    } else {
-                        $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Cadasrar Instituição", $sString);
                     }
                 }
             }
         }
     }
 
+    public function filtrarCep() {
+        $this->view->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        
+        $idUf = $this->getRequest()->getParam('idUf');
+        $where = "loc_uf_id = $idUf";
+        $order = array('nm_municipio ASC');
+        $oMunicipio = new Loc_Municipio();
+        $json = $oMunicipio->fetchAll($where, $order)->toArray();
+        
+        $this->_helper->json->sendJson($json);
+    }
+    
     public function alterarAction() {
         $this->view->layout()->nmPrograma = "Instituição";
         $this->view->layout()->nmOperacao = "Alterar";
@@ -129,6 +144,7 @@ class Sinbio_InstituicaoController extends Zend_Controller_Action {
         $this->view->layout()->includeJs = '
 			<script src="/js/geral/jquery.validate.js" type="text/javascript"></script>
 			<script src="/js/sinbio/validacao.js" type="text/javascript"></script>
+                        <script src="/js/sinbio/instituicao-scripts.js" type="text/javascript"></script>
 		';
 
         $this->view->layout()->includeCss = '';
@@ -137,9 +153,6 @@ class Sinbio_InstituicaoController extends Zend_Controller_Action {
 
         $oUf = new Loc_Uf();
         $this->view->vUf = $oUf->fetchAll()->toArray();
-        
-        $oMunicipio = new Loc_Municipio();
-        $this->view->vMunicipio = $oMunicipio->fetchAll()->toArray();
 
         $oNucleo = new Loc_Nucleo();
         $this->view->vNucleo = $oNucleo->fetchAll()->toArray();
@@ -152,6 +165,10 @@ class Sinbio_InstituicaoController extends Zend_Controller_Action {
         if ($nId) {
             $vInstituicao = $oInstituicao->find($nId)->toArray();
             $vInstituicao = $vInstituicao[0];
+            
+            $oMunicipio = new Loc_Municipio();
+            $ufId = $vInstituicao["loc_uf_id"];
+            $this->view->vMunicipio = $oMunicipio->fetchAll("loc_uf_id = $ufId")->toArray();
 
             //VALIDA SE O USUARIO EXISTE
             if (count($vInstituicao)) {

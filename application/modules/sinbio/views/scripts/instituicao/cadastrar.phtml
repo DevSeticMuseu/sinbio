@@ -124,7 +124,8 @@
                         <div class="control-group">
                             <label class="control-label">Estado <i class="icon-asterisk"></i>:</label>
                             <div class="controls ">
-                                <select name="fIdUf" style="width: 200px;">
+                                <select id="fIdUf" name="fIdUf" style="width: 200px;">
+                                    <option value="null"></option>
                                     <?php
                                     foreach ($this->vUf as $uf) {
                                         ?>
@@ -139,14 +140,7 @@
                         <div class="control-group">
                             <label class="control-label">Município <i class="icon-asterisk"></i>:</label>
                             <div class="controls ">
-                                <select name="fIdMunicipio" style="width: 200px;">
-                                    <?php
-                                    foreach ($this->vMunicipio as $municipio) {
-                                        ?>
-                                        <option value="<?=$municipio["id"]?>"><?=$municipio["nm_municipio"]?></option>
-                                        <?php
-                                    }
-                                    ?>
+                                <select id="fIdMunicipio" name="fIdMunicipio" style="width: 200px;">
                                 </select>
                             </div>
                         </div>
