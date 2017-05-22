@@ -155,17 +155,9 @@
                       } else {
                           foreach ($this->vMenu as $vModulo) {
                             foreach ($vModulo["programas"] as $vPrograma) {
-                              //echo '<pre>';
-                              //print_r($vModulo);
                             }
-                            //****PAULO ROSA******
-                            /*
-                              Alteração dos label's no menu, Requesito presente no backlog (07/06/2016)
-                            */
                             $labelMenu;
-                            if ($vModulo["modulo"]=="Pessoas") {
-                              $labelMenu = "Pesquisas";
-                            } else if($vModulo["modulo"]=="Segurança"){
+                            if($vModulo["modulo"]=="Segurança"){
                               $labelMenu = "Cadastro de Usuários";
                             }else{
                               $labelMenu=$vModulo['modulo'];
