@@ -187,12 +187,10 @@ class Sinbio_SitioController extends Zend_Controller_Action {
             }
 
             if ($oSitio->getErroMensagem()) {
-                $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Alterar Amostra", $oSitio->getErroMensagem());
+                $this->view->layout()->msg = UtilsFile::recuperaMensagens(2, "Erro ao Alterar Sítio", $oSitio->getErroMensagem());
             } else {
                 $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(1, "Sucesso", "Sítio(s) removido(s) com sucesso.");
             }
-        } else {
-            $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(2, "Erro ao Deletar Sítio", "Você deve selecionar ao menos um registro.");
         }
     }
 }

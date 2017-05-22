@@ -317,7 +317,7 @@ class Sinbio_AmostraController extends Zend_Controller_Action {
 
         //VALIDA O ID
         if ($nId) {
-            $vAmostraRetorno = $oAmostra->fetchAll("id = $nId", array('id DESC'));
+            $vAmostraRetorno = $oAmostra->fetchAll(array("id = $nId"), array('id DESC'));
             $vAmostra = $vAmostraRetorno->toArray();
             $vAmostra = $vAmostra[0];
             $vAmostraRow = $vAmostraRetorno->current();
@@ -475,7 +475,7 @@ class Sinbio_AmostraController extends Zend_Controller_Action {
         $request = $this->_request;
         $vId = $request->getParam("fId");
 
-
+        
         $oAmostra = new Amostra_Amostra();
 
         $auth = Zend_Auth::getInstance();
@@ -493,8 +493,6 @@ class Sinbio_AmostraController extends Zend_Controller_Action {
             } else {
                 $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(1, "Sucesso", "Amostra removida(s) com sucesso.");
             }
-        } else {
-            $_SESSION["sMsg"] = UtilsFile::recuperaMensagens(2, "Erro ao Deletar Amostra", "Você deve selecionar ao menos um registro.");
         }
     }
 
