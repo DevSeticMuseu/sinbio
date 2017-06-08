@@ -4,36 +4,30 @@ if ($this->vMenu == "") {
     
 } else {
     foreach ($this->vMenu as $vModulo) {
-        ?>
-        <ul class="nav nav-tabs">
-            <?php
-            if ($vModulo["modulo"] == "Segurança") {
-
-
+        if ($vModulo["modulo"] == "Segurança") {
+            ?>
+            <ul class="nav nav-tabs">
+                <?php
                 foreach ($vModulo["programas"] as $vPrograma) {
-
-//                              echo '<pre>';
-//        print_r($vPrograma);
-
                     if ($vPrograma['controller'] == "usuario") {
                         ?>
                         <li class="active">  
-                            <?php } else {
-                            ?>
+                    <?php } else {
+                        ?>
                         <li> 
                             <?php
                         }
                         ?>
                         <a href="/<?= $vPrograma["controller"] . "/index" ?>"><?= $vPrograma["programa"] ?></a></li>
-                    <?php
-                }
-                ?>
+                        <?php
+                    }
+                    ?>
             </ul>
-            <?php
+                <?php
+            }
         }
     }
-}
-?>
+    ?>
 
 <div class="container-fluid">
     <div class="row-fluid">
@@ -51,15 +45,15 @@ if ($this->vMenu == "") {
 
                     <tbody>
 
-                        <?php foreach ($this->paginator as $value) {
-                            ?>
+<?php foreach ($this->paginator as $value) {
+    ?>
                             <tr>
                                 <td><?php echo $value["id"]; ?></td>
                                 <td><?php echo $value["nm_usuario"]; ?></td>
                                 <td><?php echo $value["login"]; ?></td>
                                 <td><?php echo $value["nm_grupo_usuario"]; ?></td>
                             </tr>
-                        <?php } ?>
+<?php } ?>
 
                     </tbody>
                 </table>

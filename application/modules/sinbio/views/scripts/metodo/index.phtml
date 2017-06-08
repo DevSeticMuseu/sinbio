@@ -6,46 +6,42 @@ if ($this->vMenu == "") {
     
 } else {
     foreach ($this->vMenu as $vModulo) {
-      
-        ?>
-                            <ul class="nav nav-tabs">
-                        <?php
-                                if ($vModulo["modulo"] == "Protocolos") {
-                             
-                                    
-                             
-                        foreach ($vModulo["programas"] as $vPrograma) {
+        if ($vModulo["modulo"] == "Protocolos") {
+            ?>
+            <ul class="nav nav-tabs">
+                <?php
+                foreach ($vModulo["programas"] as $vPrograma) {
 
-        
-        if ($vPrograma['controller'] == "metodo") {
-                                            ?>
-                                  <li class="active">  
-                                      <?php
-                    } else {?>
-                                  <li> 
-                                   <?php
-                                        }
-                                        ?>
-                                    <a href="/<?= $vPrograma["controller"] . "/index" ?>"><?= $vPrograma["programa"] ?></a></li>
-                                    <?php
-                                }
-                                ?>
-                            </ul>
-                                <?php
-                            }
-                        }
-                           }
+
+                    if ($vPrograma['controller'] == "metodo") {
                         ?>
-                           
+                        <li class="active">  
+                    <?php } else {
+                        ?>
+                        <li> 
+                            <?php
+                        }
+                        ?>
+                        <a href="/<?= $vPrograma["controller"] . "/index" ?>"><?= $vPrograma["programa"] ?></a></li>
+                        <?php
+                    }
+                    ?>
+            </ul>
+                <?php
+            }
+        }
+    }
+    ?>
+
 <!--                        <form class="search">
                             <input type="text" name="pesquisar" id="pesquisar" />
                             <input type="submit" class="btn" name="enviar" value="pesquisar">
                         </form>-->
 
 <div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span12">
-			<table class="grid" style="display: none"></table>
-		</div>
-	</div>
+    <div class="row-fluid">
+        <div class="span12">
+            <table class="grid" style="display: none"></table>
+        </div>
+    </div>
 </div>

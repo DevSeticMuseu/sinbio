@@ -5,35 +5,32 @@ if ($this->vMenu == "") {
     
 } else {
     foreach ($this->vMenu as $vModulo) {
-        ?>
-        <ul class="nav nav-tabs">
-            <?php
-            if ($vModulo["modulo"] == "Amostra") {
-
-
-
+        if ($vModulo["modulo"] == "Amostra") {
+            ?>
+            <ul class="nav nav-tabs">
+                <?php
                 foreach ($vModulo["programas"] as $vPrograma) {
 
 
                     if ($vPrograma['controller'] == "amostra") {
                         ?>
                         <li class="active">  
-                            <?php } else {
-                            ?>
+                    <?php } else {
+                        ?>
                         <li> 
                             <?php
                         }
                         ?>
                         <a href="/<?= $vPrograma["controller"] . "/index" ?>"><?= $vPrograma["programa"] ?></a></li>
-                    <?php
-                }
-                ?>
+                        <?php
+                    }
+                    ?>
             </ul>
-            <?php
+                <?php
+            }
         }
     }
-}
-?>
+    ?>
 
 <!--<div class="container-fluid">
     <div class="row-fluid">
@@ -60,8 +57,8 @@ if ($this->vMenu == "") {
 
                     <tbody>
 
-                        <?php foreach ($this->paginator as $value) {
-                            ?>
+<?php foreach ($this->paginator as $value) {
+    ?>
                             <tr>
                                 <td style="text-align: center;"><?php echo $value["id"]; ?></td>
                                 <td style="text-align: center;"><?php echo $value["codigo_amostra_numero_coletor"]; ?></td>
@@ -69,7 +66,7 @@ if ($this->vMenu == "") {
                                 <td style="text-align: center;"><?php echo $value["nm_metodo"]; ?></td>
                                 <td style="text-align: center;"><?php echo $value["data_inicio"] . ' - ' . $value["nm_localidade"]; ?></td>
                             </tr>
-                        <?php } ?>
+<?php } ?>
 
                     </tbody>
                 </table>

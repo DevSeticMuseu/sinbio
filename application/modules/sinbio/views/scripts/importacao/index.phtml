@@ -1,209 +1,209 @@
 <div class="row-fluid">
-		<div class="span12">
-			<div class="widget-box">
-				<div class="widget-title">
-					<span class="icon"><i class="icon-info-sign"></i></span>
-					<h5>Importação</h5>
-                                        
-                                       <h5 style="float: right; margin-right: 10px"> <a href="/planilha_importacao.xls"> <i class="icon-download-alt" style="margin: 3px 6px 0 0"></i>Download do Modelo de Planilha para a Importa&ccedil;&atilde;o
-                                       </a></h5>
-                                </div>
-                            
-<div class="widget-content nopadding">
-<form enctype="multipart/form-data" class="form-horizontal" method="post" action="visualizar" name="" id="insere-altera" novalidate="novalidate">
-    
-                      
-    
-                                         
-                                            
-						<div class="control-group">
-							<label class="control-label">Selecione o Arquivo <i class="icon-asterisk"></i>:</label>
-							<div class="controls">
-                                                          <input type="file" name="arquivo" />
-							</div>
-						</div>
-    
-                                                <div class="control-group">
-							<label class="control-label">Protocolo <i class="icon-asterisk"></i>:</label>
-							<div class="controls">
-								<select name="fIdProtocolo" class="required" style="width: 400px;">
-									<?php
-									foreach ($this->vProtocolo as $Protocolo) {
-									?>
-									<option value="<?=$Protocolo["id"]?>"><?=$Protocolo["sigla"]?> - <?=$Protocolo["nm_protocolo"]?></option>
-									<?php 
-									}
-									?>
-								</select>
-							</div>
-						</div>
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"><i class="icon-info-sign"></i></span>
+                <h5>Importação</h5>
 
-                                                 <div class="control-group">
-							<label class="control-label">Metodo <i class="icon-asterisk"></i>:</label>
-							<div class="controls">
-								<select name="fIdMetodo" class="required" style="width: 400px;">
-									<?php
-									foreach ($this->vMetodo as $Metodo) {
-									?>
-									<option value="<?=$Metodo["id"]?>"><?=$Metodo["nm_metodo"]?></option>
-									<?php
-									}
-									?>
-								</select>
-							</div>
-						</div>
+                <h5 style="float: right; margin-right: 10px"> <a href="/planilha_importacao.xls"> <i class="icon-download-alt" style="margin: 3px 6px 0 0"></i>Download do Modelo de Planilha para a Importa&ccedil;&atilde;o
+                    </a></h5>
+            </div>
 
-                                                <div class="control-group">
-							<label class="control-label">Atrativos <i class="icon-asterisk"></i>:</label>
-							<div class="controls">
-								<select name="fIdAtrativo" class="required" style="width: 400px;">
-									<?php
-									foreach ($this->vAtrativo as $Atrativo) {
-									?>
-									<option value="<?=$Atrativo["id"]?>"><?=$Atrativo["nm_atrativos"]?></option>
-									<?php
-									}
-									?>
-								</select>
-							</div>
-						</div>
-                                            
-                                                <div class="control-group">
-							<label class="control-label">Expedição <i class="icon-asterisk"></i>:</label>
-							<div class="controls">
-								<select name="fIdExpedicao" class="required" style="width: 400px;">
-									<?php
-									foreach ($this->vExpedicao as $Expedicao) {
-									?>
-									<option value="<?=$Expedicao["id"]?>"><?=$Expedicao["data_inicio"]?> a <?=$Expedicao["data_fim"]?></option>
-									<?php
-									}
-									?>
-								</select>
-							</div>
-						</div>
+            <div class="widget-content nopadding">
+                <form enctype="multipart/form-data" class="form-horizontal" method="post" action="visualizar" name="" id="insere-altera" novalidate="novalidate">
 
-                                                <div class="control-group">
-							<label class="control-label">Sistema de Projeção <i class="icon-asterisk"></i>:</label>
-							<div class="controls">
-								<select name="fIdProjecao" class="required" style="width: 400px;">
-									<?php
-									foreach ($this->vProjecao as $Projecao) {
-									?>
-									<option value="<?=$Projecao["id"]?>"><?=$Projecao["sistema_projecao"]?></option>
-									<?php
-									}
-									?>
-								</select>
-							</div>
-						</div>
 
-                                                <div class="control-group">
-							<label class="control-label">Coletores <i class="icon-asterisk"></i>:</label>
-							<div class="controls">
-                                                              <select id="fIdColetores" name="fIdColetores[]" multiple="multiple">
-                                                              <?php
-                                                                        foreach ($this->vUsuario as $usuario) {
-                                                                            ?>
-                                                                                <option value="<?= $usuario["id"]; ?>"><?= $usuario["nm_usuario"]." (".$usuario["citacao"].")" ?></option>
-                                                                            <?php
-                                                                        }
-                                                                        ?>
-                                                            </select>
-							</div>
-						</div>
 
-                                                <div class="control-group">
-							<label class="control-label">Determinadores <i class="icon-asterisk"></i>:</label>
-							<div class="controls">
-                                                              <select id="fIdDeterminadores" name="fIdDeterminadores[]" multiple="multiple">
-                                                              <?php
-                                                                        foreach ($this->vUsuario as $usuario) {
-                                                                            ?>
-                                                                                <option value="<?= $usuario["id"]; ?>"><?= $usuario["nm_usuario"]." (".$usuario["citacao"].")" ?></option>
-                                                                            <?php
-                                                                        }
-                                                                        ?>
-                                                            </select>
-							</div>
-						</div>
 
-                                            <div class="control-group">
-                                                <label class="control-label">Data Determinação: </label>
-                                                <div class="controls">
-                                                    <input type="text" name="fDataDeterminacao" data-date-format="dd-mm-yyyy" value="<?php echo date("d-m-Y") ?>" class="datepicker" />
-                                                </div>
-                                            </div>
 
-                                            <div class="control-group">
-							<label class="control-label">Referência Bibliografica Determinação: </label>
-							<div class="controls">
-                                                            <input type="text" name="fReferencia" style="width: 400px">
-							</div>
-						</div>
+                    <div class="control-group">
+                        <label class="control-label">Selecione o Arquivo <i class="icon-asterisk"></i>:</label>
+                        <div class="controls">
+                            <input type="file" name="arquivo" />
+                        </div>
+                    </div>
 
-                                            <div class="control-group">
-							<label class="control-label">Observação Determinação: </label>
-							<div class="controls">
-                                                            <input type="text" name="fObservacao" style="width: 400px">
-							</div>
-						</div>
+                    <div class="control-group">
+                        <label class="control-label">Protocolo <i class="icon-asterisk"></i>:</label>
+                        <div class="controls">
+                            <select name="fIdProtocolo" class="required" style="width: 400px;">
+                                <?php
+                                foreach ($this->vProtocolo as $Protocolo) {
+                                    ?>
+                                    <option value="<?= $Protocolo["id"] ?>"><?= $Protocolo["sigla"] ?> - <?= $Protocolo["nm_protocolo"] ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
 
-                                                <div class="control-group">
-							<label class="control-label">Conservação <i class="icon-asterisk"></i>:</label>
-							<div class="controls">
-								<select name="fIdConservacao" class="required" style="width: 400px;">
-									<?php
-									foreach ($this->vConservacao as $Conservacao) {
-									?>
-									<option value="<?=$Conservacao["id"]?>"><?=$Conservacao["conservacao_material"]?></option>
-									<?php
-									}
-									?>
-								</select>
-							</div>
-						</div>
+                    <div class="control-group">
+                        <label class="control-label">Metodo <i class="icon-asterisk"></i>:</label>
+                        <div class="controls">
+                            <select name="fIdMetodo" class="required" style="width: 400px;">
+                                <?php
+                                foreach ($this->vMetodo as $Metodo) {
+                                    ?>
+                                    <option value="<?= $Metodo["id"] ?>"><?= $Metodo["nm_metodo"] ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
 
-                                                <div class="control-group">
-							<label class="control-label">Destinação: <i class="icon-asterisk"></i>:</label>
-							<div class="controls">
-								<select name="fIdDestinacao" class="required" style="width: 400px;">
-									<?php
-									foreach ($this->vDestinacao as $Destinacao) {
-									?>
-									<option value="<?=$Destinacao["id"]?>"><?=$Destinacao["nm_destinacao"]?></option>
-									<?php
-									}
-									?>
-								</select>
-							</div>
-						</div>
-				
-						<div class="form-actions">
-							<input type="hidden" name="sOP" value="cadastrar" />
-							<input type="submit" value="Salvar" class="btn btn-success">
-						</div>
-					</form>
+                    <div class="control-group">
+                        <label class="control-label">Atrativos <i class="icon-asterisk"></i>:</label>
+                        <div class="controls">
+                            <select name="fIdAtrativo" class="required" style="width: 400px;">
+                                <?php
+                                foreach ($this->vAtrativo as $Atrativo) {
+                                    ?>
+                                    <option value="<?= $Atrativo["id"] ?>"><?= $Atrativo["nm_atrativos"] ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
 
-                            </div>
-			</div>
-		</div>
+                    <div class="control-group">
+                        <label class="control-label">Expedição <i class="icon-asterisk"></i>:</label>
+                        <div class="controls">
+                            <select name="fIdExpedicao" class="required" style="width: 400px;">
+                                <?php
+                                foreach ($this->vExpedicao as $Expedicao) {
+                                    ?>
+                                    <option value="<?= $Expedicao["id"] ?>"><?= $Expedicao["data_inicio"] ?> a <?= $Expedicao["data_fim"] ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Sistema de Projeção <i class="icon-asterisk"></i>:</label>
+                        <div class="controls">
+                            <select name="fIdProjecao" class="required" style="width: 400px;">
+                                <?php
+                                foreach ($this->vProjecao as $Projecao) {
+                                    ?>
+                                    <option value="<?= $Projecao["id"] ?>"><?= $Projecao["sistema_projecao"] ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Coletores <i class="icon-asterisk"></i>:</label>
+                        <div class="controls">
+                            <select id="fIdColetores" name="fIdColetores[]" multiple="multiple">
+                                <?php
+                                foreach ($this->vUsuario as $usuario) {
+                                    ?>
+                                    <option value="<?= $usuario["id"]; ?>"><?= $usuario["nm_usuario"] . " (" . $usuario["citacao"] . ")" ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Determinadores <i class="icon-asterisk"></i>:</label>
+                        <div class="controls">
+                            <select id="fIdDeterminadores" name="fIdDeterminadores[]" multiple="multiple">
+                                <?php
+                                foreach ($this->vUsuario as $usuario) {
+                                    ?>
+                                    <option value="<?= $usuario["id"]; ?>"><?= $usuario["nm_usuario"] . " (" . $usuario["citacao"] . ")" ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Data Determinação: </label>
+                        <div class="controls">
+                            <input type="text" name="fDataDeterminacao" data-date-format="dd-mm-yyyy" value="<?php echo date("d-m-Y") ?>" class="datepicker" />
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Referência Bibliografica Determinação: </label>
+                        <div class="controls">
+                            <input type="text" name="fReferencia" style="width: 400px">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Observação Determinação: </label>
+                        <div class="controls">
+                            <input type="text" name="fObservacao" style="width: 400px">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Conservação <i class="icon-asterisk"></i>:</label>
+                        <div class="controls">
+                            <select name="fIdConservacao" class="required" style="width: 400px;">
+                                <?php
+                                foreach ($this->vConservacao as $Conservacao) {
+                                    ?>
+                                    <option value="<?= $Conservacao["id"] ?>"><?= $Conservacao["conservacao_material"] ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Destinação: <i class="icon-asterisk"></i>:</label>
+                        <div class="controls">
+                            <select name="fIdDestinacao" class="required" style="width: 400px;">
+                                <?php
+                                foreach ($this->vDestinacao as $Destinacao) {
+                                    ?>
+                                    <option value="<?= $Destinacao["id"] ?>"><?= $Destinacao["nm_destinacao"] ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="hidden" name="sOP" value="cadastrar" />
+                        <input type="submit" value="Salvar" class="btn btn-success">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 </div>
-        
-        
-        	<div class="row-fluid">
-		<div class="span12">
-			<div class="widget-box">
-				<div class="widget-title"><span class="icon"><i class="icon-comment"></i></span><h5>Legenda</h5></div>
-				<div class="widget-content nopadding">
-					<ul class="activity-list">
-						<li><a href="#">
-							<i class="icon-asterisk"></i>
-							<span>Campo obrigatório</span>
-						</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title"><span class="icon"><i class="icon-comment"></i></span><h5>Legenda</h5></div>
+            <div class="widget-content nopadding">
+                <ul class="activity-list">
+                    <li><a href="#">
+                            <i class="icon-asterisk"></i>
+                            <span>Campo obrigatório</span>
+                        </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 </div>

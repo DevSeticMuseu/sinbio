@@ -5,10 +5,10 @@ if ($this->vMenu == "") {
     
 } else {
     foreach ($this->vMenu as $vModulo) {
-        ?>
-        <ul class="nav nav-tabs">
-            <?php
-            if ($vModulo["modulo"] == "Localidade") {
+        if ($vModulo["modulo"] == "Localidade") {
+            ?>
+            <ul class="nav nav-tabs">
+                <?php
                 foreach ($vModulo["programas"] as $vPrograma) {
                     if ($vPrograma['controller'] == "sitio") {
                         ?>

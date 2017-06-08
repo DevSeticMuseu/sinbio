@@ -5,19 +5,17 @@ if ($this->vMenu == "") {
     
 } else {
     foreach ($this->vMenu as $vModulo) {
-        ?>
-        <ul class="nav nav-tabs">
-            <?php
-            if ($vModulo["modulo"] == "Coleção") {
-
-
+        if ($vModulo["modulo"] == "Coleção") {
+            ?>
+            <ul class="nav nav-tabs">
+                <?php
                 foreach ($vModulo["programas"] as $vPrograma) {
 
 
                     if ($vPrograma['controller'] == "colecao") {
                         ?>
                         <li class="active">  
-                            <?php } else {
+                        <?php } else {
                             ?>
                         <li> 
                             <?php
