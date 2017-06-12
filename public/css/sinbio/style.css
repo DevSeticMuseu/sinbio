@@ -245,7 +245,6 @@ a:hover { text-decoration: none; }
 	margin-right: 5px;
 	opacity: .8;
 }
-
 /* Style Switcher */
 #style-switcher {
 	position: absolute;
@@ -5318,7 +5317,8 @@ button.btn.btn-mini, input.btn.btn-mini[type="submit"] {
     list-style-image: none;
     list-style-position: outside;
     list-style-type: none;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
+    margin-bottom: 5px;
     margin-left: 0;
 }
 .nav > li > a {
@@ -9161,7 +9161,7 @@ h1 {
     border-top-style: solid;
     border-top-width: 1px;
     min-height: 65px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 5px;
@@ -9221,7 +9221,7 @@ h1 {
     padding-bottom: 20px;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 20px;
+    padding-top: 5px;
 }
 .tcontent .presentation {
     clear: both;
@@ -9265,7 +9265,9 @@ h1 {
 }
 .tcontent .area h1 {
     float: left;
-    margin-top: 20px;
+    /*margin-top: 10px;*/
+    margin-bottom: 0px;
+    font-size: 44px;
 }
 .tcontent .area a {
     margin-bottom: 10px;
@@ -9283,8 +9285,8 @@ h1 {
     background-size: auto auto;
     display: table;
     height: auto;
-    padding-bottom: 20px;
-    padding-top: 20px;
+    /*padding-bottom: 10px;*/
+    /*padding-top: 10px;*/
 }
 
 .tcontent .content-inner .navside .amostras_cadastradas {
@@ -9298,20 +9300,21 @@ h1 {
     background-size: auto auto;
     color: #FFFFFF;
     height: auto;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     padding-left: 25px;
     padding-right: 10px;
-    padding-top: 25px;
+    padding-top: 15px;
 }
 .tcontent .content-inner .navside .amostras_cadastradas .numero_amostra {
     display: block;
-    font-size: 60px;
+    font-size: 50px;
     margin-top: 10px;
 }
 .tcontent .content-inner .navside .amostras_cadastradas h3 {
     color: #FFFFFF;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: normal;
+    margin-bottom: 0px;
 }
 .tcontent .content-inner .navside a {
     background-attachment: scroll;
@@ -9323,8 +9326,8 @@ h1 {
     background-repeat: repeat;
     background-size: auto auto;
     display: inline-block;
-    padding-bottom: 4%;
-    padding-top:4%;
+    /*padding-bottom: 1%;*/
+    /*padding-top: 1%;*/
     width: 100%;    
     margin-bottom: -4px;
 }
@@ -9339,8 +9342,8 @@ h1 {
     background-repeat: repeat;
     background-size: auto auto;
     display: inline-block;
-   padding-bottom: 4%; 
-    padding-top: 4%;
+   /*padding-bottom: 4%;*/ 
+    /*padding-top: 4%;*/
     width: 100%;
     color: #FFFFFF;
     margin-bottom: -4px;
@@ -9349,13 +9352,16 @@ h1 {
     padding-left: 28px;
     padding-right: 6%;
     float: left;
+    width: 40px;
+    padding-top: 5px;
 }
 .tcontent .content-inner .navside a p {
     color: #7d7d7d;
     text-align: center;
     float: left;
     font-size: 18px;
-    margin-top: 20px;
+    margin-top: 14px;
+    margin-bottom: 9px;
 }
 .tcontent .content-inner .cside {
     padding-right: 20px;
@@ -9392,6 +9398,13 @@ h1 {
 .tcontent .content-inner .contentside .counter {
     float: right;
     margin-top: 20px;
+}
+.tcontent .content-inner .row-fluid h2{
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+div .navside{
+    padding-top: 10px;
 }
 .footer {
     clear: both;
@@ -9551,4 +9564,26 @@ h1 {
 #rowcolor2
 {
      color: #DAA520;
+}
+.tcontent .content-inner .rowfluid h2{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.footer .copyright2{
+    padding-top: 7px;
+}
+.footer .copyright2 p{
+    margin-bottom: 0px;
+}
+.footer .copyright2 .sti img{
+    width:45px;
+}
+.form-scroll{
+    height:400px; 
+    overflow:scroll; 
+    overflow-x:hidden;
+}
+.widget-no-margin{
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
